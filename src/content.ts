@@ -53,6 +53,10 @@ export const nav = [
 ------------------------------------------------------------------------- */
 export type CaseStudySection = { heading: string; body: string; bullets?: string[] }
 export type CaseStudyLink = { label: string; href: string; kind: 'primary' | 'secondary' }
+/** A line in the terminal-style feature listing. */
+export type CaseStudyFile = { name: string; desc: string }
+/** One tradeoff: what was chosen, what it was chosen over, and why. */
+export type CaseStudyDecision = { chose: string; over: string; why: string }
 
 export type CaseStudy = {
   id: string
@@ -62,7 +66,14 @@ export type CaseStudy = {
   title: string
   summary: string
   links?: CaseStudyLink[]
-  sections: CaseStudySection[]
+  /** Prose layout: three columns. Used by Pega. */
+  sections?: CaseStudySection[]
+  /** Compact layout: problem line, file listing, tradeoff cards. Used by Witness. */
+  problem?: string
+  builtIntro?: string
+  built?: CaseStudyFile[]
+  decisionsIntro?: string
+  decisions?: CaseStudyDecision[]
   stack: string[]
   diagram: 'flow' | 'pipeline'
 }
@@ -131,40 +142,55 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 'work-witness',
     company: 'Witness to History',
-    role: 'Engineer, one of two on the team',
-    title: 'Witness to History \u2014 an interactive history simulation for middle/high schoolers',
+    role: 'One of two engineers on a six-person team',
+    title: 'An interactive history simulation for middle and high schoolers',
     summary:
-      'A browser game where a student sits down with the people who lived a historical moment, hears their conflicting pressures, and makes the same decision with the same incomplete information they had.',
+      'Sit with the people who lived a moment. Hear their conflicting pressures. Make the call with only what they knew. Then find out what really happened.',
     links: [
       { label: 'Live demo', href: 'https://juliaktzr.github.io/witness-to-history/', kind: 'primary' },
       { label: 'Source', href: 'https://github.com/juliaktzr/witness-to-history', kind: 'secondary' },
     ],
-    sections: [
+    problem:
+      'History class shows the outcome first, so every decision looks obvious in hindsight. A four-person Education team and I wanted students to feel the uncertainty instead.',
+    builtIntro:
+      'I built the content-driven game engine end to end. A browser game: no install, no login, runs on a school Chromebook. A student picks an era, talks through branching dialogue with two or three figures, makes one real decision, and sees the outcome and the historical reveal.',
+    built: [
       {
-        heading: 'The problem',
-        body: 'History class usually shows students the outcome, so decisions look obvious in hindsight. A 4-person Education team and I wanted students to actually feel the uncertainty the historical figures felt: sit down with the people who lived a moment, hear their conflicting pressures, and make the same decision with the same incomplete information they had, before finding out what really happened.',
+        name: 'pipeline/',
+        desc: 'Google Sheet to validated game JSON. Four non-coders write content, get plain-English errors, never touch code',
+      },
+      { name: 'dialogue/', desc: 'Branching conversations. Every factual claim cites a primary source' },
+      { name: 'map/', desc: 'Illustrated hub. Your own character walks between figures' },
+      { name: 'a11y/', desc: 'Read-aloud via Web Speech API, full keyboard nav, alt text throughout' },
+      { name: 'deploy/', desc: 'GitHub Pages. Zero backend, zero recurring cost' },
+    ],
+    decisionsIntro:
+      'This is where most of the actual work was. Every call was made against an Oct 7 pitch deadline.',
+    decisions: [
+      {
+        chose: 'One scenario, one working decision loop, reliable load',
+        over: 'Character customization and a second scenario',
+        why: 'An untested format built out four times risks four times the rework after feedback',
       },
       {
-        heading: 'What I built',
-        body: 'As one of two engineers on the team, I built the content-driven game engine end to end: a browser game (no install, no login, works on a school Chromebook) where a student picks an era, talks through branching dialogue with 2-3 historical figures, makes one real decision, and sees both the outcome and the historical reveal. Specifically:',
-        bullets: [
-          'A content pipeline that turns a shared Google Sheet into validated game JSON, so 4 non-coding teammates can write dialogue, sources, and outcomes without touching code, and get plain-English errors (not stack traces) when something doesn\u2019t connect',
-          'A branching dialogue system where every factual claim is tied to a cited primary source',
-          'An illustrated map hub with the student\u2019s own character walking between figures to start each conversation',
-          'Read-aloud (Web Speech API), full keyboard nav, and alt text throughout',
-          'Deployed free on GitHub Pages, zero backend, zero recurring cost',
-        ],
+        chose: 'Content-agnostic engine. A new scenario is one JSON file',
+        over: 'Hardcoding content, faster once but slower to iterate',
+        why: 'Four non-technical teammates ship content without waiting on the two engineers',
       },
       {
-        heading: 'How I decided',
-        body: 'This is where most of the actual work was.',
-        bullets: [
-          'Scoped hard against an Oct 7 pitch deadline: cut character customization and a second scenario down to must-haves (era select, one working decision loop, reliable load), even under pressure to add more, since an untested format built out 4 times risked 4x rework after feedback',
-          'Chose a content-agnostic architecture (a new scenario is just one JSON file) specifically so 4 non-technical teammates could produce content independently of the 2 engineers, instead of the faster-to-build-once but slower-to-iterate option of hardcoding content',
-          'Pushed for a one-job-per-person split across a single scenario over each teammate owning a whole scenario, to validate the format with real pitch feedback before parallelizing work',
-          'Built validation into the tool itself (not a wiki page) because the content authors can\u2019t debug a broken reference on their own',
-          'Treated historical integrity as a product requirement: composite characters instead of invented quotes from real people, mandatory source citation on every factual line, decided with the Education team rather than defaulted into by whoever finished first',
-        ],
+        chose: 'One job per person on a single scenario',
+        over: 'Each teammate owning a whole scenario',
+        why: 'Validate the format with real pitch feedback before parallelizing',
+      },
+      {
+        chose: 'Validation built into the tool',
+        over: 'A wiki page of rules',
+        why: 'Content authors cannot debug a broken reference on their own',
+      },
+      {
+        chose: 'Composite characters, a citation on every factual line',
+        over: 'Invented quotes from real people',
+        why: 'Historical integrity is a product requirement, decided with the Education team',
       },
     ],
     stack: [
@@ -173,8 +199,8 @@ export const caseStudies: CaseStudy[] = [
       'TypeScript',
       'Web Speech API',
       'GitHub Pages',
-      'Custom CSV/Sheets-to-JSON content pipeline',
-      'No backend or database',
+      'Sheets-to-JSON pipeline',
+      'No backend',
     ],
     diagram: 'pipeline',
   },
