@@ -3,10 +3,8 @@ import { hero, site } from '../content'
 import { useTypedSequence } from '../hooks/useTypedSequence'
 
 const buttonStyles = {
-  primary:
-    'bg-text text-bg hover:bg-accent-ink hover:text-bg',
-  secondary:
-    'border border-text/30 text-text hover:border-accent hover:text-accent-ink',
+  primary: 'bg-text text-bg hover:bg-accent-ink hover:text-bg',
+  secondary: 'border border-text/30 text-text hover:border-accent hover:text-accent-ink',
   ghost: 'text-muted hover:text-accent-ink',
 } as const
 
@@ -25,7 +23,6 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35] [background-image:linear-gradient(var(--line)_1px,transparent_1px),linear-gradient(90deg,var(--line)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]"
       />
 
-      <div className="flex flex-col-reverse items-start gap-8 lg:flex-row lg:items-center lg:gap-12">
       <div
         className="w-full max-w-3xl rounded-xl border border-line bg-surface/70 shadow-[0_20px_60px_-30px_var(--glow)]"
         role="group"
@@ -106,33 +103,11 @@ export function Hero() {
         </div>
       </div>
 
-        <Headshot />
-      </div>
-
       {/* Screen-reader friendly fallback while typing runs. */}
       <p className="sr-only" aria-live="polite">
         {state.done ? '' : `${site.name}. ${site.tagline}`}
       </p>
     </section>
-  )
-}
-
-function Headshot() {
-  return (
-    <div className="relative shrink-0 lg:mr-2">
-      <div
-        aria-hidden="true"
-        className="absolute -inset-2 rounded-[1.6rem] border border-accent/40 lg:-inset-3 lg:rounded-[2rem]"
-      />
-      <img
-        src={site.headshot}
-        alt={site.headshotAlt}
-        width={800}
-        height={800}
-        fetchPriority="high"
-        className="h-24 w-24 rounded-2xl object-cover shadow-[0_20px_50px_-25px_var(--glow)] sm:h-28 sm:w-28 lg:h-56 lg:w-56 lg:rounded-3xl"
-      />
-    </div>
   )
 }
 

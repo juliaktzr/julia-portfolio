@@ -47,16 +47,16 @@ type RowProps = {
 
 function Row({ label, steps, note, tone, reduce }: RowProps) {
   const accent = tone === 'accent'
-  const box = accent
-    ? 'border-accent/60 bg-bg text-text'
-    : 'border-line bg-bg/60 text-muted'
+  const box = accent ? 'border-accent/60 bg-bg text-text' : 'border-line bg-bg/60 text-muted'
   const line = accent ? 'bg-accent' : 'bg-line'
   const stagger = accent ? 0.18 : 0.1
 
   return (
     <div aria-hidden="true">
       <div className="mb-3 flex items-baseline justify-between gap-3">
-        <span className={`font-mono text-xs uppercase tracking-[0.18em] ${accent ? 'text-accent-ink' : 'text-muted'}`}>
+        <span
+          className={`font-mono text-xs uppercase tracking-[0.18em] ${accent ? 'text-accent-ink' : 'text-muted'}`}
+        >
           {label}
         </span>
         <span className={`font-mono text-xs ${accent ? 'text-accent-ink' : 'text-muted'}`}>{note}</span>

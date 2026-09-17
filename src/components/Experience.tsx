@@ -34,7 +34,6 @@ function TimelineItem({ role, index, open, onToggle }: ItemProps) {
   const reduce = useReducedMotion() ?? false
   const panelId = `exp-panel-${index}`
   const buttonId = `exp-button-${index}`
-  const isEducation = role.tag === 'Education'
 
   return (
     <li className="relative pb-6 last:pb-0">
@@ -42,7 +41,7 @@ function TimelineItem({ role, index, open, onToggle }: ItemProps) {
       <span
         aria-hidden="true"
         className={`absolute -left-[1.85rem] top-5 h-3 w-3 rounded-full border-2 border-bg sm:-left-[2.35rem] ${
-          open ? 'bg-accent' : isEducation ? 'bg-pop' : 'bg-muted'
+          open ? 'bg-accent' : 'bg-muted'
         }`}
       />
       <div
@@ -66,14 +65,22 @@ function TimelineItem({ role, index, open, onToggle }: ItemProps) {
               </span>
               <span className="mt-2 flex flex-wrap items-center gap-2">
                 <span className="font-mono text-xs text-muted">{role.period}</span>
-                <Tag tone={isEducation ? 'pop' : 'default'}>{role.tag}</Tag>
+                <Tag>{role.tag}</Tag>
               </span>
             </span>
             <span
               aria-hidden="true"
               className={`mt-1 shrink-0 text-muted transition-transform duration-300 ${open ? 'rotate-45' : ''}`}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              >
                 <path d="M12 5v14M5 12h14" />
               </svg>
             </span>
@@ -88,14 +95,21 @@ function TimelineItem({ role, index, open, onToggle }: ItemProps) {
               key="panel"
               initial={reduce ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
-              exit={reduce ? { height: 'auto', opacity: 1, transition: { duration: 0 } } : { height: 0, opacity: 0 }}
+              exit={
+                reduce
+                  ? { height: 'auto', opacity: 1, transition: { duration: 0 } }
+                  : { height: 0, opacity: 0 }
+              }
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="overflow-hidden"
             >
               <ul className="space-y-2.5 border-t border-line px-4 py-4 text-sm leading-relaxed text-muted sm:px-5">
                 {role.bullets.map((b) => (
                   <li key={b} className="flex gap-3">
-                    <span aria-hidden="true" className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-2" />
+                    <span
+                      aria-hidden="true"
+                      className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-2"
+                    />
                     <span>{b}</span>
                   </li>
                 ))}

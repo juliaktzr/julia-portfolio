@@ -7,7 +7,10 @@ export function Leadership() {
     <Section id={leadership.id} eyebrow={leadership.eyebrow} title={leadership.title}>
       <div className="grid gap-6 lg:grid-cols-3">
         {leadership.items.map((item) => (
-          <article key={item.org} className="flex flex-col rounded-xl border border-line bg-surface/60 p-5 sm:p-6">
+          <article
+            key={item.org}
+            className="flex flex-col rounded-xl border border-line bg-surface/60 p-5 sm:p-6"
+          >
             <h3 className="font-semibold leading-snug">{item.org}</h3>
             <p className="mt-1 text-sm text-muted">{item.role}</p>
             <p className="mt-1 font-mono text-xs text-muted">{item.period}</p>

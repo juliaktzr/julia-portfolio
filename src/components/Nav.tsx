@@ -2,9 +2,9 @@ import { nav, site } from '../content'
 import type { Theme } from '../hooks/useTheme'
 import { ThemeToggle } from './ThemeToggle'
 
-type Props = { theme: Theme; onToggleTheme: () => void }
+type Props = { theme: Theme; onToggleTheme: () => void; onOpenPalette: () => void }
 
-export function Nav({ theme, onToggleTheme }: Props) {
+export function Nav({ theme, onToggleTheme, onOpenPalette }: Props) {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-bg/80 backdrop-blur">
       <a
@@ -30,9 +30,27 @@ export function Nav({ theme, onToggleTheme }: Props) {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <kbd className="hidden rounded-md border border-line px-2 py-1 font-mono text-xs text-muted sm:inline-block">
-            ⌘K
-          </kbd>
+          <button
+            type="button"
+            onClick={onOpenPalette}
+            aria-label="Open command palette"
+            title="Command palette (Cmd K)"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-accent hover:text-accent-ink"
+          >
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" />
+            </svg>
+          </button>
           <ThemeToggle theme={theme} onToggle={onToggleTheme} />
         </div>
       </div>

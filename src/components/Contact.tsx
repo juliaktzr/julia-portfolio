@@ -4,6 +4,14 @@ import { Section } from './Section'
 export function Contact() {
   return (
     <Section id={contact.id} eyebrow={contact.eyebrow} title={contact.title} intro={contact.body}>
+      <img
+        src={site.headshot}
+        alt={site.headshotAlt}
+        width={800}
+        height={800}
+        loading="lazy"
+        className="mb-8 h-20 w-20 rounded-full object-cover ring-2 ring-accent/50 ring-offset-4 ring-offset-bg sm:h-24 sm:w-24"
+      />
       <ul className="grid gap-4 sm:grid-cols-3">
         {contact.links.map((l) => {
           const external = l.href.startsWith('http')
@@ -27,7 +35,11 @@ export function Contact() {
       </ul>
       <p className="mt-6 text-sm text-muted">
         Or grab the{' '}
-        <a href={site.resumeUrl} download className="text-accent-ink underline underline-offset-4 hover:text-text">
+        <a
+          href={site.resumeUrl}
+          download
+          className="text-accent-ink underline underline-offset-4 hover:text-text"
+        >
           resume PDF
         </a>
         .
@@ -39,12 +51,8 @@ export function Contact() {
 export function Footer() {
   return (
     <footer className="border-t border-line">
-      <div className="mx-auto flex max-w-5xl flex-col gap-2 px-4 py-8 font-mono text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <div className="mx-auto max-w-5xl px-4 py-8 font-mono text-xs text-muted sm:px-6">
         <p>{footer.line}</p>
-        <p>
-          <span aria-hidden="true">~ </span>
-          press <kbd className="rounded border border-line px-1">~</kbd> for terminal
-        </p>
       </div>
     </footer>
   )

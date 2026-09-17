@@ -39,6 +39,7 @@ export const hero = {
 export const nav = [
   { label: 'Work', href: '#work' },
   { label: 'Experience', href: '#experience' },
+  { label: 'Education', href: '#education' },
   { label: 'Research', href: '#research' },
   { label: 'Leadership', href: '#leadership' },
   { label: 'Skills', href: '#skills' },
@@ -76,7 +77,12 @@ export const caseStudy = {
   stack: ['Python', 'React', 'Claude Code', 'MCP'],
   before: {
     label: 'Before',
-    steps: ['Gather inputs by hand', 'Fill legacy Excel workbooks', 'Reconcile and rerun', 'Hand off results'],
+    steps: [
+      'Gather inputs by hand',
+      'Fill legacy Excel workbooks',
+      'Reconcile and rerun',
+      'Hand off results',
+    ],
     time: '~40 hours',
   },
   after: {
@@ -96,7 +102,7 @@ export type Role = {
   location: string
   period: string
   start: string // YYYY-MM, used for ordering only
-  tag: 'Engineering' | 'Research' | 'AI evaluation' | 'Teaching' | 'Education'
+  tag: 'Engineering' | 'Research' | 'AI evaluation' | 'Teaching'
   summary: string
   bullets: string[]
 }
@@ -169,20 +175,39 @@ export const experience: Role[] = [
       'Built test datasets and edge-case scenarios that uncovered validation failures and improved software quality.',
     ],
   },
-  {
-    org: 'Vanderbilt University',
-    title: 'B.S. Computer Science, B.A. Applied Mathematics',
-    location: 'Nashville, TN',
-    period: 'August 2023 to May 2027',
-    start: '2023-08',
-    tag: 'Education',
-    summary: 'Minors in Human and Organizational Development and Scientific Computing.',
-    bullets: [
-      'B.S. Computer Science and B.A. Applied Mathematics.',
-      'Minors: Human and Organizational Development, Scientific Computing.',
-    ],
-  },
 ]
+
+/* -------------------------------------------------------------------------
+   Education
+------------------------------------------------------------------------- */
+export const education = {
+  id: 'education',
+  eyebrow: 'Education',
+  title: 'Where I study.',
+  schools: [
+    {
+      name: 'Vanderbilt University',
+      location: 'Nashville, TN',
+      period: 'August 2023 to May 2027',
+      degree: 'B.S. Computer Science, B.A. Applied Mathematics',
+      detail: 'Minors in Human and Organizational Development and Scientific Computing.',
+      logo: '/logos/vanderbilt.png',
+      logoAlt: 'Vanderbilt University',
+      logoStyle: 'mark' as const,
+    },
+    {
+      // TODO: confirm the school name and add a line about what you studied there.
+      name: 'Universidad Carlos III de Madrid (UC3M)',
+      location: 'Madrid, Spain',
+      period: 'January 2026 to June 2026',
+      degree: 'Study abroad',
+      detail: 'One semester abroad in Madrid.',
+      logo: '/logos/uc3m.svg',
+      logoAlt: 'Universidad Carlos III de Madrid',
+      logoStyle: 'seal' as const,
+    },
+  ],
+}
 
 /* -------------------------------------------------------------------------
    Research and AI evaluation
@@ -284,7 +309,7 @@ export const skills = {
 ------------------------------------------------------------------------- */
 export const interests = {
   eyebrow: 'Interests',
-  body: 'Government and defense tech, and mission-driven software in general. I want to build for people whose problems actually matter.',
+  body: 'Building AI products end to end. I care most about the gap between a model that works in a demo and a product that works for real users.',
 }
 
 /* -------------------------------------------------------------------------
@@ -303,5 +328,5 @@ export const contact = {
 }
 
 export const footer = {
-  line: `${site.name}. Built with React and Tailwind. Copy lives in one file.`,
+  line: `\u00A9 ${new Date().getFullYear()} ${site.name}`,
 }
