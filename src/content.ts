@@ -21,7 +21,7 @@ export const site = {
   headshotAlt: 'Julia Kantzer smiling, wearing a dark blazer',
   siteUrl: 'https://juliakantzer.com',
   description:
-    'Julia Kantzer builds AI products for real users. CS and Applied Math at Vanderbilt. Product-focused engineering, AI evaluation, and mission-driven tech.',
+    'Julia Kantzer builds AI products for real users. CS and Applied Math at Vanderbilt. Product engineering where business and technology meet.',
 }
 
 export const hero = {
@@ -427,7 +427,7 @@ export const skills = {
 ------------------------------------------------------------------------- */
 export const interests = {
   eyebrow: 'Interests',
-  body: 'Building AI products end to end. I care most about the gap between a model that works in a demo and a product that works for real users.',
+  body: 'The place where business and technology meet. I like deciding what to build and why as much as building it. Right now that means AI products end to end, and closing the gap between a model that works in a demo and a product that works for real users.',
 }
 
 /* -------------------------------------------------------------------------
@@ -437,7 +437,7 @@ export const contact = {
   id: 'contact',
   eyebrow: 'Contact',
   title: 'Let’s build something.',
-  body: 'Open to product engineering, technical PM, and forward deployed engineering roles. Willing to relocate.',
+  body: 'Open to product engineering, technical PM, and forward deployed engineering roles. Anywhere business and technology meet. Willing to relocate.',
   links: [
     { label: 'Email', value: site.email, href: `mailto:${site.email}` },
     { label: 'LinkedIn', value: 'linkedin.com/in/julia-kantzer', href: site.linkedin },

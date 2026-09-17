@@ -42,18 +42,23 @@ export function TerminalHint({ onOpen, start }: Props) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, delay: reduce ? 0 : 1.2 }}
       aria-label="Open the terminal"
-      className="print-hidden group mt-6 inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-md font-mono text-xs text-muted transition-colors hover:text-accent-ink sm:text-sm"
+      className="print-hidden group mt-6 inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-accent/50 bg-accent/10 px-3 py-2 font-mono text-sm text-text transition-colors hover:border-accent hover:bg-accent/15 hover:text-accent-ink motion-safe:animate-hint-glow"
     >
-      <span className="text-accent-2" aria-hidden="true">
-        #
+      <span className="text-accent-ink" aria-hidden="true">
+        ❯
       </span>
-      <span aria-hidden="true">{reduce ? text : text.slice(0, typed)}</span>
+      <span aria-hidden="true">
+        {reduce ? text : text.slice(0, typed)}
+        {!done && (
+          <span className="ml-0.5 inline-block h-[1em] w-[0.5em] translate-y-[0.15em] bg-accent motion-safe:animate-pulse" />
+        )}
+      </span>
       <span className="sr-only">{text}</span>
       {done && !touch && (
         <>
           <kbd
             aria-hidden="true"
-            className="inline-flex h-6 min-w-6 items-center justify-center rounded-md border border-accent/60 bg-bg px-1.5 text-[13px] leading-none text-accent-ink shadow-[0_2px_0_var(--accent)] motion-safe:animate-keypress group-hover:border-accent"
+            className="inline-flex h-7 min-w-7 items-center justify-center rounded-md border border-accent bg-bg px-2 text-base font-semibold leading-none text-accent-ink shadow-[0_2px_0_var(--accent)] motion-safe:animate-keypress"
           >
             ~
           </kbd>

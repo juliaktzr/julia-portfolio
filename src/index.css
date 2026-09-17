@@ -58,6 +58,17 @@
 
   /* A keycap pressing itself: sinks onto its shadow, then pops back. */
   --animate-keypress: keypress 1.8s ease-in-out infinite;
+  /* Three soft rose pulses when the terminal hint appears, then still. */
+  --animate-hint-glow: hintglow 2.2s ease-out 3;
+  @keyframes hintglow {
+    0% {
+      box-shadow: 0 0 0 0 rgb(184 107 119 / 0.45);
+    }
+    70%,
+    100% {
+      box-shadow: 0 0 0 12px rgb(184 107 119 / 0);
+    }
+  }
   @keyframes keypress {
     0%,
     60%,

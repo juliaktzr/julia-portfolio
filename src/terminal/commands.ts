@@ -1,4 +1,4 @@
-import { caseStudies, contact, education, experience, hero, nav, site, skills } from '../content'
+import { caseStudies, contact, education, experience, hero, interests, nav, site, skills } from '../content'
 import type { Theme } from '../hooks/useTheme'
 import { rps, startGuess, startHangman, type GameState, type WordBank } from './games'
 import type { Line } from './types'
@@ -124,7 +124,7 @@ export function runCommand(raw: string, ctx: Context): Result {
       }
     }
     case 'about':
-      return { lines: [out(site.tagline), out(hero.meta), out(hero.status)] }
+      return { lines: [out(site.tagline), out(hero.meta), out(hero.status), out(''), out(interests.body)] }
     case 'projects':
       return {
         lines: caseStudies.flatMap((c) => [
