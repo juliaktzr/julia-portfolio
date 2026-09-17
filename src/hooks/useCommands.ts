@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { nav, site } from '../content'
+import { caseStudies, nav, site } from '../content'
 import type { Theme } from './useTheme'
 
 export type Command = {
@@ -27,6 +27,13 @@ export function useCommands({ theme, onToggleTheme, onOpenTerminal }: Deps) {
         hint: n.href,
         group: 'Navigate',
         run: go(n.href),
+      })),
+      ...caseStudies.map<Command>((c) => ({
+        id: `#${c.id}`,
+        label: c.company,
+        hint: 'Case study',
+        group: 'Navigate',
+        run: go(`#${c.id}`),
       })),
       {
         id: 'theme',

@@ -39,7 +39,7 @@ export const hero = {
 }
 
 export const nav = [
-  { label: 'Work', href: '#work' },
+  { label: 'Selected work', href: '#work' },
   { label: 'Experience', href: '#experience' },
   { label: 'Education', href: '#education' },
   { label: 'Research', href: '#research' },
@@ -49,33 +49,31 @@ export const nav = [
 ]
 
 /* -------------------------------------------------------------------------
-   Featured case study
-   Details are kept at resume level on purpose.
+   Selected work. Pega details are kept at resume level on purpose.
 ------------------------------------------------------------------------- */
-export const caseStudy = {
+export type CaseStudySection = { heading: string; body: string; bullets?: string[] }
+export type CaseStudyLink = { label: string; href: string; kind: 'primary' | 'secondary' }
+
+export type CaseStudy = {
+  id: string
+  company: string
+  role: string
+  period?: string // TODO for Witness to History: add the dates you worked on it
+  title: string
+  summary: string
+  links?: CaseStudyLink[]
+  sections: CaseStudySection[]
+  stack: string[]
+  diagram: 'flow' | 'pipeline'
+}
+
+export const work = {
   id: 'work',
-  eyebrow: 'Featured work',
-  company: 'Pegasystems',
-  role: 'Technology Architect Intern',
-  period: 'June 2026 to Present',
-  title: 'Replacing a 40-hour modeling process with a guided AI experience',
-  summary:
-    'Infrastructure modeling at Pega ran on a manual, spreadsheet-driven process. I architected a full-stack AI product that turned it into a conversational, guided experience.',
-  sections: [
-    {
-      heading: 'The problem',
-      body: 'Modeling infrastructure for a deployment took about 40 hours of manual work per run. The logic lived in legacy Excel workbooks. Only a few people could run it, and every run was slow to iterate on.',
-    },
-    {
-      heading: 'What I built',
-      body: 'A conversational, guided experience that walks the user through the inputs and produces a model. Underneath it, a Python calculation engine that reproduces the legacy Excel logic within 5% accuracy, so the new experience did not trade away reliability.',
-    },
-    {
-      heading: 'How I decided',
-      body: 'I evaluated four solution paths across product, UX, and technical tradeoffs before building. That analysis shaped the infrastructure modeling roadmap and informed engineering leadership decisions.',
-    },
-  ],
-  stack: ['Python', 'React', 'Claude Code', 'MCP'],
+  eyebrow: 'Selected work',
+  title: 'What I have shipped.',
+}
+
+export const pegaFlow = {
   before: {
     label: 'Before',
     steps: [
@@ -92,6 +90,95 @@ export const caseStudy = {
     time: 'Within 5% of legacy logic',
   },
 }
+
+/** Content pipeline for Witness to History. The validator is the point of the story. */
+export const witnessPipeline = {
+  steps: [
+    { label: 'Google Sheet', note: 'Teammates write dialogue, sources, outcomes' },
+    { label: 'CSV', note: 'Exported from the sheet' },
+    { label: 'Validator', note: 'Checks every reference, plain-English errors', highlight: true },
+    { label: 'JSON', note: 'One file per scenario' },
+    { label: 'Game', note: 'Browser, no install, no login' },
+  ],
+}
+
+export const caseStudies: CaseStudy[] = [
+  {
+    id: 'work-pega',
+    company: 'Pegasystems',
+    role: 'Technology Architect Intern',
+    period: 'June 2026 to Present',
+    title: 'Replacing a 40-hour modeling process with a guided AI experience',
+    summary:
+      'Infrastructure modeling at Pega ran on a manual, spreadsheet-driven process. I architected a full-stack AI product that turned it into a conversational, guided experience.',
+    sections: [
+      {
+        heading: 'The problem',
+        body: 'Modeling infrastructure for a deployment took about 40 hours of manual work per run. The logic lived in legacy Excel workbooks. Only a few people could run it, and every run was slow to iterate on.',
+      },
+      {
+        heading: 'What I built',
+        body: 'A conversational, guided experience that walks the user through the inputs and produces a model. Underneath it, a Python calculation engine that reproduces the legacy Excel logic within 5% accuracy, so the new experience did not trade away reliability.',
+      },
+      {
+        heading: 'How I decided',
+        body: 'I evaluated four solution paths across product, UX, and technical tradeoffs before building. That analysis shaped the infrastructure modeling roadmap and informed engineering leadership decisions.',
+      },
+    ],
+    stack: ['Python', 'React', 'Claude Code', 'MCP'],
+    diagram: 'flow',
+  },
+  {
+    id: 'work-witness',
+    company: 'Witness to History',
+    role: 'Engineer, one of two on the team',
+    title: 'Witness to History \u2014 an interactive history simulation for middle/high schoolers',
+    summary:
+      'A browser game where a student sits down with the people who lived a historical moment, hears their conflicting pressures, and makes the same decision with the same incomplete information they had.',
+    links: [
+      { label: 'Live demo', href: 'https://juliaktzr.github.io/witness-to-history/', kind: 'primary' },
+      { label: 'Source', href: 'https://github.com/juliaktzr/witness-to-history', kind: 'secondary' },
+    ],
+    sections: [
+      {
+        heading: 'The problem',
+        body: 'History class usually shows students the outcome, so decisions look obvious in hindsight. A 4-person Education team and I wanted students to actually feel the uncertainty the historical figures felt: sit down with the people who lived a moment, hear their conflicting pressures, and make the same decision with the same incomplete information they had, before finding out what really happened.',
+      },
+      {
+        heading: 'What I built',
+        body: 'As one of two engineers on the team, I built the content-driven game engine end to end: a browser game (no install, no login, works on a school Chromebook) where a student picks an era, talks through branching dialogue with 2-3 historical figures, makes one real decision, and sees both the outcome and the historical reveal. Specifically:',
+        bullets: [
+          'A content pipeline that turns a shared Google Sheet into validated game JSON, so 4 non-coding teammates can write dialogue, sources, and outcomes without touching code, and get plain-English errors (not stack traces) when something doesn\u2019t connect',
+          'A branching dialogue system where every factual claim is tied to a cited primary source',
+          'An illustrated map hub with the student\u2019s own character walking between figures to start each conversation',
+          'Read-aloud (Web Speech API), full keyboard nav, and alt text throughout',
+          'Deployed free on GitHub Pages, zero backend, zero recurring cost',
+        ],
+      },
+      {
+        heading: 'How I decided',
+        body: 'This is where most of the actual work was.',
+        bullets: [
+          'Scoped hard against an Oct 7 pitch deadline: cut character customization and a second scenario down to must-haves (era select, one working decision loop, reliable load), even under pressure to add more, since an untested format built out 4 times risked 4x rework after feedback',
+          'Chose a content-agnostic architecture (a new scenario is just one JSON file) specifically so 4 non-technical teammates could produce content independently of the 2 engineers, instead of the faster-to-build-once but slower-to-iterate option of hardcoding content',
+          'Pushed for a one-job-per-person split across a single scenario over each teammate owning a whole scenario, to validate the format with real pitch feedback before parallelizing work',
+          'Built validation into the tool itself (not a wiki page) because the content authors can\u2019t debug a broken reference on their own',
+          'Treated historical integrity as a product requirement: composite characters instead of invented quotes from real people, mandatory source citation on every factual line, decided with the Education team rather than defaulted into by whoever finished first',
+        ],
+      },
+    ],
+    stack: [
+      'Vite',
+      'React',
+      'TypeScript',
+      'Web Speech API',
+      'GitHub Pages',
+      'Custom CSV/Sheets-to-JSON content pipeline',
+      'No backend or database',
+    ],
+    diagram: 'pipeline',
+  },
+]
 
 /* -------------------------------------------------------------------------
    Experience timeline

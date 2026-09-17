@@ -1,6 +1,6 @@
 import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react'
-import { caseStudy, contact, hero, site } from '../content'
+import { caseStudies, contact, hero, site } from '../content'
 import type { Theme } from '../hooks/useTheme'
 
 type Line = { kind: 'in' | 'out' | 'err'; text: string }
@@ -57,9 +57,10 @@ export function Terminal({ open, onClose, theme, onToggleTheme }: Props) {
       case 'projects':
         print(
           echo,
-          { kind: 'out', text: `${caseStudy.company}: ${caseStudy.title}.` },
-          { kind: 'out', text: caseStudy.summary },
-          { kind: 'out', text: 'Stack: ' + caseStudy.stack.join(', ') },
+          ...caseStudies.flatMap<Line>((c) => [
+            { kind: 'out', text: `${c.company}: ${c.title}` },
+            { kind: 'out', text: '  Stack: ' + c.stack.join(', ') },
+          ]),
         )
         break
       case 'resume':

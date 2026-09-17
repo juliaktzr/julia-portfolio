@@ -1,13 +1,8 @@
 import { m, useReducedMotion } from 'framer-motion'
 import { hero, site } from '../content'
+import { ButtonLink } from './Button'
 import { usePrinting } from '../hooks/usePrinting'
 import { useTypedSequence } from '../hooks/useTypedSequence'
-
-const buttonStyles = {
-  primary: 'bg-text text-bg hover:bg-accent-ink hover:text-bg',
-  secondary: 'border border-text/30 text-text hover:border-accent hover:text-accent-ink',
-  ghost: 'text-muted hover:text-accent-ink',
-} as const
 
 export function Hero() {
   const reduceMotion = useReducedMotion() ?? false
@@ -93,15 +88,15 @@ export function Hero() {
               </p>
               <div className="print-hidden flex flex-wrap items-center gap-3">
                 {hero.buttons.map((b) => (
-                  <a
+                  <ButtonLink
                     key={b.label}
                     href={b.href}
+                    kind={b.kind}
                     download={b.download ? site.resumeFilename : undefined}
-                    className={`inline-flex h-11 items-center rounded-md px-5 text-sm font-medium transition-colors ${buttonStyles[b.kind]}`}
                   >
                     {b.label}
                     {b.download && <span className="sr-only"> (PDF)</span>}
-                  </a>
+                  </ButtonLink>
                 ))}
               </div>
             </m.div>

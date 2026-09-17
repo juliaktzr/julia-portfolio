@@ -1,6 +1,6 @@
 import { useReducedMotion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { caseStudy } from '../content'
+import { pegaFlow as caseStudy } from '../content'
 import { usePrinting } from '../hooks/usePrinting'
 
 /**
