@@ -45,7 +45,7 @@ Theme defaults to the system preference. The toggle stores a choice in `localSto
 ## Interactive features
 
 - **Cmd K / Ctrl K** opens the command palette. Commands are defined in `src/hooks/useCommands.ts`.
-- **`~`** opens the terminal. Commands are in `src/components/Terminal.tsx`.
+- **`~`** opens the terminal. Commands live in `src/terminal/commands.ts`, games in `src/terminal/games.ts`. Type `help` inside it.
 - Scroll reveal, counters, and the cursor glow all switch off under `prefers-reduced-motion`.
 
 ## Deploy to Vercel

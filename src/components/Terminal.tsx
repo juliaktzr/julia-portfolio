@@ -1,39 +1,48 @@
 import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react'
-import { caseStudies, contact, hero, site } from '../content'
+import { site } from '../content'
 import type { Theme } from '../hooks/useTheme'
-
-type Line = { kind: 'in' | 'out' | 'err'; text: string }
+import { COMMAND_NAMES, runCommand } from '../terminal/commands'
+import { gamePrompt, playGame, type GameState } from '../terminal/games'
+import type { Line } from '../terminal/types'
 
 type Props = {
   open: boolean
   onClose: () => void
   theme: Theme
   onToggleTheme: () => void
+  onSetTheme: (t: Theme) => void
 }
-
-const COMMANDS = ['help', 'about', 'projects', 'resume', 'contact', 'theme', 'clear', 'exit'] as const
 
 const WELCOME: Line[] = [{ kind: 'out', text: `${site.name} portfolio shell. Type help to see commands.` }]
 
-export function Terminal({ open, onClose, theme, onToggleTheme }: Props) {
+export function Terminal({ open, onClose, theme, onToggleTheme, onSetTheme }: Props) {
   const reduce = useReducedMotion() ?? false
   const [lines, setLines] = useState<Line[]>(WELCOME)
   const [input, setInput] = useState('')
   const [history, setHistory] = useState<string[]>([])
   const [histIdx, setHistIdx] = useState<number | null>(null)
+  const [game, setGame] = useState<GameState | null>(null)
+  const openedAt = useRef(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const returnFocus = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     if (open) {
+      openedAt.current = Date.now()
       returnFocus.current = document.activeElement as HTMLElement | null
       requestAnimationFrame(() => inputRef.current?.focus())
     } else {
       returnFocus.current?.focus?.()
     }
   }, [open])
+
+  // Leaving the terminal also leaves any game in progress.
+  const close = () => {
+    setGame(null)
+    onClose()
+  }
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight })
@@ -42,52 +51,29 @@ export function Terminal({ open, onClose, theme, onToggleTheme }: Props) {
   const print = (...out: Line[]) => setLines((l) => [...l, ...out])
 
   const execute = (raw: string) => {
-    const cmd = raw.trim().toLowerCase()
-    const echo: Line = { kind: 'in', text: raw }
-    switch (cmd) {
-      case '':
-        print(echo)
-        break
-      case 'help':
-        print(echo, { kind: 'out', text: 'Commands: ' + COMMANDS.join(', ') })
-        break
-      case 'about':
-        print(echo, { kind: 'out', text: site.tagline }, { kind: 'out', text: hero.meta })
-        break
-      case 'projects':
-        print(
-          echo,
-          ...caseStudies.flatMap<Line>((c) => [
-            { kind: 'out', text: `${c.company}: ${c.title}` },
-            { kind: 'out', text: '  Stack: ' + c.stack.join(', ') },
-          ]),
-        )
-        break
-      case 'resume':
-        print(echo, { kind: 'out', text: `Opening ${site.resumeUrl}` })
-        window.open(site.resumeUrl, '_blank', 'noopener')
-        break
-      case 'contact':
-        print(
-          echo,
-          ...contact.links.map<Line>((l) => ({ kind: 'out', text: `${l.label.padEnd(9)} ${l.value}` })),
-        )
-        break
-      case 'theme':
-        onToggleTheme()
-        print(echo, { kind: 'out', text: `Theme set to ${theme === 'dark' ? 'light' : 'dark'}.` })
-        break
-      case 'clear':
-        setLines([])
-        break
-      case 'exit':
-      case 'quit':
-        print(echo)
-        onClose()
-        break
-      default:
-        print(echo, { kind: 'err', text: `command not found: ${cmd}. Type help.` })
+    const echo: Line = { kind: 'in', text: raw, prompt: game ? `${gamePrompt(game)}❯` : '❯' }
+
+    if (game) {
+      const { lines: outLines, state } = playGame(game, raw)
+      setGame(state)
+      print(echo, ...outLines)
+      return
     }
+
+    const result = runCommand(raw, {
+      theme,
+      setTheme: onSetTheme,
+      toggleTheme: onToggleTheme,
+      close,
+      history,
+      openedAt: openedAt.current,
+    })
+    if (result.clear) {
+      setLines([])
+      return
+    }
+    if (result.game !== undefined) setGame(result.game)
+    print(echo, ...result.lines)
   }
 
   const onSubmit = (e: FormEvent) => {
@@ -101,7 +87,7 @@ export function Terminal({ open, onClose, theme, onToggleTheme }: Props) {
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Escape') {
       e.preventDefault()
-      onClose()
+      close()
     } else if (e.key === 'ArrowUp' && history.length) {
       e.preventDefault()
       const idx = histIdx === null ? history.length - 1 : Math.max(0, histIdx - 1)
@@ -119,7 +105,8 @@ export function Terminal({ open, onClose, theme, onToggleTheme }: Props) {
       }
     } else if (e.key === 'Tab') {
       e.preventDefault()
-      const match = COMMANDS.find((c) => c.startsWith(input.toLowerCase()) && input)
+      if (game) return
+      const match = COMMAND_NAMES.find((c) => c.startsWith(input.toLowerCase()) && input)
       if (match) setInput(match)
     }
   }
@@ -143,7 +130,7 @@ export function Terminal({ open, onClose, theme, onToggleTheme }: Props) {
             <span>julia@vanderbilt ~ zsh</span>
             <button
               type="button"
-              onClick={onClose}
+              onClick={close}
               className="rounded px-2 py-0.5 text-muted hover:text-text"
               aria-label="Close terminal"
             >
@@ -158,20 +145,20 @@ export function Terminal({ open, onClose, theme, onToggleTheme }: Props) {
                   l.kind === 'in' ? 'text-accent-ink' : l.kind === 'err' ? 'text-pop' : 'text-text'
                 }`}
               >
-                {l.kind === 'in' ? `❯ ${l.text}` : l.text}
+                {l.kind === 'in' ? `${l.prompt ?? '❯'} ${l.text}` : l.text}
               </p>
             ))}
           </div>
           <form onSubmit={onSubmit} className="flex items-center gap-2 border-t border-line px-4 py-2">
-            <span aria-hidden="true" className="text-accent-ink">
-              ❯
+            <span aria-hidden="true" className="shrink-0 text-accent-ink">
+              {game ? `${gamePrompt(game)}❯` : '❯'}
             </span>
             <input
               ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={onKeyDown}
-              aria-label="Terminal input"
+              aria-label={game ? `${gamePrompt(game)} input` : 'Terminal input'}
               autoComplete="off"
               autoCapitalize="off"
               spellCheck={false}

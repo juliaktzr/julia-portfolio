@@ -22,7 +22,7 @@ function isTypingTarget(el: EventTarget | null) {
 }
 
 export default function App() {
-  const { theme, toggle } = useTheme()
+  const { theme, toggle, setTheme } = useTheme()
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [terminalOpen, setTerminalOpen] = useState(false)
 
@@ -78,6 +78,7 @@ export default function App() {
         onClose={() => setTerminalOpen(false)}
         theme={theme}
         onToggleTheme={toggle}
+        onSetTheme={setTheme}
       />
     </LazyMotion>
   )
