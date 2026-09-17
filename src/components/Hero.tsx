@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { hero, site } from '../content'
 import { useTypedSequence } from '../hooks/useTypedSequence'
 
@@ -56,7 +56,7 @@ export function Hero() {
                   {showCursor && !showOut && <Cursor />}
                 </p>
                 {showOut && (
-                  <motion.div
+                  <m.div
                     initial={reduceMotion ? false : { opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
@@ -69,14 +69,14 @@ export function Hero() {
                     ) : (
                       <p className="max-w-2xl text-lg leading-relaxed text-text sm:text-xl">{line.out}</p>
                     )}
-                  </motion.div>
+                  </m.div>
                 )}
               </div>
             )
           })}
 
           {state.done && (
-            <motion.div
+            <m.div
               initial={reduceMotion ? false : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
@@ -98,7 +98,7 @@ export function Hero() {
                   </a>
                 ))}
               </div>
-            </motion.div>
+            </m.div>
           )}
         </div>
       </div>

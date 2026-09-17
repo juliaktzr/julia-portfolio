@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useCommands, type Command } from '../hooks/useCommands'
 import type { Theme } from '../hooks/useTheme'
@@ -37,7 +37,7 @@ export function CommandPalette({ open, onClose, theme, onToggleTheme, onOpenTerm
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
           key="palette"
           initial={reduce ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -55,7 +55,7 @@ export function CommandPalette({ open, onClose, theme, onToggleTheme, onOpenTerm
             onToggleTheme={onToggleTheme}
             onOpenTerminal={onOpenTerminal}
           />
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   )
@@ -118,7 +118,7 @@ function Panel({ reduce, onClose, theme, onToggleTheme, onOpenTerminal }: PanelP
   }
 
   return (
-    <motion.div
+    <m.div
       role="dialog"
       aria-modal="true"
       aria-label="Command palette"
@@ -198,6 +198,6 @@ function Panel({ reduce, onClose, theme, onToggleTheme, onOpenTerminal }: PanelP
         <span aria-live="polite">{status || 'Use arrow keys, Enter to run'}</span>
         <span>⌘K</span>
       </div>
-    </motion.div>
+    </m.div>
   )
 }

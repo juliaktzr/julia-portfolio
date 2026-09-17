@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react'
 import { caseStudy, contact, hero, site } from '../content'
 import type { Theme } from '../hooks/useTheme'
@@ -126,7 +126,7 @@ export function Terminal({ open, onClose, theme, onToggleTheme }: Props) {
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
           key="terminal"
           role="dialog"
           aria-modal="true"
@@ -177,7 +177,7 @@ export function Terminal({ open, onClose, theme, onToggleTheme }: Props) {
               className="h-8 w-full bg-transparent outline-none"
             />
           </form>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   )

@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { caseStudy } from '../content'
 
 /**
@@ -64,7 +64,7 @@ function Row({ label, steps, note, tone, reduce }: RowProps) {
       <ol className="flex flex-col gap-2">
         {steps.map((step, i) => (
           <li key={step} className="flex flex-col">
-            <motion.div
+            <m.div
               initial={reduce ? false : { opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.6 }}
@@ -75,9 +75,9 @@ function Row({ label, steps, note, tone, reduce }: RowProps) {
                 {String(i + 1).padStart(2, '0')}
               </span>
               {step}
-            </motion.div>
+            </m.div>
             {i < steps.length - 1 && (
-              <motion.span
+              <m.span
                 initial={reduce ? false : { scaleY: 0 }}
                 whileInView={{ scaleY: 1 }}
                 viewport={{ once: true, amount: 0.6 }}

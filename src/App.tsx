@@ -1,3 +1,4 @@
+import { LazyMotion, domAnimation } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
 import { CaseStudy } from './components/CaseStudy'
 import { CommandPalette } from './components/CommandPalette'
@@ -48,7 +49,7 @@ export default function App() {
   }, [])
 
   return (
-    <>
+    <LazyMotion features={domAnimation} strict>
       <CursorGlow />
       <Nav theme={theme} onToggleTheme={toggle} onOpenPalette={() => setPaletteOpen(true)} />
       <main id="main">
@@ -76,6 +77,6 @@ export default function App() {
         theme={theme}
         onToggleTheme={toggle}
       />
-    </>
+    </LazyMotion>
   )
 }

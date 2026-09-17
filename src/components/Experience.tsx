@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
 import { experience, type Role } from '../content'
 import { Section, Tag } from './Section'
@@ -88,7 +88,7 @@ function TimelineItem({ role, index, open, onToggle }: ItemProps) {
         </h3>
         <AnimatePresence initial={false}>
           {open && (
-            <motion.div
+            <m.div
               id={panelId}
               role="region"
               aria-labelledby={buttonId}
@@ -114,7 +114,7 @@ function TimelineItem({ role, index, open, onToggle }: ItemProps) {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>
