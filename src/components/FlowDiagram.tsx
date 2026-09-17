@@ -179,8 +179,8 @@ function Row({ label, steps, note, tone, lit, noteShown, collapsed }: RowProps) 
         </span>
       </div>
       <ol
-        className={`flex flex-col gap-2 transition-[opacity,transform] duration-700 ease-out sm:flex-row sm:items-stretch sm:gap-0 ${
-          collapsed ? 'scale-[0.97] opacity-40' : ''
+        className={`flex flex-col gap-2 transition-transform duration-700 ease-out sm:flex-row sm:items-stretch sm:gap-0 ${
+          collapsed ? 'scale-[0.97]' : ''
         }`}
       >
         {steps.map((step, i) => {
@@ -188,8 +188,10 @@ function Row({ label, steps, note, tone, lit, noteShown, collapsed }: RowProps) 
           const box = on
             ? accent
               ? 'border-accent/70 bg-bg text-text'
-              : 'border-text/30 bg-bg/80 text-text'
-            : 'border-line bg-bg/30 text-muted/50'
+              : collapsed
+                ? 'border-dashed border-accent-2/50 bg-bg/60 text-muted line-through decoration-accent-2/70'
+                : 'border-text/30 bg-bg/80 text-text'
+            : 'border-line bg-bg/30 text-muted'
           const line =
             i < lit - 1 || (i === lit - 1 && lit === steps.length)
               ? accent
