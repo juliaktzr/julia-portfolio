@@ -35,7 +35,6 @@ export function CaseStudy() {
         </div>
         <div className="lg:sticky lg:top-24 lg:self-start">
           <FlowDiagram />
-          <p className="mt-3 font-mono text-[11px] leading-relaxed text-muted">{caseStudy.shareNote}</p>
         </div>
       </div>
     </Section>

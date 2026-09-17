@@ -13,7 +13,7 @@ export const site = {
   tagline: 'I build AI products for real users and lead the people who ship them.',
   location: 'Nashville, TN',
   email: 'juliakantzer@gmail.com',
-  linkedin: 'https://linkedin.com/julia-kantzer',
+  linkedin: 'https://www.linkedin.com/in/julia-kantzer/',
   github: 'https://github.com/juliaktzr',
   resumeUrl: '/resume.pdf',
   headshot: '/headshot.jpg',
@@ -48,8 +48,7 @@ export const nav = [
 
 /* -------------------------------------------------------------------------
    Featured case study
-   TODO: Confirm with Pegasystems which of these details are shareable
-   publicly before launch. Everything below is kept at resume level.
+   Details are kept at resume level on purpose.
 ------------------------------------------------------------------------- */
 export const caseStudy = {
   id: 'work',
@@ -90,7 +89,6 @@ export const caseStudy = {
     steps: ['Guided conversation collects inputs', 'Python engine runs the model', 'Results in one session'],
     time: 'Within 5% of legacy logic',
   },
-  shareNote: 'TODO: confirm with Pega what is shareable. Details here stay at resume level on purpose.',
 }
 
 /* -------------------------------------------------------------------------
@@ -196,7 +194,6 @@ export const education = {
       logoStyle: 'mark' as const,
     },
     {
-      // TODO: confirm the school name and add a line about what you studied there.
       name: 'Universidad Carlos III de Madrid (UC3M)',
       location: 'Madrid, Spain',
       period: 'January 2026 to June 2026',
@@ -322,7 +319,7 @@ export const contact = {
   body: 'Open to product engineering, technical PM, and forward deployed engineering roles. Willing to relocate.',
   links: [
     { label: 'Email', value: site.email, href: `mailto:${site.email}` },
-    { label: 'LinkedIn', value: 'linkedin.com/julia-kantzer', href: site.linkedin },
+    { label: 'LinkedIn', value: 'linkedin.com/in/julia-kantzer', href: site.linkedin },
     { label: 'GitHub', value: 'github.com/juliaktzr', href: site.github },
   ],
 }
