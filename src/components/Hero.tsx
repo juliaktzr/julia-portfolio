@@ -96,7 +96,7 @@ export function Hero() {
                   <a
                     key={b.label}
                     href={b.href}
-                    download={b.download ? `${site.name.replace(' ', '-')}-Resume.pdf` : undefined}
+                    download={b.download ? site.resumeFilename : undefined}
                     className={`inline-flex h-11 items-center rounded-md px-5 text-sm font-medium transition-colors ${buttonStyles[b.kind]}`}
                   >
                     {b.label}

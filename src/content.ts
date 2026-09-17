@@ -16,6 +16,7 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/julia-kantzer/',
   github: 'https://github.com/juliaktzr',
   resumeUrl: '/resume.pdf',
+  resumeFilename: 'JuliaKantzerResume.pdf', // name the browser saves the download as
   headshot: '/headshot.jpg',
   headshotAlt: 'Julia Kantzer smiling, wearing a dark blazer',
   siteUrl: 'https://juliakantzer.com',

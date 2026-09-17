@@ -41,7 +41,7 @@ export function Contact() {
         Or grab the{' '}
         <a
           href={site.resumeUrl}
-          download
+          download={site.resumeFilename}
           className="text-accent-ink underline underline-offset-4 hover:text-text"
         >
           resume PDF

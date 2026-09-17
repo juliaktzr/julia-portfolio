@@ -52,7 +52,7 @@ export function useCommands({ theme, onToggleTheme, onOpenTerminal }: Deps) {
         run: () => {
           const a = document.createElement('a')
           a.href = site.resumeUrl
-          a.download = 'Julia-Kantzer-Resume.pdf'
+          a.download = site.resumeFilename
           a.click()
         },
       },
