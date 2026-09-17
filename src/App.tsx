@@ -55,7 +55,7 @@ export default function App() {
       <CursorGlow />
       <Nav theme={theme} onToggleTheme={toggle} onOpenPalette={() => setPaletteOpen(true)} />
       <main id="main">
-        <Hero />
+        <Hero onOpenTerminal={openTerminal} />
         <CaseStudy />
         <Experience />
         <Education />

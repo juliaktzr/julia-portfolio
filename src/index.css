@@ -55,6 +55,22 @@
   --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* A keycap pressing itself: sinks onto its shadow, then pops back. */
+  --animate-keypress: keypress 1.8s ease-in-out infinite;
+  @keyframes keypress {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+      box-shadow: 0 2px 0 var(--accent);
+    }
+    70%,
+    80% {
+      transform: translateY(2px);
+      box-shadow: 0 0 0 var(--accent);
+    }
+  }
 }
 
 @layer base {

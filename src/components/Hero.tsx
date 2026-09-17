@@ -1,10 +1,13 @@
 import { m, useReducedMotion } from 'framer-motion'
 import { hero, site } from '../content'
 import { ButtonLink } from './Button'
+import { TerminalHint } from './TerminalHint'
 import { usePrinting } from '../hooks/usePrinting'
 import { useTypedSequence } from '../hooks/useTypedSequence'
 
-export function Hero() {
+type Props = { onOpenTerminal: () => void }
+
+export function Hero({ onOpenTerminal }: Props) {
   const reduceMotion = useReducedMotion() ?? false
   const printing = usePrinting()
   const state = useTypedSequence(hero.commands, { instant: reduceMotion || printing })
@@ -99,6 +102,7 @@ export function Hero() {
                   </ButtonLink>
                 ))}
               </div>
+              <TerminalHint onOpen={onOpenTerminal} start={state.done} />
             </m.div>
           )}
         </div>

@@ -31,6 +31,12 @@ export const hero = {
   ],
   meta: 'CS + Applied Math at Vanderbilt, May 2027',
   status: 'Currently at Pegasystems',
+  /** Hint under the hero buttons. `before` + a ~ keycap + `after` on keyboards; `touch` on phones. */
+  terminalHint: {
+    before: 'psst. press',
+    after: 'for a real terminal',
+    touch: 'psst. tap here for a real terminal',
+  },
   buttons: [
     { label: 'View Work', href: '#work', kind: 'primary' as const },
     { label: 'Resume', href: site.resumeUrl, kind: 'secondary' as const, download: true },
