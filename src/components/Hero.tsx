@@ -1,5 +1,6 @@
 import { m, useReducedMotion } from 'framer-motion'
 import { hero, site } from '../content'
+import { usePrinting } from '../hooks/usePrinting'
 import { useTypedSequence } from '../hooks/useTypedSequence'
 
 const buttonStyles = {
@@ -10,16 +11,18 @@ const buttonStyles = {
 
 export function Hero() {
   const reduceMotion = useReducedMotion() ?? false
-  const state = useTypedSequence(hero.commands, { instant: reduceMotion })
+  const printing = usePrinting()
+  const state = useTypedSequence(hero.commands, { instant: reduceMotion || printing })
 
   return (
     <section
       id="top"
-      className="relative mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-5xl flex-col justify-center px-4 py-16 sm:px-6"
+      className="relative mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-5xl flex-col justify-center px-4 py-16 print:min-h-0 print:py-4 sm:px-6"
     >
       {/* Decorative grid: the one "techy" flourish in this section. */}
       <div
         aria-hidden="true"
+        data-decorative
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35] [background-image:linear-gradient(var(--line)_1px,transparent_1px),linear-gradient(90deg,var(--line)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]"
       />
 
@@ -29,7 +32,7 @@ export function Hero() {
         aria-label="Introduction"
       >
         {/* Window chrome */}
-        <div className="flex items-center gap-2 border-b border-line px-4 py-3">
+        <div className="print-hidden flex items-center gap-2 border-b border-line px-4 py-3">
           <span className="h-3 w-3 rounded-full bg-accent/80" aria-hidden="true" />
           <span className="h-3 w-3 rounded-full bg-accent-2/70" aria-hidden="true" />
           <span className="h-3 w-3 rounded-full bg-muted/50" aria-hidden="true" />
@@ -63,9 +66,12 @@ export function Hero() {
                     className="mt-2"
                   >
                     {i === 0 ? (
-                      <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
-                        {line.out}
-                      </h1>
+                      <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+                        <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
+                          {line.out}
+                        </h1>
+                        <StatusPill />
+                      </div>
                     ) : (
                       <p className="max-w-2xl text-lg leading-relaxed text-text sm:text-xl">{line.out}</p>
                     )}
@@ -85,7 +91,7 @@ export function Hero() {
               <p className="mb-5 font-mono text-xs text-muted sm:text-sm">
                 <span className="text-accent-2">#</span> {hero.meta}
               </p>
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="print-hidden flex flex-wrap items-center gap-3">
                 {hero.buttons.map((b) => (
                   <a
                     key={b.label}
@@ -108,6 +114,18 @@ export function Hero() {
         {state.done ? '' : `${site.name}. ${site.tagline}`}
       </p>
     </section>
+  )
+}
+
+function StatusPill() {
+  return (
+    <span className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-bg/70 px-3 py-1 font-mono text-xs text-muted">
+      <span className="relative flex h-2 w-2" aria-hidden="true">
+        <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-75 motion-safe:animate-ping" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+      </span>
+      {hero.status}
+    </span>
   )
 }
 

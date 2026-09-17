@@ -77,9 +77,14 @@
     transition: background-color 250ms ease, color 250ms ease;
   }
 
+  /* Selection: rose on cream in light, cream on rose inverted in dark. */
   ::selection {
     background: var(--accent);
-    color: var(--bg);
+    color: #faf6f1;
+  }
+  :root[data-theme='dark'] ::selection {
+    background: #f3eae2;
+    color: #b86b77;
   }
 
   /* Visible, consistent focus for keyboard users. */
@@ -94,5 +99,105 @@
   .font-display {
     font-family: var(--font-display);
     font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 1;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Print: one clean light document. Hide chrome and decoration, expand
+   everything, show link targets, tighten spacing.
+--------------------------------------------------------------------------- */
+@media print {
+  :root,
+  :root[data-theme='dark'] {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --text: #1a1310;
+    --muted: #4a3b34;
+    --accent: #9a4c59;
+    --accent-ink: #9a4c59;
+    --accent-2: #8a5a44;
+    --pop: #6e4f7a;
+    --line: rgb(0 0 0 / 0.2);
+    --glow: transparent;
+    color-scheme: light;
+  }
+
+  @page {
+    size: letter;
+    margin: 10mm 12mm;
+  }
+
+  html {
+    font-size: 9px;
+  }
+
+  body {
+    background: #fff !important;
+    color: var(--text) !important;
+  }
+
+  /* Anything that animates in must be visible on paper. */
+  * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .print-hidden,
+  header,
+  footer,
+  [data-grain],
+  [data-decorative],
+  [aria-controls^='exp-panel'] svg {
+    display: none !important;
+  }
+
+  .max-w-5xl {
+    max-width: none !important;
+  }
+
+  section {
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+    scroll-margin: 0 !important;
+  }
+
+  section > div > .mt-10,
+  section > div > div.mt-10 {
+    margin-top: 0.6rem !important;
+  }
+
+  h1 {
+    font-size: 2.4rem !important;
+  }
+
+  h2 {
+    font-size: 1.3rem !important;
+  }
+
+  h3 {
+    font-size: 1rem !important;
+  }
+
+  p,
+  li {
+    line-height: 1.35 !important;
+  }
+
+  article,
+  li,
+  figure {
+    break-inside: avoid;
+  }
+
+  a[href^='http']::after,
+  a[href^='mailto:']::after {
+    content: ' (' attr(href) ')';
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--muted);
   }
 }

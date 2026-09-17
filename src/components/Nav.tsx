@@ -36,22 +36,10 @@ export function Nav({ theme, onToggleTheme, onOpenPalette }: Props) {
             type="button"
             onClick={onOpenPalette}
             aria-label="Open command palette"
-            title="Command palette (Cmd K)"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-accent hover:text-accent-ink"
+            title="Command palette"
+            className="hidden h-8 items-center rounded-md border border-line px-2 font-mono text-[11px] text-muted transition-colors hover:border-accent hover:text-accent-ink sm:inline-flex"
           >
-            <svg
-              width="17"
-              height="17"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              aria-hidden="true"
-            >
-              <circle cx="11" cy="11" r="7" />
-              <path d="m20 20-3.5-3.5" />
-            </svg>
+            ⌘K
           </button>
           <ThemeToggle theme={theme} onToggle={onToggleTheme} />
           <MobileMenu />

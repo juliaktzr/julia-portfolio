@@ -56,7 +56,7 @@ The repo already has a `vercel.json` with the Vite framework preset, long-lived 
 2. Accept the detected settings (framework Vite, build `npm run build`, output `dist`). Click Deploy.
 3. Every push to `main` deploys automatically after that.
 
-After the first deploy, replace `TODO.vercel.app` with your real URL in three places: `index.html` (canonical and Open Graph tags), `public/robots.txt`, and `site.siteUrl` in `src/content.ts`. Then commit and push.
+The canonical and Open Graph URLs point at https://juliakantzer.com. In the Vercel project settings, add that domain and follow the DNS instructions. If the domain ever changes, update `index.html` and `site.siteUrl` in `src/content.ts`.
 
 Alternative from the terminal:
 
@@ -66,6 +66,14 @@ vercel login
 vercel --prod
 ```
 
+## 404 page
+
+`404.html` is a second Vite entry (see `vite.config.ts`) rendered by `src/notFound.tsx`. Vercel serves it automatically for unknown paths on static deployments.
+
+## Print
+
+Cmd P produces a light, single-column document: nav, footer, and decoration hidden, every timeline card expanded, link URLs printed inline. Styles live under `@media print` in `src/index.css`.
+
 ## Open Graph image
 
-`public/og.png` is a 1200x630 render of the hero. Regenerate it if you change your name or tagline. The source template is not in the repo; any 1200x630 PNG at that path works.
+`public/og-image.png` is a 1200x630 render of the hero. Regenerate it if you change your name or tagline. The source template is not in the repo; any 1200x630 PNG at that path works.

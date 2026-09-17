@@ -44,6 +44,7 @@ export function CursorGlow() {
   return (
     <m.div
       aria-hidden="true"
+      data-decorative
       style={{ x: sx, y: sy }}
       className="pointer-events-none fixed left-0 top-0 z-0 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,var(--glow)_0%,transparent_60%)] will-change-transform"
     />

@@ -11,9 +11,9 @@ export function Contact() {
           width={800}
           height={800}
           loading="lazy"
-          className="h-20 w-20 shrink-0 rounded-full object-cover ring-2 ring-accent/50 ring-offset-4 ring-offset-bg sm:h-24 sm:w-24"
+          className="print-hidden h-20 w-20 shrink-0 rounded-full object-cover ring-2 ring-accent/50 ring-offset-4 ring-offset-bg sm:h-24 sm:w-24"
         />
-        <ul className="grid flex-1 gap-4 sm:grid-cols-3">
+        <ul className="grid flex-1 gap-4 sm:grid-cols-3 print:grid-cols-3">
           {contact.links.map((l) => {
             const external = l.href.startsWith('http')
             return (
@@ -55,8 +55,9 @@ export function Contact() {
 export function Footer() {
   return (
     <footer className="border-t border-line">
-      <div className="mx-auto max-w-5xl px-4 py-8 font-mono text-xs text-muted sm:px-6">
+      <div className="mx-auto flex max-w-5xl flex-col gap-2 px-4 py-8 font-mono text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <p>{footer.line}</p>
+        <p className="text-muted/70">{footer.hint}</p>
       </div>
     </footer>
   )

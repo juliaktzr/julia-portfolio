@@ -6,12 +6,13 @@ type Props = {
   eyebrow: string
   title?: string
   intro?: string
+  introClassName?: string
   children: ReactNode
   className?: string
 }
 
 /** Shared section frame: mono eyebrow, display title, optional intro. */
-export function Section({ id, eyebrow, title, intro, children, className = '' }: Props) {
+export function Section({ id, eyebrow, title, intro, introClassName = '', children, className = '' }: Props) {
   return (
     <section id={id} className={`scroll-mt-20 py-20 sm:py-28 ${className}`} aria-labelledby={`${id}-title`}>
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
@@ -30,9 +31,11 @@ export function Section({ id, eyebrow, title, intro, children, className = '' }:
               {eyebrow}
             </h2>
           )}
-          {intro && <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">{intro}</p>}
+          {intro && (
+            <p className={`mt-4 max-w-2xl text-lg leading-relaxed text-muted ${introClassName}`}>{intro}</p>
+          )}
         </Reveal>
-        <Reveal delay={0.1} className="mt-10">
+        <Reveal delay={0.1} className="mt-10 print:mt-3">
           {children}
         </Reveal>
       </div>

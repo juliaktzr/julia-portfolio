@@ -4,7 +4,7 @@ import { Section } from './Section'
 export function Skills() {
   return (
     <Section id={skills.id} eyebrow={skills.eyebrow} title={skills.title}>
-      <dl className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+      <dl className="grid gap-x-10 gap-y-8 sm:grid-cols-2 print:grid-cols-4 print:gap-4">
         {skills.groups.map((g) => (
           <div key={g.name}>
             <dt className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-accent-2">{g.name}</dt>

@@ -6,6 +6,7 @@ import { Contact, Footer } from './components/Contact'
 import { CursorGlow } from './components/CursorGlow'
 import { Education } from './components/Education'
 import { Experience } from './components/Experience'
+import { Grain } from './components/Grain'
 import { Hero } from './components/Hero'
 import { Interests } from './components/Interests'
 import { Leadership } from './components/Leadership'
@@ -50,6 +51,7 @@ export default function App() {
 
   return (
     <LazyMotion features={domAnimation} strict>
+      <Grain />
       <CursorGlow />
       <Nav theme={theme} onToggleTheme={toggle} onOpenPalette={() => setPaletteOpen(true)} />
       <main id="main">

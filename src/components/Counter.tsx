@@ -1,6 +1,7 @@
 import { animate, useInView, useReducedMotion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import type { Counter as CounterData } from '../content'
+import { usePrinting } from '../hooks/usePrinting'
 
 const fmt = new Intl.NumberFormat('en-US')
 
@@ -10,7 +11,8 @@ export function Counter({ value, prefix = '', suffix = '', label }: CounterData)
   const inView = useInView(ref, { once: true, margin: '-10% 0px' })
   const reduce = useReducedMotion() ?? false
   const [counted, setCounted] = useState(0)
-  const shown = reduce ? value : counted
+  const printing = usePrinting()
+  const shown = reduce || printing ? value : counted
 
   useEffect(() => {
     if (!inView || reduce) return
@@ -26,7 +28,10 @@ export function Counter({ value, prefix = '', suffix = '', label }: CounterData)
 
   return (
     <div className="flex flex-col">
-      <span ref={ref} className="font-display text-3xl font-semibold tabular-nums tracking-tight sm:text-4xl">
+      <span
+        ref={ref}
+        className="font-display text-3xl font-semibold tabular-nums tracking-tight print:text-2xl sm:text-4xl"
+      >
         <span aria-hidden="true">
           {prefix}
           {fmt.format(shown)}

@@ -18,7 +18,7 @@ export const site = {
   resumeUrl: '/resume.pdf',
   headshot: '/headshot.jpg',
   headshotAlt: 'Julia Kantzer smiling, wearing a dark blazer',
-  siteUrl: 'https://TODO.vercel.app', // TODO: set after first deploy (used for Open Graph)
+  siteUrl: 'https://juliakantzer.com',
   description:
     'Julia Kantzer builds AI products for real users. CS and Applied Math at Vanderbilt. Product-focused engineering, AI evaluation, and mission-driven tech.',
 }
@@ -29,6 +29,7 @@ export const hero = {
     { cmd: 'cat mission.txt', out: site.tagline },
   ],
   meta: 'CS + Applied Math at Vanderbilt, May 2027',
+  status: 'Currently at Pegasystems',
   buttons: [
     { label: 'View Work', href: '#work', kind: 'primary' as const },
     { label: 'Resume', href: site.resumeUrl, kind: 'secondary' as const, download: true },
@@ -326,4 +327,23 @@ export const contact = {
 
 export const footer = {
   line: `\u00A9 ${new Date().getFullYear()} ${site.name}`,
+  hint: 'press ~ for terminal',
+}
+
+export const notFound = {
+  title: 'Page not found',
+  home: 'cd ~',
+  homeLabel: 'Back to home',
+}
+
+/** Printed to the browser console on load. */
+export const consoleGreeting = {
+  banner: `
+      _       _ _         _  __           _
+     | |_   _| (_) __ _  | |/ /__ _ _ __ | |_ _______ _ __
+  _  | | | | | | |/ _\` | | ' // _\` | '_ \\| __|_  / _ \\ '__|
+ | |_| | |_| | | | (_| | | . \\ (_| | | | | |_ / /  __/ |
+  \\___/ \\__,_|_|_|\\__,_| |_|\\_\\__,_|_| |_|\\__/___\\___|_|
+`,
+  line: `Open to product engineering and forward deployed roles. Say hi: ${site.email}`,
 }

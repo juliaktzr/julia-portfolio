@@ -4,9 +4,12 @@ import { Section } from './Section'
 export function Education() {
   return (
     <Section id={education.id} eyebrow={education.eyebrow} title={education.title}>
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 print:grid-cols-2 print:gap-3">
         {education.schools.map((s) => (
-          <article key={s.name} className="flex gap-5 rounded-xl border border-line bg-surface/60 p-5 sm:p-6">
+          <article
+            key={s.name}
+            className="flex gap-5 rounded-xl border border-line bg-surface/60 p-5 print:p-3 sm:p-6"
+          >
             <div
               className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-[#faf6f1] ring-1 ring-line ${
                 s.logoStyle === 'seal' ? 'p-2' : 'p-3'

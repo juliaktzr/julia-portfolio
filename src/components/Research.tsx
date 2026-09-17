@@ -5,11 +5,11 @@ import { Section } from './Section'
 export function Research() {
   return (
     <Section id={research.id} eyebrow={research.eyebrow} title={research.title} intro={research.intro}>
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 print:grid-cols-2 print:gap-3">
         {research.items.map((item) => (
           <article
             key={item.org}
-            className="flex flex-col rounded-xl border border-line bg-surface/60 p-5 sm:p-6"
+            className="flex flex-col rounded-xl border border-line bg-surface/60 p-5 print:p-3 sm:p-6"
           >
             <h3 className="font-semibold leading-snug">{item.org}</h3>
             <p className="mt-1 text-sm text-muted">{item.role}</p>

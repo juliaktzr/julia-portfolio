@@ -1,10 +1,12 @@
 import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
 import { experience, type Role } from '../content'
+import { usePrinting } from '../hooks/usePrinting'
 import { Section, Tag } from './Section'
 
 export function Experience() {
   const [open, setOpen] = useState<number | null>(0)
+  const printing = usePrinting()
 
   return (
     <Section
@@ -12,6 +14,7 @@ export function Experience() {
       eyebrow="Experience"
       title="Where I have worked."
       intro="Click a role to expand it."
+      introClassName="print-hidden"
     >
       <ol className="relative border-l border-line pl-6 sm:pl-8">
         {experience.map((role, i) => (
@@ -19,7 +22,7 @@ export function Experience() {
             key={`${role.org}-${role.title}`}
             role={role}
             index={i}
-            open={open === i}
+            open={printing || open === i}
             onToggle={() => setOpen(open === i ? null : i)}
           />
         ))}
@@ -36,7 +39,7 @@ function TimelineItem({ role, index, open, onToggle }: ItemProps) {
   const buttonId = `exp-button-${index}`
 
   return (
-    <li className="relative pb-6 last:pb-0">
+    <li className="relative pb-6 last:pb-0 print:pb-2">
       {/* Timeline dot */}
       <span
         aria-hidden="true"
@@ -56,7 +59,7 @@ function TimelineItem({ role, index, open, onToggle }: ItemProps) {
             aria-expanded={open}
             aria-controls={panelId}
             onClick={onToggle}
-            className="flex w-full items-start justify-between gap-4 rounded-xl px-4 py-4 text-left sm:px-5"
+            className="flex w-full items-start justify-between gap-4 rounded-xl px-4 py-4 text-left print:py-2 sm:px-5"
           >
             <span className="min-w-0">
               <span className="block font-semibold leading-snug">{role.title}</span>
@@ -103,7 +106,7 @@ function TimelineItem({ role, index, open, onToggle }: ItemProps) {
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="overflow-hidden"
             >
-              <ul className="space-y-2.5 border-t border-line px-4 py-4 text-sm leading-relaxed text-muted sm:px-5">
+              <ul className="space-y-2.5 border-t border-line px-4 py-4 text-sm leading-relaxed text-muted print:space-y-1 print:py-2 sm:px-5">
                 {role.bullets.map((b) => (
                   <li key={b} className="flex gap-3">
                     <span
