@@ -53,7 +53,7 @@ export default function App() {
       <Grain />
       <Nav theme={theme} onToggleTheme={toggle} onOpenPalette={() => setPaletteOpen(true)} />
       <main id="main">
-        <Hero onOpenTerminal={openTerminal} />
+        <Hero />
         <CaseStudy />
         <Experience />
         <Education />

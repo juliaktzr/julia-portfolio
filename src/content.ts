@@ -9,8 +9,8 @@
 export const site = {
   name: 'Julia Kantzer',
   firstName: 'Julia',
-  role: 'Product Engineer',
-  tagline: 'I build AI products for real users and lead the people who ship them.',
+  role: 'Business and Technology Strategy',
+  tagline: 'I help teams decide what to build with AI, and make sure it works for real users.',
   location: 'Nashville, TN',
   email: 'juliakantzer@gmail.com',
   linkedin: 'https://www.linkedin.com/in/julia-kantzer/',
@@ -21,22 +21,12 @@ export const site = {
   headshotAlt: 'Julia Kantzer smiling, wearing a dark blazer',
   siteUrl: 'https://juliakantzer.com',
   description:
-    'Julia Kantzer builds AI products for real users. CS and Applied Math at Vanderbilt. Product engineering where business and technology meet.',
+    'Julia Kantzer helps teams decide what to build with AI and makes sure it works for real users. CS and Applied Math at Vanderbilt. Where business and technology meet.',
 }
 
 export const hero = {
-  commands: [
-    { cmd: 'whoami', out: site.name },
-    { cmd: 'cat mission.txt', out: site.tagline },
-  ],
   meta: 'CS + Applied Math at Vanderbilt, May 2027',
   status: 'Currently at Pegasystems',
-  /** Hint under the hero buttons. `before` + a ~ keycap + `after` on keyboards; `touch` on phones. */
-  terminalHint: {
-    before: 'psst. press',
-    after: 'for a real terminal',
-    touch: 'psst. tap here for a real terminal',
-  },
   buttons: [
     { label: 'View Work', href: '#work', kind: 'primary' as const },
     { label: 'Resume', href: site.resumeUrl, kind: 'secondary' as const, download: true },
@@ -437,7 +427,7 @@ export const contact = {
   id: 'contact',
   eyebrow: 'Contact',
   title: 'Let’s build something.',
-  body: 'Open to product engineering, technical PM, and forward deployed engineering roles. Anywhere business and technology meet. Willing to relocate.',
+  body: 'Open to business and technology strategy, product, and consulting roles. Anywhere business and technology meet. Willing to relocate.',
   links: [
     { label: 'Email', value: site.email, href: `mailto:${site.email}` },
     { label: 'LinkedIn', value: 'linkedin.com/in/julia-kantzer', href: site.linkedin },

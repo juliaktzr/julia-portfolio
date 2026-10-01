@@ -19,7 +19,7 @@ Every word on the site lives in `src/content.ts`. Components never hard-code tex
 | Export | What it controls |
 |---|---|
 | `site` | Name, tagline, email, LinkedIn, GitHub, resume path, headshot, site URL |
-| `hero` | The two typed terminal commands and the three buttons |
+| `hero` | The line above your name and the three buttons |
 | `nav` | Header links and the command palette's Navigate group |
 | `caseStudy` | Featured Pega work: sections, stack, before/after diagram steps |
 | `experience` | Timeline roles, newest first. Each has `bullets` shown when expanded |
