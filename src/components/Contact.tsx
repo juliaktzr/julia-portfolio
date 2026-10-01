@@ -1,4 +1,5 @@
 import { contact, footer, site } from '../content'
+import { ButtonLink } from './Button'
 import { Section } from './Section'
 
 export function Contact() {
@@ -37,17 +38,25 @@ export function Contact() {
           })}
         </ul>
       </div>
-      <p className="mt-6 text-sm text-muted">
-        Or grab the{' '}
-        <a
-          href={site.resumeUrl}
-          download={site.resumeFilename}
-          className="text-accent-ink underline underline-offset-4 hover:text-text"
-        >
-          resume PDF
-        </a>
-        .
-      </p>
+      <div className="print-hidden mt-8">
+        <ButtonLink href={site.resumeUrl} download={site.resumeFilename} kind="primary">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
+          </svg>
+          Download my resume
+          <span className="sr-only"> (PDF)</span>
+        </ButtonLink>
+      </div>
     </Section>
   )
 }
