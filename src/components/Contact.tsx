@@ -5,14 +5,15 @@ import { Section } from './Section'
 export function Contact() {
   return (
     <Section id={contact.id} eyebrow={contact.eyebrow} title={contact.title} intro={contact.body}>
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+      {/* On wider screens the photo stretches to match the cards plus the resume button. */}
+      <div className="flex flex-col gap-6 sm:flex-row">
         <img
           src={site.headshot}
           alt={site.headshotAlt}
           width={800}
           height={800}
           loading="lazy"
-          className="print-hidden h-20 w-20 shrink-0 rounded-full object-cover ring-2 ring-accent/50 ring-offset-4 ring-offset-bg sm:h-24 sm:w-24"
+          className="print-hidden h-20 w-20 shrink-0 rounded-full object-cover ring-2 ring-accent/50 ring-offset-4 ring-offset-bg sm:h-auto sm:w-36 sm:self-stretch sm:rounded-xl"
         />
         <div className="flex-1">
           <ul className="grid gap-4 sm:grid-cols-3 print:grid-cols-3">
