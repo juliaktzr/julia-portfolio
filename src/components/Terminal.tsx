@@ -23,14 +23,12 @@ export function Terminal({ open, onClose, theme, onToggleTheme, onSetTheme }: Pr
   const [history, setHistory] = useState<string[]>([])
   const [histIdx, setHistIdx] = useState<number | null>(null)
   const [game, setGame] = useState<GameState | null>(null)
-  const openedAt = useRef(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const returnFocus = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     if (open) {
-      openedAt.current = Date.now()
       returnFocus.current = document.activeElement as HTMLElement | null
       requestAnimationFrame(() => inputRef.current?.focus())
     } else {
@@ -66,7 +64,6 @@ export function Terminal({ open, onClose, theme, onToggleTheme, onSetTheme }: Pr
       toggleTheme: onToggleTheme,
       close,
       history,
-      openedAt: openedAt.current,
     })
     if (result.clear) {
       setLines([])
@@ -124,7 +121,11 @@ export function Terminal({ open, onClose, theme, onToggleTheme, onSetTheme }: Pr
           exit={reduce ? { opacity: 1, transition: { duration: 0 } } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="fixed inset-x-3 bottom-3 z-50 mx-auto flex max-h-[60vh] w-auto max-w-2xl flex-col overflow-hidden rounded-xl border border-line bg-bg font-mono text-sm shadow-[0_30px_80px_-30px_rgb(0_0_0/0.5)] sm:inset-x-6 sm:bottom-6"
-          onClick={() => inputRef.current?.focus()}
+          onClick={() => {
+            // Refocusing the input would clear a text selection, so leave it alone while copying.
+            if (window.getSelection()?.toString()) return
+            inputRef.current?.focus()
+          }}
         >
           <div className="flex items-center justify-between border-b border-line px-4 py-2 text-xs text-muted">
             <span>julia@vanderbilt ~ zsh</span>
@@ -145,7 +146,20 @@ export function Terminal({ open, onClose, theme, onToggleTheme, onSetTheme }: Pr
                   l.kind === 'in' ? 'text-accent-ink' : l.kind === 'err' ? 'text-pop' : 'text-text'
                 }`}
               >
-                {l.kind === 'in' ? `${l.prompt ?? '❯'} ${l.text}` : l.text}
+                {l.kind === 'in' ? (
+                  `${l.prompt ?? '❯'} ${l.text}`
+                ) : l.href ? (
+                  <a
+                    href={l.href}
+                    target={l.href.startsWith('http') ? '_blank' : undefined}
+                    rel="noopener noreferrer"
+                    className="underline decoration-line underline-offset-4 hover:text-accent-ink"
+                  >
+                    {l.text}
+                  </a>
+                ) : (
+                  l.text
+                )}
               </p>
             ))}
           </div>

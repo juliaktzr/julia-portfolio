@@ -28,7 +28,7 @@ Every word on the site lives in `src/content.ts`. Components never hard-code tex
 
 Search the file for `TODO` to find anything still waiting on you.
 
-**Resume:** replace `public/resume.pdf`. The download button and the terminal `resume` command point at it.
+**Resume:** replace `public/JuliaKantzerResume.pdf` (keep the name, since it is what visitors save it as). The download button and the terminal `resume` command point at it.
 
 **Headshot:** replace `public/headshot.jpg` with a square image, 800px or larger.
 
@@ -45,8 +45,8 @@ Theme defaults to the system preference. The toggle stores a choice in `localSto
 ## Interactive features
 
 - **Cmd K / Ctrl K** opens the command palette. Commands are defined in `src/hooks/useCommands.ts`.
-- **`~`** opens the terminal. Commands live in `src/terminal/commands.ts`, games in `src/terminal/games.ts`. Type `help` inside it.
-- Scroll reveal, counters, and the cursor glow all switch off under `prefers-reduced-motion`.
+- **`~`** opens the terminal. Commands live in `src/terminal/commands.ts`, hangman in `src/terminal/games.ts`. Type `help` inside it.
+- Scroll reveal and counters both switch off under `prefers-reduced-motion`.
 
 ## Deploy to Vercel
 

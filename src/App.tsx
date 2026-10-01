@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react'
 import { CaseStudy } from './components/CaseStudy'
 import { CommandPalette } from './components/CommandPalette'
 import { Contact, Footer } from './components/Contact'
-import { CursorGlow } from './components/CursorGlow'
 import { Education } from './components/Education'
 import { Experience } from './components/Experience'
 import { Grain } from './components/Grain'
@@ -52,7 +51,6 @@ export default function App() {
   return (
     <LazyMotion features={domAnimation} strict>
       <Grain />
-      <CursorGlow />
       <Nav theme={theme} onToggleTheme={toggle} onOpenPalette={() => setPaletteOpen(true)} />
       <main id="main">
         <Hero onOpenTerminal={openTerminal} />

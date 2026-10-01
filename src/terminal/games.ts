@@ -2,12 +2,11 @@ import type { Line } from './types'
 
 /* -------------------------------------------------------------------------
    Games that take over the prompt. Each returns new output and its next state
-   (null when finished). Type quit in any game to leave it.
+   (null when finished). Type quit to leave.
 ------------------------------------------------------------------------- */
 
 export type HangmanState = { kind: 'hangman'; word: string; hint: string; guessed: string[]; wrong: number }
-export type GuessState = { kind: 'guess'; target: number; tries: number }
-export type GameState = HangmanState | GuessState
+export type GameState = HangmanState
 
 const MAX_WRONG = 6
 
@@ -90,40 +89,10 @@ export function playHangman(s: HangmanState, raw: string): { lines: Line[]; stat
   return { lines: board(next), state: next }
 }
 
-export function startGuess(): { lines: Line[]; state: GuessState } {
-  return {
-    lines: [out('guess: I picked a number from 1 to 100. Type a number. Type quit to stop.')],
-    state: { kind: 'guess', target: 1 + Math.floor(Math.random() * 100), tries: 0 },
-  }
-}
-
-export function playGuess(s: GuessState, raw: string): { lines: Line[]; state: GameState | null } {
-  const g = raw.trim().toLowerCase()
-  if (g === 'quit' || g === 'exit') return { lines: [out(`It was ${s.target}.`)], state: null }
-  const n = Number(g)
-  if (!Number.isInteger(n) || n < 1 || n > 100)
-    return { lines: [err('A whole number from 1 to 100, please.')], state: s }
-  const tries = s.tries + 1
-  if (n === s.target)
-    return { lines: [out(`${n} is it. Got it in ${tries} ${tries === 1 ? 'try' : 'tries'}.`)], state: null }
-  return { lines: [out(n < s.target ? `${n} is too low.` : `${n} is too high.`)], state: { ...s, tries } }
-}
-
 export function playGame(state: GameState, raw: string) {
-  return state.kind === 'hangman' ? playHangman(state, raw) : playGuess(state, raw)
+  return playHangman(state, raw)
 }
 
 export function gamePrompt(state: GameState) {
-  return state.kind === 'hangman' ? 'hangman' : 'guess'
-}
-
-/** One-shot rock, paper, scissors. */
-export function rps(choice: string): Line[] {
-  const moves = ['rock', 'paper', 'scissors'] as const
-  const you = choice.trim().toLowerCase()
-  if (!moves.includes(you as (typeof moves)[number])) return [err('Usage: rps rock | paper | scissors')]
-  const me = moves[Math.floor(Math.random() * 3)]
-  const beats: Record<string, string> = { rock: 'scissors', paper: 'rock', scissors: 'paper' }
-  const result = you === me ? 'Draw.' : beats[you] === me ? 'You win.' : 'I win.'
-  return [out(`You: ${you}. Me: ${me}. ${result}`)]
+  return state.kind
 }
