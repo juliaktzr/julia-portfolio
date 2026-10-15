@@ -160,7 +160,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       'A course project for middle and high school history classes. Students talk with people living through a moment, make the call with only what they knew, then see what really happened. I built the game engine and a pipeline that lets non-coders add new scenarios without touching code.',
     links: [
-      { label: 'Live demo', href: 'https://juliaktzr.github.io/witness-to-history/', kind: 'primary' },
+      { label: 'Live demo', href: 'https://witness-to-history.vercel.app/', kind: 'primary' },
       { label: 'Source', href: 'https://github.com/juliaktzr/witness-to-history', kind: 'secondary' },
     ],
     problem:
