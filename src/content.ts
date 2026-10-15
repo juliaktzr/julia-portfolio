@@ -9,8 +9,9 @@
 export const site = {
   name: 'Julia Kantzer',
   firstName: 'Julia',
-  role: 'Business and Technology Strategy',
-  tagline: 'I help teams decide what to build with AI, and make sure it works for real users.',
+  role: 'Technology Strategy, Consulting, and TPM',
+  tagline:
+    'I turn slow, manual technical processes into tools people actually use. At Pegasystems, I cut a 40-hour infrastructure sizing process to under 40 minutes with a guided AI tool my team uses today.',
   location: 'Nashville, TN',
   email: 'juliakantzer@gmail.com',
   linkedin: 'https://www.linkedin.com/in/julia-kantzer/',
@@ -21,12 +22,15 @@ export const site = {
   headshotAlt: 'Julia Kantzer smiling, wearing a dark blazer',
   siteUrl: 'https://juliakantzer.com',
   description:
-    'Julia Kantzer helps teams decide what to build with AI and makes sure it works for real users. CS and Applied Math at Vanderbilt. Where business and technology meet.',
+    'CS and Applied Math at Vanderbilt, May 2027. Cut a 40-hour infrastructure sizing process at Pegasystems to under 40 minutes with a guided AI tool. Seeking technology strategy, consulting, and TPM roles.',
 }
 
 export const hero = {
   meta: 'CS + Applied Math at Vanderbilt, May 2027',
   status: 'Currently at Pegasystems',
+  /** Shown between the tagline and the buttons. */
+  seeking:
+    'Seeking new grad roles in technology strategy, technology consulting, and technical program management, starting summer 2027.',
   buttons: [
     { label: 'View Work', href: '#work', kind: 'primary' as const },
     { label: 'Resume', href: site.resumeUrl, kind: 'secondary' as const, download: true },
@@ -416,8 +420,8 @@ export const skills = {
    Interests
 ------------------------------------------------------------------------- */
 export const interests = {
-  eyebrow: 'Interests',
-  body: 'The place where business and technology meet. I like deciding what to build and why as much as building it. Right now that means AI products end to end, and closing the gap between a model that works in a demo and a product that works for real users.',
+  eyebrow: 'What I want next',
+  body: 'I like deciding what to build and why as much as building it. I want a role between the people who set direction and the engineers who deliver it, especially on AI products, where the gap between a working demo and a reliable product is widest.',
 }
 
 /* -------------------------------------------------------------------------
@@ -426,8 +430,8 @@ export const interests = {
 export const contact = {
   id: 'contact',
   eyebrow: 'Contact',
-  title: 'Let’s build something.',
-  body: 'Open to business and technology strategy, product, and consulting roles. Anywhere business and technology meet. Willing to relocate.',
+  title: 'Let’s talk.',
+  body: 'Open to new grad roles in technology strategy, technology consulting, technical program management, and product-focused engineering, starting summer 2027. Willing to relocate. Email is the fastest way to reach me.',
   links: [
     { label: 'Email', value: site.email, href: `mailto:${site.email}` },
     { label: 'LinkedIn', value: 'linkedin.com/in/julia-kantzer', href: site.linkedin },
@@ -455,5 +459,5 @@ export const consoleGreeting = {
  | |_| | |_| | | | (_| | | . \\ (_| | | | | |_ / /  __/ |
   \\___/ \\__,_|_|_|\\__,_| |_|\\_\\__,_|_| |_|\\__/___\\___|_|
 `,
-  line: `Open to product engineering and forward deployed roles. Say hi: ${site.email}`,
+  line: `Open to technology strategy, consulting, and TPM roles. Say hi: ${site.email}`,
 }
