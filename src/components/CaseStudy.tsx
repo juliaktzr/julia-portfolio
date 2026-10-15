@@ -1,4 +1,5 @@
-import { caseStudies, work, type CaseStudy as CaseStudyData } from '../content'
+import type { CSSProperties } from 'react'
+import { caseStudies, work, type CaseStudy as CaseStudyData, type CaseStudyScreenshot } from '../content'
 import { ButtonLink } from './Button'
 import { FlowDiagram } from './FlowDiagram'
 import { PipelineDiagram } from './PipelineDiagram'
@@ -46,6 +47,7 @@ function CaseStudyArticle({ study }: { study: CaseStudyData }) {
 
       {study.sections && <ProseSections study={study} />}
       {study.built && <CompactSections study={study} />}
+      {study.screenshots && <Screenshots shots={study.screenshots} />}
 
       <div className="mt-10">{study.diagram === 'flow' ? <FlowDiagram /> : <PipelineDiagram />}</div>
 
@@ -100,6 +102,14 @@ function CompactSections({ study }: { study: CaseStudyData }) {
           <p className="leading-relaxed text-muted">{study.problem}</p>
           <h4 className="mb-2 mt-8 font-display text-xl font-semibold">What I built</h4>
           <p className="leading-relaxed text-muted">{study.builtIntro}</p>
+          {study.contribution && (
+            <>
+              <h5 className="mb-2 mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-accent-ink">
+                My part
+              </h5>
+              <p className="leading-relaxed text-muted">{study.contribution}</p>
+            </>
+          )}
         </div>
 
         <div className="self-start overflow-hidden rounded-xl border border-line bg-surface/70">
@@ -157,5 +167,35 @@ function CompactSections({ study }: { study: CaseStudyData }) {
         </ol>
       </div>
     </>
+  )
+}
+
+/**
+ * Screenshots side by side from sm up. Column widths follow each image's
+ * aspect ratio so both render at the same height. One column on mobile.
+ */
+function Screenshots({ shots }: { shots: CaseStudyScreenshot[] }) {
+  const cols = shots.map((s) => `${(s.width / s.height).toFixed(3)}fr`).join(' ')
+  return (
+    <div
+      style={{ '--shot-cols': cols } as CSSProperties}
+      className="print-hidden mt-10 grid gap-4 sm:[grid-template-columns:var(--shot-cols)]"
+    >
+      {shots.map((s) => (
+        <figure key={s.src} className="overflow-hidden rounded-xl border border-line bg-surface/60">
+          <img
+            src={s.src}
+            alt={s.alt}
+            width={s.width}
+            height={s.height}
+            loading="lazy"
+            className="block h-auto w-full"
+          />
+          <figcaption className="border-t border-line px-4 py-3 text-sm leading-snug text-muted">
+            {s.caption}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
   )
 }

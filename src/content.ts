@@ -61,23 +61,29 @@ export type CaseStudyLink = { label: string; href: string; kind: 'primary' | 'se
 export type CaseStudyFile = { name: string; desc: string }
 /** One tradeoff: what was chosen, what it was chosen over, and why. */
 export type CaseStudyDecision = { chose: string; over: string; why: string }
+/** A product screenshot. Width and height are the image's real pixel size, to prevent layout shift. */
+export type CaseStudyScreenshot = { src: string; alt: string; caption: string; width: number; height: number }
 
 export type CaseStudy = {
   id: string
   company: string
   role: string
-  period?: string // TODO for Witness to History: add the dates you worked on it
+  period?: string
   title: string
   summary: string
   links?: CaseStudyLink[]
-  /** Prose layout: three columns. Used by Pega. */
+  /** Prose layout: a 2x2 grid of sections. Used by Pega. */
   sections?: CaseStudySection[]
   /** Compact layout: problem line, file listing, tradeoff cards. Used by Witness. */
   problem?: string
   builtIntro?: string
+  /** Shown under "What I built" as "My part". */
+  contribution?: string
   built?: CaseStudyFile[]
   decisionsIntro?: string
   decisions?: CaseStudyDecision[]
+  /** Shown in a row between the decision cards and the diagram. */
+  screenshots?: CaseStudyScreenshot[]
   stack: string[]
   diagram: 'flow' | 'pipeline'
 }
@@ -150,18 +156,21 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 'work-witness',
     company: 'Witness to History',
-    role: 'One of two engineers on a six-person team',
+    role: 'Lead engineer, six-person team (2 CS, 4 Education) · CS 3892, Vanderbilt',
+    period: 'August 2026 to December 2026',
     title: 'An interactive history simulation for middle and high schoolers',
     summary:
-      'Sit with the people who lived a moment. Hear their conflicting pressures. Make the call with only what they knew. Then find out what really happened.',
+      'A course project for middle and high school history classes. Students talk with people living through a moment, make the call with only what they knew, then see what really happened. I built the game engine and a pipeline that lets non-coders add new scenarios without touching code.',
     links: [
       { label: 'Live demo', href: 'https://juliaktzr.github.io/witness-to-history/', kind: 'primary' },
       { label: 'Source', href: 'https://github.com/juliaktzr/witness-to-history', kind: 'secondary' },
     ],
     problem:
-      'History class shows the outcome first, so every decision looks obvious in hindsight. A four-person Education team and I wanted students to feel the uncertainty instead.',
+      'History class shows the outcome first, so every decision looks obvious in hindsight. Our team of four Education students, one other engineer, and me wanted students to feel that uncertainty instead.',
     builtIntro:
       'I built the content-driven game engine end to end. A browser game: no install, no login, runs on a school Chromebook. A student picks an era, talks through branching dialogue with two or three figures, makes one real decision, and sees the outcome and the historical reveal.',
+    contribution:
+      'The game engine, the Sheets-to-JSON pipeline and validator, dialogue and source panels, read-aloud, the map hub, the title screen and character creator, and deployment. The Education team researched, wrote, and sourced every scenario.',
     built: [
       {
         name: 'pipeline/',
@@ -176,9 +185,9 @@ export const caseStudies: CaseStudy[] = [
       'This is where most of the actual work was. Every call was made against an Oct 7 pitch deadline.',
     decisions: [
       {
-        chose: 'One scenario, one working decision loop, reliable load',
-        over: 'Character customization and a second scenario',
-        why: 'An untested format built out four times risks four times the rework after feedback',
+        chose: 'A working decision loop on one scenario, before any extras',
+        over: 'Starting with a second scenario or character customization',
+        why: 'An untested format built out twice means twice the rework after feedback. Character creation came only after the core loop worked end to end.',
       },
       {
         chose: 'Content-agnostic engine. A new scenario is one JSON file',
@@ -201,15 +210,23 @@ export const caseStudies: CaseStudy[] = [
         why: 'Historical integrity is a product requirement, decided with the Education team',
       },
     ],
-    stack: [
-      'Vite',
-      'React',
-      'TypeScript',
-      'Web Speech API',
-      'GitHub Pages',
-      'Sheets-to-JSON pipeline',
-      'No backend',
+    screenshots: [
+      {
+        src: '/work/witness-map.webp',
+        alt: 'Illustrated town map from 1775 Massachusetts with three townspeople to visit and the student’s character at the edge of town',
+        caption: 'The town map hub. Students choose who to talk to.',
+        width: 1200,
+        height: 1089,
+      },
+      {
+        src: '/work/witness-character.webp',
+        alt: 'Character creation screen with a customizable student avatar, poses, and an experience tracker',
+        caption: 'Character creator. Students design who walks through history with them.',
+        width: 1600,
+        height: 856,
+      },
     ],
+    stack: ['Vite', 'React', 'Web Speech API', 'GitHub Pages', 'Sheets-to-JSON pipeline', 'No backend'],
     diagram: 'pipeline',
   },
 ]
