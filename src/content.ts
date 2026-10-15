@@ -10,8 +10,7 @@ export const site = {
   name: 'Julia Kantzer',
   firstName: 'Julia',
   role: 'Technology Strategy, Consulting, and TPM',
-  tagline:
-    'I turn slow, manual technical processes into tools people actually use. At Pegasystems, I cut a 40\u2011hour infrastructure sizing process to under 40 minutes with a guided AI tool my team uses today.',
+  tagline: 'Making AI useful',
   location: 'Nashville, TN',
   email: 'juliakantzer@gmail.com',
   linkedin: 'https://www.linkedin.com/in/julia-kantzer/',
@@ -29,8 +28,7 @@ export const hero = {
   meta: 'CS + Applied Math at Vanderbilt, May 2027',
   status: 'Currently at Pegasystems',
   /** Shown between the tagline and the buttons. */
-  seeking:
-    'Seeking new grad roles in technology strategy, technology consulting, and technical program management, starting summer 2027.',
+  seeking: 'Seeking a role between strategy and engineering, turning AI into products people use.',
   buttons: [
     { label: 'View Work', href: '#work', kind: 'primary' as const },
     { label: 'Resume', href: site.resumeUrl, kind: 'secondary' as const, download: true },
