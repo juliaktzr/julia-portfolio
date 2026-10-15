@@ -145,7 +145,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: 'Result',
-        body: 'In use by 3 people on my team. A model run now takes under 40 minutes instead of about 40 hours, with estimates within 5% of the legacy spreadsheets. Pega invited me to continue the work remotely through the school year. Client and system details are generalized for confidentiality.',
+        body: 'In use by 3 people on my team. A model run now takes under 40 minutes instead of about 40 hours, with estimates within 5% of the legacy spreadsheets. Pega invited me to continue the work remotely through the school year.',
       },
     ],
     stack: ['Python', 'React', 'Claude Code', 'MCP'],
