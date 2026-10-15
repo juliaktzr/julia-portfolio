@@ -63,10 +63,10 @@ function CaseStudyArticle({ study }: { study: CaseStudyData }) {
   )
 }
 
-/** Three prose columns. */
+/** Prose sections in a 2x2 grid from md up, one column on mobile. */
 function ProseSections({ study }: { study: CaseStudyData }) {
   return (
-    <div className="mt-10 grid gap-8 md:grid-cols-3 print:mt-4 print:grid-cols-3 print:gap-4">
+    <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2 print:mt-4 print:grid-cols-2 print:gap-4">
       {study.sections?.map((s) => (
         <div key={s.heading}>
           <h4 className="mb-2 font-display text-xl font-semibold">{s.heading}</h4>

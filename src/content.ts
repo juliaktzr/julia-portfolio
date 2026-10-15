@@ -49,8 +49,12 @@ export const nav = [
 ]
 
 /* -------------------------------------------------------------------------
-   Selected work. Pega details are kept at resume level on purpose.
+   Selected work. Pega client and system details stay generalized for
+   confidentiality.
 ------------------------------------------------------------------------- */
+
+/** Pega title, shared by the case study and the experience timeline. Matches the resume. */
+const PEGA_TITLE = 'Technology Architect Consulting Intern'
 export type CaseStudySection = { heading: string; body: string; bullets?: string[] }
 export type CaseStudyLink = { label: string; href: string; kind: 'primary' | 'secondary' }
 /** A line in the terminal-style feature listing. */
@@ -98,7 +102,7 @@ export const pegaFlow = {
   after: {
     label: 'After',
     steps: ['Guided conversation collects inputs', 'Python engine runs the model', 'Results in one session'],
-    time: 'Within 5% of legacy logic',
+    time: 'Under 40 minutes, within 5% of legacy',
   },
 }
 
@@ -117,11 +121,11 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 'work-pega',
     company: 'Pegasystems',
-    role: 'Technology Architect Intern',
+    role: PEGA_TITLE,
     period: 'June 2026 to Present',
-    title: 'Replacing a 40-hour modeling process with a guided AI experience',
+    title: 'Cutting a 40-hour modeling process to under 40 minutes',
     summary:
-      'Infrastructure modeling at Pega ran on a manual, spreadsheet-driven process. I architected a full-stack AI product that turned it into a conversational, guided experience.',
+      'On Pega’s Government Consulting team, sizing infrastructure for a deployment took about 40 hours in legacy spreadsheets that only a few people could run. I built a Python engine that matches those spreadsheets within 5%, then built guided AI experiences on top of it. My team now gets a model in under 40 minutes.',
     sections: [
       {
         heading: 'The problem',
@@ -129,11 +133,15 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: 'What I built',
-        body: 'A conversational, guided experience that walks the user through the inputs and produces a model. Underneath it, a Python calculation engine that reproduces the legacy Excel logic within 5% accuracy, so the new experience did not trade away reliability.',
+        body: 'A conversational, guided experience that walks the user through the inputs and produces a model. Underneath it, a Python calculation engine that reproduces the legacy Excel logic within 5% accuracy, so the new experience did not trade away reliability. I validated the engine against 12 test cases. Every result landed within 5% of the spreadsheet output.',
       },
       {
         heading: 'How I decided',
-        body: 'I evaluated four solution paths across product, UX, and technical tradeoffs before building. That analysis shaped the infrastructure modeling roadmap and informed engineering leadership decisions.',
+        body: 'I mapped four ways to rebuild it: a Claude conversational skill, Claude Code with MCP tools calling the Python engine, a Python backend with a React front end, and a native build on Pega rules. Instead of choosing one on paper, I am prototyping each in turn and comparing them on product, user experience, and implementation tradeoffs. I built the MCP version first, then the skill, then the React app, and I am now building the Pega version. The comparison is shaping the infrastructure modeling roadmap and informing engineering leadership decisions.',
+      },
+      {
+        heading: 'Result',
+        body: 'In use by 3 people on my team. A model run now takes under 40 minutes instead of about 40 hours, with estimates within 5% of the legacy spreadsheets. Pega invited me to continue the work remotely through the school year. Client and system details are generalized for confidentiality.',
       },
     ],
     stack: ['Python', 'React', 'Claude Code', 'MCP'],
