@@ -51,13 +51,13 @@ export const COMMAND_NAMES = COMMANDS.map((c) => c.name)
 
 const sections = nav.map((n) => ({ id: n.href.slice(1), label: n.label }))
 
-/** Words for hangman, all pulled from site content. */
-const wordBank: WordBank = [
+/** Words for hangman, all pulled from site content. Single words only, first hint wins on repeats. */
+const wordBank: WordBank = dedupe([
   ...skills.groups.flatMap((g) =>
     g.items
       .map((i) => i.replace(/\s*\(.*\)/, ''))
       .filter((w) => /^[A-Za-z]{4,}$/.test(w))
-      .map((w) => ({ word: w, hint: `${g.name} skill` })),
+      .map((w) => ({ word: w, hint: g.name === 'Languages' ? 'A language I speak' : `${g.name} skill` })),
   ),
   { word: 'Vanderbilt', hint: 'Where I study' },
   { word: 'Nashville', hint: 'City I study in' },
@@ -70,7 +70,17 @@ const wordBank: WordBank = [
       .filter((w) => /^[A-Za-z]{4,}$/.test(w))
       .map((w) => ({ word: w, hint: `In the ${c.company} stack` })),
   ),
-]
+])
+
+function dedupe(bank: WordBank): WordBank {
+  const seen = new Set<string>()
+  return bank.filter(({ word }) => {
+    const key = word.toLowerCase()
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
 
 function scrollTo(id: string) {
   const el = document.getElementById(id)

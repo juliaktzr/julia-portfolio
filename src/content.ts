@@ -228,46 +228,36 @@ export type Role = {
   bullets: string[]
 }
 
+/** Same order as the resume: current roles first, then by end date. */
 export const experience: Role[] = [
   {
     org: 'Pegasystems',
-    title: 'Technology Architect Intern',
-    location: 'Waltham, MA',
+    title: PEGA_TITLE,
+    location: 'Waltham, MA and remote',
     period: 'June 2026 to Present',
     start: '2026-06',
     tag: 'Engineering',
-    summary: 'Architected a full-stack AI product that replaced a 40-hour manual process.',
+    summary: 'Cut a 40-hour sizing process to under 40 minutes with a tool my team uses today.',
     bullets: [
-      'Architected a full-stack AI product that replaced a 40-hour manual infrastructure modeling process with a conversational, guided experience, using Python, ReactJS, and Claude Code with Model Context Protocol (MCP) integrations.',
-      'Built a Python calculation engine that reproduced legacy Excel-based infrastructure logic within 5% accuracy, enabling new AI-powered planning experiences without sacrificing reliability.',
-      'Evaluated four solution paths across product, UX, and technical tradeoffs to shape the infrastructure modeling roadmap and inform engineering leadership decisions.',
+      'On the Government Consulting team, assessed product, user experience, and implementation trade-offs across four solution paths, delivering recommendations that shaped enterprise infrastructure strategy and roadmap decisions.',
+      'Modernized a 40-hour manual enterprise sizing process into an AI-powered experience, converting spreadsheet-driven workflows into guided conversations and interactive applications.',
+      'Translated Excel-based infrastructure logic into reusable Python services, building a calculation engine that produced estimates within 5% of legacy spreadsheet models.',
+      'Built full-stack AI solutions using Python, ReactJS, Git, Claude Code, and Model Context Protocol (MCP) integrations.',
+      'Invited to continue the work remotely through the school year after the summer internship.',
     ],
   },
   {
     org: 'Language and Education Analytics Research Lab',
-    title: 'Research Assistant, Strategy and Content Manager',
+    title: 'Research Assistant, Strategy and Product Manager',
     location: 'Nashville, TN',
     period: 'September 2024 to Present',
     start: '2024-09',
     tag: 'Research',
-    summary: 'Shaped AI educational software across 25+ live deployments.',
+    summary: 'Helped scale iTELL, the lab’s AI-powered textbook platform, to 25+ deployments.',
     bullets: [
-      'Evaluated AI-generated educational content against quality frameworks, synthesizing findings into recommendations that shaped product, content, and model improvements across 25+ live deployments.',
-      'Partnered with engineers and PhD researchers to scale AI-powered educational software from prototype to institutional deployment.',
-      'Led a redesign of the lab’s public website, improving information architecture and navigation for researchers, educators, and external partners.',
-    ],
-  },
-  {
-    org: 'Handshake AI',
-    title: 'MOVE Fellow',
-    location: 'Remote',
-    period: 'August 2025 to October 2025',
-    start: '2025-08',
-    tag: 'AI evaluation',
-    summary: 'Found systemic failure patterns in AI outputs for a confidential training initiative.',
-    bullets: [
-      'Selected for a competitive fellowship supporting a confidential AI training initiative with a leading global research organization.',
-      'Evaluated AI-generated outputs against detailed quality frameworks, identifying systemic failure patterns and contributing recommendations that improved evaluation consistency across the training pipeline.',
+      'Collaborated with a team of engineers and PhD researchers to scale iTELL, the lab’s AI-powered textbook platform, to 25+ deployments.',
+      'Evaluated AI-generated content and delivered insights that guided iterative model improvements.',
+      'Led the restructuring of the lab’s website, improving navigation and usability.',
     ],
   },
   {
@@ -277,23 +267,38 @@ export const experience: Role[] = [
     period: 'January 2025 to December 2025',
     start: '2025-01',
     tag: 'Teaching',
-    summary: 'Supported 150+ students and redesigned instructional resources with faculty.',
+    summary: 'Supported 150+ students and fed recurring bottlenecks back into the course materials.',
     bullets: [
-      'Supported 150+ students through technical instruction, debugging guidance, and algorithmic problem-solving in introductory computer science.',
-      'Identified recurring learning bottlenecks and partnered with faculty to redesign instructional resources and support processes.',
+      'Supported 150+ students by translating complex algorithmic concepts into clear, actionable steps, improving understanding and accelerating student progress.',
+      'Identified common learning bottlenecks during office hours and communicated insights to faculty, leading to adjustments to instructional materials.',
+    ],
+  },
+  {
+    org: 'Handshake AI',
+    title: 'MOVE Fellow',
+    location: 'Remote',
+    period: 'August 2025 to October 2025',
+    start: '2025-08',
+    tag: 'AI evaluation',
+    summary:
+      'Selected to evaluate AI outputs for a confidential training initiative with a top global research lab.',
+    bullets: [
+      'Selected as a MOVE Fellow to support a confidential AI training initiative with a top global research lab.',
+      'Evaluated webpage outputs against detailed accuracy and clarity rubrics, identifying systemic error patterns and informing rubric refinements.',
     ],
   },
   {
     org: 'Transmodal Corporation',
-    title: 'Software Engineering Intern',
+    title: 'Software QA Intern',
     location: 'Ramsey, NJ',
     period: 'May 2025 to August 2025',
     start: '2025-05',
     tag: 'Engineering',
-    summary: 'Designed testing strategies for invoice-validation software used by global importers.',
+    summary: 'Weekly QA reports that helped prioritize engineering fixes on invoice-validation software.',
     bullets: [
-      'Designed testing strategies for commercial invoice-validation software used by global importers, ensuring reliability across complex business workflows.',
-      'Built test datasets and edge-case scenarios that uncovered validation failures and improved software quality.',
+      'Designed and executed test plans for commercial-invoice validation software used by global importers.',
+      'Built datasets and test scenarios to uncover edge-case failures and improve validation accuracy.',
+      'Delivered weekly QA reports that helped prioritize engineering fixes and clarify evolving requirements.',
     ],
   },
 ]
@@ -321,7 +326,8 @@ export const education = {
       location: 'Madrid, Spain',
       period: 'January 2026 to June 2026',
       degree: 'Study abroad',
-      detail: 'One semester abroad in Madrid.',
+      detail:
+        'Spring 2026 semester abroad. Coursework in Logic, Applied Machine Learning, and Databases. Lived in Madrid for five months and traveled to 10 countries.',
       logo: '/logos/uc3m.svg',
       logoAlt: 'Universidad Carlos III de Madrid',
       logoStyle: 'seal' as const,
@@ -341,7 +347,7 @@ export const research = {
   items: [
     {
       org: 'Language and Education Analytics Research Lab',
-      role: 'Research Assistant, Strategy and Content Manager',
+      role: 'Research Assistant, Strategy and Product Manager',
       period: 'September 2024 to Present',
       points: [
         'Evaluated AI-generated educational content against quality frameworks across 25+ live deployments.',
@@ -377,27 +383,27 @@ export const leadership = {
   items: [
     {
       org: 'Read for Those in Need',
-      role: 'Founder and President',
+      role: 'Founder and CEO',
       period: 'March 2019 to July 2023',
-      body: 'Founded and scaled a nonprofit that improves literacy access for underserved K-8 students. Directed outreach, fundraising, logistics, and volunteer coordination for four years.',
+      body: 'Founded and operated a nonprofit improving literacy access for underserved K-8 students, distributing 3,000+ books across 5 public schools. Directed outreach, fundraising, logistics, volunteer coordination, and community partnerships over four years.',
       counters: [
         { value: 3000, suffix: '+', label: 'books distributed' },
         { value: 5, label: 'public schools' },
-        { value: 4, label: 'years of growth' },
+        { value: 25, label: 'volunteers' },
       ] as Counter[],
     },
     {
       org: 'Zeta Tau Alpha',
       role: 'Director of Fundraising',
       period: 'February 2025 to Present',
-      body: 'Directed fundraising strategy, volunteer leadership, and partner engagement for chapter-wide philanthropy supporting breast cancer education and awareness.',
+      body: 'Directed fundraising strategy and partner engagement for chapter-wide philanthropy, leading campaigns that raised $12,000 in a single semester for breast cancer education programs.',
       counters: [{ value: 12000, prefix: '$', label: 'raised in one semester' }] as Counter[],
     },
     {
       org: 'Incentive Spirometer for Tracheostomy Patients',
       role: 'Project Lead',
       period: 'August 2025 to December 2025',
-      body: 'Led a multidisciplinary team through requirements gathering, prototyping, and user testing for a specialized medical device. Translated clinical needs into engineering requirements. Built and presented a functional prototype shaped by clinician and engineering feedback.',
+      body: 'Led a multidisciplinary team through requirements gathering, prototyping, and user testing to deliver a functional medical device prototype refined through clinician feedback.',
       counters: [] as Counter[],
     },
   ],
@@ -411,16 +417,34 @@ export const skills = {
   eyebrow: 'Skills',
   title: 'Tools I reach for.',
   groups: [
-    { name: 'Technical', items: ['Python', 'Java', 'C++', 'JavaScript', 'ReactJS', 'Git'] },
     {
-      name: 'AI',
-      items: ['Generative AI', 'Prompt Engineering', 'Model Context Protocol (MCP)', 'AI Evaluation'],
+      name: 'Technical',
+      items: ['Python', 'Java', 'C++', 'C', 'HTML/CSS', 'ReactJS', 'Git', 'Linux', 'MATLAB', 'Kubernetes'],
+    },
+    {
+      name: 'AI and Emerging Technology',
+      items: [
+        'Generative AI',
+        'Prompt Engineering',
+        'Model Context Protocol (MCP)',
+        'Claude Code',
+        'AI Evaluation',
+        'Machine Learning',
+      ],
     },
     {
       name: 'Product and Strategy',
-      items: ['Product Strategy', 'Requirements Gathering', 'User-Centered Design', 'Stakeholder Management'],
+      items: [
+        'Requirements Gathering',
+        'User-Centered Design',
+        'Stakeholder Management',
+        'Technical Documentation',
+        'Competitive Benchmarking',
+        'Requirements Matrices',
+        'User Personas',
+      ],
     },
-    { name: 'Languages', items: ['Spanish (Professional)', 'Polish (Conversational)'] },
+    { name: 'Languages', items: ['English (Native)', 'Spanish (Professional)', 'Polish (Conversational)'] },
   ],
 }
 
