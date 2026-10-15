@@ -9,7 +9,7 @@ export function Experience() {
   const printing = usePrinting()
 
   return (
-    <Section id="experience" eyebrow="Experience" title="Where I have worked.">
+    <Section id="experience" eyebrow="Experience" title="Where I’ve worked.">
       <ol className="relative border-l border-line pl-6 sm:pl-8">
         {experience.map((role, i) => (
           <TimelineItem

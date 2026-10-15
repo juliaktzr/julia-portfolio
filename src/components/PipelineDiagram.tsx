@@ -20,7 +20,7 @@ export function PipelineDiagram() {
       </figcaption>
       <div className="mb-4 flex items-baseline justify-between gap-3" aria-hidden="true">
         <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted">Content pipeline</span>
-        <span className="font-mono text-xs text-accent-ink">No code for content authors</span>
+        <span className="font-mono text-xs text-accent-ink">No coding needed to add content</span>
       </div>
       <ol className="flex flex-col gap-2 sm:flex-row sm:items-stretch sm:gap-0" aria-hidden="true">
         {steps.map((step, i) => {
@@ -51,11 +51,6 @@ export function PipelineDiagram() {
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   {step.label}
-                  {hi && (
-                    <span className="ml-auto rounded-full bg-accent/15 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-accent-ink">
-                      key
-                    </span>
-                  )}
                 </span>
                 <span className="mt-1 text-xs leading-snug text-muted">{step.note}</span>
               </m.div>

@@ -2,8 +2,8 @@
  * All site copy lives here. Edit this file to change text without touching
  * components.
  *
- * Writing rules: direct, confident, no fluff. No em dashes. Short sentences.
- * Lead with outcomes.
+ * Writing rules: plain, specific, first person. Use contractions. Say each
+ * fact once, in the place it fits best. No slogans, no buzzwords, no em dashes.
  */
 
 export const site = {
@@ -21,23 +21,23 @@ export const site = {
   headshotAlt: 'Julia Kantzer smiling, wearing a dark blazer',
   siteUrl: 'https://juliakantzer.com',
   description:
-    'CS and Applied Math at Vanderbilt, May 2027. Embedded with Pega’s Government Consulting team, I cut a 40-hour infrastructure sizing process to under 40 minutes with an AI tool my team uses today.',
+    'Julia Kantzer studies CS and Applied Math at Vanderbilt and builds AI tools at Pegasystems, where her team now sizes infrastructure in under 40 minutes instead of 40 hours.',
 }
 
 export const hero = {
-  meta: 'CS + Applied Math at Vanderbilt, May 2027',
+  meta: 'CS and Applied Math at Vanderbilt, graduating May 2027',
   status: 'Currently at Pegasystems',
   /** Shown between the tagline and the buttons. */
   seeking: 'Seeking a role close to the customer and close to the code.',
   buttons: [
-    { label: 'View Work', href: '#work', kind: 'primary' as const },
+    { label: 'See my work', href: '#work', kind: 'primary' as const },
     { label: 'Resume', href: site.resumeUrl, kind: 'secondary' as const, download: true },
     { label: 'Contact', href: '#contact', kind: 'ghost' as const },
   ],
 }
 
 export const nav = [
-  { label: 'Selected work', href: '#work' },
+  { label: 'Work', href: '#work' },
   { label: 'Experience', href: '#experience' },
   { label: 'Education', href: '#education' },
   { label: 'Research', href: '#research' },
@@ -89,7 +89,7 @@ export type CaseStudy = {
 export const work = {
   id: 'work',
   eyebrow: 'Selected work',
-  title: 'Two problems I owned end to end.',
+  title: 'What I’ve been building.',
 }
 
 export const pegaFlow = {
@@ -97,7 +97,7 @@ export const pegaFlow = {
     label: 'Before',
     steps: [
       'Gather inputs by hand',
-      'Fill legacy Excel workbooks',
+      'Fill in legacy Excel workbooks',
       'Reconcile and rerun',
       'Hand off results',
     ],
@@ -105,7 +105,7 @@ export const pegaFlow = {
   },
   after: {
     label: 'After',
-    steps: ['Guided conversation collects inputs', 'Python engine runs the model', 'Results in one session'],
+    steps: ['Answer questions in a guided chat', 'Python engine runs the model', 'Get results in one session'],
     time: 'Under 40 minutes, within 5% of legacy',
   },
 }
@@ -113,11 +113,11 @@ export const pegaFlow = {
 /** Content pipeline for Witness to History. The validator is the point of the story. */
 export const witnessPipeline = {
   steps: [
-    { label: 'Google Sheet', note: 'Teammates write dialogue, sources, outcomes' },
+    { label: 'Google Sheet', note: 'Teammates write dialogue, sources, and outcomes' },
     { label: 'CSV', note: 'Exported from the sheet' },
-    { label: 'Validator', note: 'Checks every reference, plain-English errors', highlight: true },
+    { label: 'Validator', note: 'Checks every link and explains errors in plain English', highlight: true },
     { label: 'JSON', note: 'One file per scenario' },
-    { label: 'Game', note: 'Browser, no install, no login' },
+    { label: 'Game', note: 'Runs in the browser, no install or login' },
   ],
 }
 
@@ -127,25 +127,25 @@ export const caseStudies: CaseStudy[] = [
     company: 'Pegasystems',
     role: PEGA_TITLE,
     period: 'June 2026 to Present',
-    title: 'Cutting a 40-hour modeling process to under 40 minutes',
+    title: 'Cutting infrastructure sizing from 40 hours to under 40 minutes',
     summary:
-      'On Pega’s Government Consulting team, sizing infrastructure for a deployment took about 40 hours in legacy spreadsheets that only a few people could run. I built a Python engine that matches those spreadsheets within 5%, then built guided AI experiences on top of it. My team now gets a model in under 40 minutes.',
+      'Pega’s Government Consulting team sized infrastructure for each deployment in a set of legacy Excel workbooks. I rebuilt the calculations in Python and put an AI-guided interface on top, so my team can now produce the same estimate in under 40 minutes.',
     sections: [
       {
         heading: 'The problem',
-        body: 'Modeling infrastructure for a deployment took about 40 hours of manual work per run. The logic lived in legacy Excel workbooks. Only a few people could run it, and every run was slow to iterate on.',
+        body: 'Every run meant gathering inputs by hand, filling in the workbooks, then reconciling and rerunning until the numbers lined up. It took about 40 hours, and only a few people knew the workbooks well enough to do it.',
       },
       {
         heading: 'What I built',
-        body: 'A conversational, guided experience that walks the user through the inputs and produces a model. Underneath it, a Python calculation engine that reproduces the legacy Excel logic within 5% accuracy, so the new experience did not trade away reliability. I validated the engine against 12 test cases. Every result landed within 5% of the spreadsheet output.',
+        body: 'First, a Python engine that reproduces the spreadsheet logic. I tested it against 12 cases, and every result came within 5% of the original workbooks. On top of that, a guided experience that asks for the inputs in plain conversation and returns a finished model.',
       },
       {
         heading: 'How I decided',
-        body: 'I mapped four ways to rebuild it: a Claude conversational skill, Claude Code with MCP tools calling the Python engine, a Python backend with a React front end, and a native build on Pega rules. Instead of choosing one on paper, I am prototyping each in turn and comparing them on product, user experience, and implementation tradeoffs. I built the MCP version first, then the skill, then the React app, and I am now building the Pega version. The comparison is shaping the infrastructure modeling roadmap and informing engineering leadership decisions.',
+        body: 'There were four reasonable ways to deliver it: a Claude conversational skill, Claude Code with MCP tools calling the engine, a Python and React web app, or a native Pega build. Rather than pick one on paper, I’m building each in turn and comparing product fit, user experience, and implementation effort. The MCP and skill versions came first, then the React app, and I’m building the Pega version now. Engineering leadership is using the comparison to shape the roadmap.',
       },
       {
         heading: 'Result',
-        body: 'In use by 3 people on my team. A model run now takes under 40 minutes instead of about 40 hours, with estimates within 5% of the legacy spreadsheets. Pega invited me to continue the work remotely through the school year.',
+        body: 'Three people on my team use it today. Pega asked me to keep working on it remotely through the school year.',
       },
     ],
     stack: ['Python', 'React', 'Claude Code', 'MCP'],
@@ -156,75 +156,74 @@ export const caseStudies: CaseStudy[] = [
     company: 'Witness to History',
     role: 'Lead engineer, six-person team (2\u00A0CS,\u00A04\u00A0Education) · CS 3892, Vanderbilt',
     period: 'August 2026 to December 2026',
-    title: 'An interactive history simulation for middle and high schoolers',
+    title: 'A history game where students make the decisions',
     summary:
-      'A course project for middle and high school history classes. Students talk with people living through a moment, make the call with only what they knew, then see what really happened. I built the game engine and a pipeline that lets non-coders add new scenarios without touching code.',
+      'A browser game for middle and high school history classes, built for a Vanderbilt course. Students talk with people living through a historical moment, make a decision with only the information those people had, and then learn what actually happened.',
     links: [
       { label: 'Live demo', href: 'https://witness-to-history.vercel.app/', kind: 'primary' },
       { label: 'Source', href: 'https://github.com/juliaktzr/witness-to-history', kind: 'secondary' },
     ],
     problem:
-      'History class shows the outcome first, so every decision looks obvious in hindsight. Our team of four Education students, one other engineer, and me wanted students to feel that uncertainty instead.',
+      'Students usually learn how history turned out before they learn what people were deciding, so every choice looks obvious. Our team of four Education students and two engineers wanted students to feel how uncertain those choices were at the time.',
     builtIntro:
-      'I built the content-driven game engine end to end. A browser game: no install, no login, runs on a school Chromebook. A student picks an era, talks through branching dialogue with two or three figures, makes one real decision, and sees the outcome and the historical reveal.',
+      'I led the engineering. The game runs in any browser with nothing to install and no login, so it works on a school Chromebook. A student picks a time period, talks with two or three people through branching dialogue, makes one decision, and then sees the outcome next to what really happened.',
     contribution:
-      'The game engine, the Sheets-to-JSON pipeline and validator, dialogue and source panels, read-aloud, the map hub, the title screen and character creator, and deployment. The Education team researched, wrote, and sourced every scenario.',
+      'I built the game engine, the pipeline that turns the team’s spreadsheet into game content, the dialogue and source panels, read-aloud, the town map, the title screen and character creator, and the deployment. The Education team researched, wrote, and sourced every scenario.',
     built: [
       {
         name: 'pipeline/',
-        desc: 'Google Sheet to validated game JSON. Four non-coders write content, get plain-English errors, never touch code',
+        desc: 'Turns the team’s Google Sheet into game files and flags mistakes in plain English, so writers never touch code',
       },
-      { name: 'dialogue/', desc: 'Branching conversations. Every factual claim cites a primary source' },
-      { name: 'map/', desc: 'Illustrated hub. Your own character walks between figures' },
-      { name: 'a11y/', desc: 'Read-aloud via Web Speech API, full keyboard nav, alt text throughout' },
-      { name: 'deploy/', desc: 'GitHub Pages. Zero backend, zero recurring cost' },
+      { name: 'dialogue/', desc: 'Branching conversations, with a primary source behind every factual claim' },
+      { name: 'map/', desc: 'An illustrated town where the student’s character walks between people' },
+      { name: 'a11y/', desc: 'Read-aloud, full keyboard navigation, and alt text on every image' },
+      { name: 'deploy/', desc: 'Static site on Vercel. No backend and no running costs' },
     ],
-    decisionsIntro:
-      'This is where most of the actual work was. Every call was made against an Oct 7 pitch deadline.',
+    decisionsIntro: 'Five decisions that shaped the project before our October 7 pitch.',
     decisions: [
       {
-        chose: 'A working decision loop on one scenario, before any extras',
-        over: 'Starting with a second scenario or character customization',
-        why: 'An untested format built out twice means twice the rework after feedback. Character creation came only after the core loop worked end to end.',
+        chose: 'Get one decision working in one scenario first',
+        over: 'Building a second scenario or character customization early',
+        why: 'If the format didn’t work, every extra piece would have to be redone. Character creation came after the core loop worked.',
       },
       {
-        chose: 'Content-agnostic engine. A new scenario is one JSON file',
-        over: 'Hardcoding content, faster once but slower to iterate',
-        why: 'Four non-technical teammates ship content without waiting on the two engineers',
+        chose: 'An engine that loads any scenario from a single file',
+        over: 'Hardcoding the first scenario, which is faster once but slow to change',
+        why: 'The Education team can add and edit scenarios without waiting on an engineer.',
       },
       {
-        chose: 'One job per person on a single scenario',
-        over: 'Each teammate owning a whole scenario',
-        why: 'Validate the format with real pitch feedback before parallelizing',
+        chose: 'Everyone works on one scenario, each with a clear job',
+        over: 'Each person writing a scenario of their own',
+        why: 'We wanted feedback on the format at the pitch before splitting up the work.',
       },
       {
-        chose: 'Validation built into the tool',
-        over: 'A wiki page of rules',
-        why: 'Content authors cannot debug a broken reference on their own',
+        chose: 'Error checking built into the tool',
+        over: 'A shared doc of formatting rules',
+        why: 'Someone who doesn’t code can’t track down a broken link between scenes on their own.',
       },
       {
-        chose: 'Composite characters, a citation on every factual line',
-        over: 'Invented quotes from real people',
-        why: 'Historical integrity is a product requirement, decided with the Education team',
+        chose: 'Composite characters, with a source for every fact',
+        over: 'Made-up quotes from real historical figures',
+        why: 'Accuracy mattered as much as gameplay. We set this rule together with the Education team.',
       },
     ],
     screenshots: [
       {
         src: '/work/witness-map.webp',
         alt: 'Illustrated town map from 1775 Massachusetts with three townspeople to visit and the student’s character at the edge of town',
-        caption: 'The town map hub. Students choose who to talk to.',
+        caption: 'The town map, where students choose who to talk to.',
         width: 1200,
         height: 1089,
       },
       {
         src: '/work/witness-character.webp',
         alt: 'Character creation screen with a customizable student avatar, poses, and an experience tracker',
-        caption: 'Character creator. Students design who walks through history with them.',
+        caption: 'The character creator.',
         width: 1600,
         height: 856,
       },
     ],
-    stack: ['Vite', 'React', 'Web Speech API', 'GitHub Pages', 'Sheets-to-JSON pipeline', 'No backend'],
+    stack: ['React', 'Vite', 'Web Speech API', 'Google Sheets', 'Vercel', 'No backend'],
     diagram: 'pipeline',
   },
 ]
@@ -248,17 +247,16 @@ export const experience: Role[] = [
   {
     org: 'Pegasystems',
     title: PEGA_TITLE,
-    location: 'Waltham, MA and remote',
+    location: 'Waltham, MA (now remote)',
     period: 'June 2026 to Present',
     start: '2026-06',
     tag: 'Engineering',
-    summary: 'Cut a 40-hour sizing process to under 40 minutes with a tool my team uses today.',
+    summary: 'Built an AI tool that cut a 40-hour sizing process to under 40 minutes.',
     bullets: [
-      'On the Government Consulting team, assessed product, user experience, and implementation trade-offs across four solution paths, delivering recommendations that shaped enterprise infrastructure strategy and roadmap decisions.',
-      'Modernized a 40-hour manual enterprise sizing process into an AI-powered experience, converting spreadsheet-driven workflows into guided conversations and interactive applications.',
-      'Translated Excel-based infrastructure logic into reusable Python services, building a calculation engine that produced estimates within 5% of legacy spreadsheet models.',
-      'Built full-stack AI solutions using Python, ReactJS, Git, Claude Code, and Model Context Protocol (MCP) integrations.',
-      'Invited to continue the work remotely through the school year after the summer internship.',
+      'Rebuilt the Government Consulting team’s Excel-based infrastructure sizing model as a Python engine that matches the original within 5% across 12 test cases.',
+      'Built AI-guided ways to run the model with Claude Code, MCP, Python, and React, cutting a roughly 40-hour process to under 40 minutes.',
+      'Compared four delivery approaches on product fit, user experience, and implementation effort, and shared recommendations that are shaping the roadmap.',
+      'Asked to continue the work remotely during the school year.',
     ],
   },
   {
@@ -268,11 +266,11 @@ export const experience: Role[] = [
     period: 'September 2024 to Present',
     start: '2024-09',
     tag: 'Research',
-    summary: 'Helped scale iTELL, the lab’s AI-powered textbook platform, to 25+ deployments.',
+    summary: 'Product and strategy work on iTELL, an AI textbook platform in 25+ deployments.',
     bullets: [
-      'Collaborated with a team of engineers and PhD researchers to scale iTELL, the lab’s AI-powered textbook platform, to 25+ deployments.',
-      'Evaluated AI-generated content and delivered insights that guided iterative model improvements.',
-      'Led the restructuring of the lab’s website, improving navigation and usability.',
+      'Work with engineers and PhD researchers on iTELL, the lab’s AI-powered textbook platform, and help make product and strategy decisions as it has grown to 25+ deployments.',
+      'Review AI-generated content and turn what I find into specific suggestions for improving the models.',
+      'Led a redesign of the lab’s website to make it easier to navigate.',
     ],
   },
   {
@@ -282,10 +280,10 @@ export const experience: Role[] = [
     period: 'January 2025 to December 2025',
     start: '2025-01',
     tag: 'Teaching',
-    summary: 'Supported 150+ students and fed recurring bottlenecks back into the course materials.',
+    summary: 'Helped 150+ intro CS students and flagged common sticking points to faculty.',
     bullets: [
-      'Supported 150+ students by translating complex algorithmic concepts into clear, actionable steps, improving understanding and accelerating student progress.',
-      'Identified common learning bottlenecks during office hours and communicated insights to faculty, leading to adjustments to instructional materials.',
+      'Helped 150+ students in Vanderbilt’s intro computer science course, breaking hard concepts into steps they could follow.',
+      'Noticed where students kept getting stuck in office hours and brought those patterns to faculty, which led to changes in the course materials.',
     ],
   },
   {
@@ -295,11 +293,10 @@ export const experience: Role[] = [
     period: 'August 2025 to October 2025',
     start: '2025-08',
     tag: 'AI evaluation',
-    summary:
-      'Selected to evaluate AI outputs for a confidential training initiative with a top global research lab.',
+    summary: 'Evaluated AI outputs for a confidential training project with a leading AI lab.',
     bullets: [
-      'Selected as a MOVE Fellow to support a confidential AI training initiative with a top global research lab.',
-      'Evaluated webpage outputs against detailed accuracy and clarity rubrics, identifying systemic error patterns and informing rubric refinements.',
+      'Chosen for a selective fellowship supporting a confidential AI training project with a leading research lab.',
+      'Graded AI-generated webpages for accuracy and clarity, found recurring error patterns, and helped refine the grading rubrics.',
     ],
   },
   {
@@ -309,11 +306,11 @@ export const experience: Role[] = [
     period: 'May 2025 to August 2025',
     start: '2025-05',
     tag: 'Engineering',
-    summary: 'Weekly QA reports that helped prioritize engineering fixes on invoice-validation software.',
+    summary: 'Tested invoice-validation software used by global importers.',
     bullets: [
-      'Designed and executed test plans for commercial-invoice validation software used by global importers.',
-      'Built datasets and test scenarios to uncover edge-case failures and improve validation accuracy.',
-      'Delivered weekly QA reports that helped prioritize engineering fixes and clarify evolving requirements.',
+      'Wrote and ran test plans for commercial invoice-validation software used by global importers.',
+      'Built test data and edge-case scenarios that caught validation failures.',
+      'Sent weekly QA reports that helped engineers decide what to fix first and kept changing requirements clear.',
     ],
   },
 ]
@@ -342,7 +339,7 @@ export const education = {
       period: 'January 2026 to June 2026',
       degree: 'Study abroad',
       detail:
-        'Spring 2026 semester abroad. Coursework in Logic, Applied Machine Learning, and Databases. Lived in Madrid for five months and traveled to 10 countries.',
+        'Took Logic, Applied Machine Learning, and Databases. Spent five months living in Madrid and traveled to 10 countries.',
       logo: '/logos/uc3m.svg',
       logoAlt: 'Universidad Carlos III de Madrid',
       logoStyle: 'seal' as const,
@@ -356,15 +353,15 @@ export const education = {
 export const research = {
   id: 'research',
   eyebrow: 'Research and AI evaluation',
-  title: 'Finding where AI output breaks, then fixing the product.',
+  title: 'Finding what AI gets wrong.',
   intro:
-    'At LEAR Lab, I evaluate AI-generated content in iTELL, an AI-powered textbook platform, across 25+ live deployments, and help shape its product and strategy decisions. At Handshake AI, I evaluated outputs for a confidential model training effort. In both, the job was turning failure patterns into specific product and model changes.',
+    'A lot of my work has been checking AI output closely. At LEAR Lab, I review AI-generated content in iTELL and help decide what to change in the product. At Handshake AI, I graded model outputs for a confidential training project. In both, the goal is to find the patterns behind the mistakes so they can be fixed at the source.',
   items: [
     {
       org: 'Language and Education Analytics Research Lab',
       role: 'Research Assistant, Strategy and Product Manager',
       period: 'September 2024 to Present',
-      stat: { value: 25, suffix: '+', label: 'live deployments' },
+      stat: { value: 25, suffix: '+', label: 'deployments' },
     },
     {
       org: 'Handshake AI',
@@ -382,14 +379,14 @@ export type Counter = { value: number; prefix?: string; suffix?: string; label: 
 
 export const leadership = {
   id: 'leadership',
-  eyebrow: 'Leadership and impact',
-  title: 'Teams I have led.',
+  eyebrow: 'Leadership',
+  title: 'Teams I’ve led.',
   items: [
     {
       org: 'Read for Those in Need',
       role: 'Founder and CEO',
       period: 'March 2019 to July 2023',
-      body: 'Founded and operated a nonprofit improving literacy access for underserved K-8 students, distributing 3,000+ books across 5 public schools. Directed outreach, fundraising, logistics, volunteer coordination, and community partnerships over four years.',
+      body: 'I started a nonprofit to get books to underserved K-8 students. I ran outreach, fundraising, logistics, and partnerships, and over four years our volunteers distributed more than 3,000 books across five public schools.',
       counters: [
         { value: 3000, suffix: '+', label: 'books distributed' },
         { value: 5, label: 'public schools' },
@@ -400,14 +397,14 @@ export const leadership = {
       org: 'Zeta Tau Alpha',
       role: 'Director of Fundraising',
       period: 'February 2025 to Present',
-      body: 'Directed fundraising strategy and partner engagement for chapter-wide philanthropy, leading campaigns that raised $12,000 in a single semester for breast cancer education programs.',
+      body: 'I lead fundraising for my chapter’s philanthropy, from planning campaigns to working with partners. In one semester, we raised $12,000 for breast cancer education.',
       counters: [{ value: 12000, prefix: '$', label: 'raised in one semester' }] as Counter[],
     },
     {
       org: 'Incentive Spirometer for Tracheostomy Patients',
       role: 'Project Lead',
       period: 'August 2025 to December 2025',
-      body: 'Led a multidisciplinary team through requirements gathering, prototyping, and user testing to deliver a functional medical device prototype refined through clinician feedback.',
+      body: 'I led a multidisciplinary team designing a breathing-exercise device for tracheostomy patients. We turned clinicians’ needs into engineering requirements, built a working prototype, and refined it through user testing and clinician feedback.',
       counters: [] as Counter[],
     },
   ],
@@ -419,14 +416,14 @@ export const leadership = {
 export const skills = {
   id: 'skills',
   eyebrow: 'Skills',
-  title: 'Tools I reach for.',
+  title: 'Tools I use.',
   groups: [
     {
       name: 'Technical',
       items: ['Python', 'Java', 'C++', 'C', 'HTML/CSS', 'ReactJS', 'Git', 'Linux', 'MATLAB', 'Kubernetes'],
     },
     {
-      name: 'AI and Emerging Technology',
+      name: 'AI',
       items: [
         'Generative AI',
         'Prompt Engineering',
@@ -457,7 +454,7 @@ export const skills = {
 ------------------------------------------------------------------------- */
 export const interests = {
   eyebrow: 'What I want next',
-  body: 'I like deciding what to build and why as much as building it. I want a role between the people who set direction and the engineers who deliver it, especially on AI products, where the gap between a working demo and a reliable product is widest.',
+  body: 'I like figuring out what’s worth building as much as building it. AI is where that matters most right now, because a tool that works in a demo often falls apart once people rely on it every day. That gap is what I want to work on.',
 }
 
 /* -------------------------------------------------------------------------
@@ -467,7 +464,7 @@ export const contact = {
   id: 'contact',
   eyebrow: 'Contact',
   title: 'Let’s talk.',
-  body: 'Open to new grad roles in AI solutions and forward-deployed engineering, technology consulting and strategy, and technical program management, starting summer 2027. Willing to relocate. Email is the fastest way to reach me.',
+  body: 'I’m looking for new grad roles starting summer 2027 in AI solutions or forward-deployed engineering, technology consulting and strategy, or technical program management. I’m happy to relocate. Email is the best way to reach me.',
   links: [
     { label: 'Email', value: site.email, href: `mailto:${site.email}` },
     { label: 'LinkedIn', value: 'linkedin.com/in/julia-kantzer', href: site.linkedin },
@@ -495,5 +492,5 @@ export const consoleGreeting = {
  | |_| | |_| | | | (_| | | . \\ (_| | | | | |_ / /  __/ |
   \\___/ \\__,_|_|_|\\__,_| |_|\\_\\__,_|_| |_|\\__/___\\___|_|
 `,
-  line: `Open to AI solutions, consulting, and TPM roles. Say hi: ${site.email}`,
+  line: `Hi, I'm Julia. I'm looking for AI solutions, consulting, and TPM roles. Say hi: ${site.email}`,
 }
