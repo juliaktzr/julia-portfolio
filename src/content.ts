@@ -91,7 +91,7 @@ export type CaseStudy = {
 export const work = {
   id: 'work',
   eyebrow: 'Selected work',
-  title: 'What I have shipped.',
+  title: 'Two problems I owned end to end.',
 }
 
 export const pegaFlow = {
@@ -358,31 +358,20 @@ export const education = {
 export const research = {
   id: 'research',
   eyebrow: 'Research and AI evaluation',
-  title: 'I know how AI products fail, and how to fix them.',
+  title: 'Finding where AI output breaks, then fixing the product.',
   intro:
-    'Two years of evaluating AI output against real quality frameworks, then turning the findings into product, content, and model changes.',
+    'At LEAR Lab, I evaluate AI-generated content in iTELL, an AI-powered textbook platform, across 25+ live deployments, and help shape its product and strategy decisions. At Handshake AI, I evaluated outputs for a confidential model training effort. In both, the job was turning failure patterns into specific product and model changes.',
   items: [
     {
       org: 'Language and Education Analytics Research Lab',
       role: 'Research Assistant, Strategy and Product Manager',
       period: 'September 2024 to Present',
-      points: [
-        'Evaluated AI-generated educational content against quality frameworks across 25+ live deployments.',
-        'Turned findings into recommendations that shaped product, content, and model improvements.',
-        'Partnered with engineers and PhD researchers to take AI educational software from prototype to institutional deployment.',
-        'Led a redesign of the lab website, improving information architecture for researchers, educators, and partners.',
-      ],
       stat: { value: 25, suffix: '+', label: 'live deployments' },
     },
     {
       org: 'Handshake AI',
       role: 'MOVE Fellow',
       period: 'August 2025 to October 2025',
-      points: [
-        'Selected for a competitive fellowship supporting a confidential AI training initiative with a leading global research organization.',
-        'Evaluated AI-generated outputs against detailed quality frameworks.',
-        'Identified systemic failure patterns and contributed recommendations that improved evaluation consistency across the training pipeline.',
-      ],
       stat: null,
     },
   ],
@@ -396,7 +385,7 @@ export type Counter = { value: number; prefix?: string; suffix?: string; label: 
 export const leadership = {
   id: 'leadership',
   eyebrow: 'Leadership and impact',
-  title: 'I lead people toward outcomes.',
+  title: 'Teams I have led.',
   items: [
     {
       org: 'Read for Those in Need',

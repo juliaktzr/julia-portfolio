@@ -9,13 +9,7 @@ export function Experience() {
   const printing = usePrinting()
 
   return (
-    <Section
-      id="experience"
-      eyebrow="Experience"
-      title="Where I have worked."
-      intro="Click a role to expand it."
-      introClassName="print-hidden"
-    >
+    <Section id="experience" eyebrow="Experience" title="Where I have worked.">
       <ol className="relative border-l border-line pl-6 sm:pl-8">
         {experience.map((role, i) => (
           <TimelineItem
@@ -66,6 +60,7 @@ function TimelineItem({ role, index, open, onToggle }: ItemProps) {
               <span className="mt-0.5 block text-sm text-muted">
                 {role.org} · {role.location}
               </span>
+              <span className="mt-2 block text-sm leading-relaxed text-text">{role.summary}</span>
               <span className="mt-2 flex flex-wrap items-center gap-2">
                 <span className="font-mono text-xs text-muted">{role.period}</span>
                 <Tag>{role.tag}</Tag>
