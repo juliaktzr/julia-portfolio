@@ -1,15 +1,18 @@
 # Julia Kantzer, portfolio
 
-Personal portfolio site. Vite + React + TypeScript, Tailwind CSS v4 with CSS-variable design tokens, Framer Motion. Static build, no backend.
+I designed and specified this site and built it with Claude Code.
+
+Personal portfolio site, live at https://juliakantzer.com. Vite + React + TypeScript, Tailwind CSS v4 with CSS-variable design tokens, Framer Motion. Static build, no backend.
 
 ## Run locally
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173
+npm run dev        # http://localhost:5175
 npm run build      # production build in dist/
 npm run preview    # serve the production build locally
 npm run lint       # oxlint
+npm run og         # re-render public/og-image.png
 ```
 
 ## Edit the content
@@ -19,18 +22,19 @@ Every word on the site lives in `src/content.ts`. Components never hard-code tex
 | Export | What it controls |
 |---|---|
 | `site` | Name, tagline, email, LinkedIn, GitHub, resume path, headshot, site URL |
-| `hero` | The line above your name and the three buttons |
+| `hero` | The line above your name, the seeking line, and the three buttons |
 | `nav` | Header links and the command palette's Navigate group |
-| `caseStudy` | Featured Pega work: sections, stack, before/after diagram steps |
-| `experience` | Timeline roles, newest first. Each has `bullets` shown when expanded |
+| `caseStudies` | Selected work: Pega (2x2 prose sections) and Witness to History (problem, file listing, decision cards, screenshots) |
+| `pegaFlow`, `witnessPipeline` | Steps for the Pega before/after diagram and the Witness content pipeline |
+| `experience` | Timeline roles in resume order. Each `summary` always shows; `bullets` show when expanded |
 | `education` | Schools, degrees, and logo paths |
 | `research`, `leadership`, `skills`, `interests`, `contact` | The remaining sections |
-
-Search the file for `TODO` to find anything still waiting on you.
 
 **Resume:** replace `public/JuliaKantzerResume.pdf` (keep the name, since it is what visitors save it as). The download button and the terminal `resume` command point at it.
 
 **Headshot:** replace `public/headshot.jpg` with a square image, 800px or larger.
+
+**Screenshots:** `public/work/`. Case study images, referenced from `screenshots` in `caseStudies`. Give each its real `width` and `height` so the page does not shift while it loads.
 
 **Logos:** `public/logos/`. Vanderbilt V mark and UC3M seal are from Wikimedia Commons.
 
@@ -76,4 +80,4 @@ Cmd P produces a light, single-column document: nav, footer, and decoration hidd
 
 ## Open Graph image
 
-`public/og-image.png` is a 1200x630 render of the hero. Regenerate it if you change your name or tagline. The source template is not in the repo; any 1200x630 PNG at that path works.
+`public/og-image.png` is the 1200x630 preview shown when the link is shared. Its source is `scripts/og-image.html`. Edit that file, then run `npm run og` to render it with Playwright. The first run on a new machine may need `npx playwright install chromium`.

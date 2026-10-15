@@ -7,12 +7,13 @@ export function Hero() {
       id="top"
       className="mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-5xl flex-col justify-center px-4 py-16 print:min-h-0 print:py-4 sm:px-6"
     >
-      <p className="text-sm text-muted sm:text-base">
-        {hero.meta}
-        <span aria-hidden="true" className="mx-2 text-accent">
+      {/* Two lines on phones, one line with a separator from sm up. */}
+      <p className="flex flex-col gap-1 text-sm text-muted sm:block sm:text-base">
+        <span>{hero.meta}</span>
+        <span aria-hidden="true" className="mx-2 hidden text-accent sm:inline">
           ·
         </span>
-        {hero.status}
+        <span>{hero.status}</span>
       </p>
       <h1 className="mt-4 font-display text-5xl font-semibold leading-[1.02] tracking-tight sm:text-7xl">
         {site.name}

@@ -20,13 +20,18 @@ export function CaseStudy() {
 function CaseStudyArticle({ study }: { study: CaseStudyData }) {
   return (
     <article id={study.id} className="scroll-mt-20" aria-labelledby={`${study.id}-title`}>
-      <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs text-muted">
+      {/* Stacked on phones so separators never dangle at a line end. */}
+      <div className="mb-4 flex flex-col gap-1 font-mono text-xs leading-relaxed text-muted sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-2">
         <span className="text-text">{study.company}</span>
-        <span aria-hidden="true">·</span>
+        <span aria-hidden="true" className="hidden sm:inline">
+          ·
+        </span>
         <span>{study.role}</span>
         {study.period && (
           <>
-            <span aria-hidden="true">·</span>
+            <span aria-hidden="true" className="hidden sm:inline">
+              ·
+            </span>
             <span>{study.period}</span>
           </>
         )}

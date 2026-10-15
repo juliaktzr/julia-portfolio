@@ -1,6 +1,6 @@
 /**
  * All site copy lives here. Edit this file to change text without touching
- * components. Anything marked TODO needs your input.
+ * components.
  *
  * Writing rules: direct, confident, no fluff. No em dashes. Short sentences.
  * Lead with outcomes.
@@ -11,7 +11,7 @@ export const site = {
   firstName: 'Julia',
   role: 'Technology Strategy, Consulting, and TPM',
   tagline:
-    'I turn slow, manual technical processes into tools people actually use. At Pegasystems, I cut a 40-hour infrastructure sizing process to under 40 minutes with a guided AI tool my team uses today.',
+    'I turn slow, manual technical processes into tools people actually use. At Pegasystems, I cut a 40\u2011hour infrastructure sizing process to under 40 minutes with a guided AI tool my team uses today.',
   location: 'Nashville, TN',
   email: 'juliakantzer@gmail.com',
   linkedin: 'https://www.linkedin.com/in/julia-kantzer/',
@@ -156,7 +156,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 'work-witness',
     company: 'Witness to History',
-    role: 'Lead engineer, six-person team (2 CS, 4 Education) · CS 3892, Vanderbilt',
+    role: 'Lead engineer, six-person team (2\u00A0CS,\u00A04\u00A0Education) · CS 3892, Vanderbilt',
     period: 'August 2026 to December 2026',
     title: 'An interactive history simulation for middle and high schoolers',
     summary:

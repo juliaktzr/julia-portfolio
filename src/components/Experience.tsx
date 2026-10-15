@@ -58,7 +58,12 @@ function TimelineItem({ role, index, open, onToggle }: ItemProps) {
             <span className="min-w-0">
               <span className="block font-semibold leading-snug">{role.title}</span>
               <span className="mt-0.5 block text-sm text-muted">
-                {role.org} · {role.location}
+                <span className="block sm:inline">{role.org}</span>
+                <span aria-hidden="true" className="hidden sm:inline">
+                  {' '}
+                  ·{' '}
+                </span>
+                <span className="block sm:inline">{role.location}</span>
               </span>
               <span className="mt-2 block text-sm leading-relaxed text-text">{role.summary}</span>
               <span className="mt-2 flex flex-wrap items-center gap-2">
