@@ -40,36 +40,43 @@ export function AboutMe() {
 
 const cardLabel = 'font-mono text-xs uppercase tracking-[0.18em] text-muted'
 
-/** Favorite photo on the left, with favorite book and languages stacked beside it. */
+/** Favorite photos on the left, with favorite book and languages stacked beside them. */
 function Favorites({ onOpen }: { onOpen: (gallery: Gallery) => void }) {
-  const { favoritePhoto: photo, favoriteBook: book, languages } = about
+  const { favoritePhotos: favs, favoriteBook: book, languages } = about
 
   return (
     <div className="mt-6 grid gap-4 md:grid-cols-2">
       <figure className="flex flex-col overflow-hidden rounded-xl border border-line bg-surface/60 md:row-span-2">
-        {/* Absolutely placed so the cards beside it, not the photo, set the row height. */}
-        <button
-          type="button"
-          onClick={() =>
-            onOpen({ title: photo.label, subtitle: photo.place, photos: [{ ...photo, place: photo.place }] })
-          }
-          className="group relative block h-64 w-full cursor-zoom-in md:h-auto md:min-h-56 md:flex-1"
-        >
-          <img
-            src={photo.src}
-            alt={photo.alt}
-            width={photo.width}
-            height={photo.height}
-            loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover object-[50%_60%]"
-          />
-          <span className="absolute bottom-3 right-3 rounded-full bg-bg/85 px-2.5 py-1 font-mono text-[11px] text-text opacity-90 transition-opacity group-hover:opacity-100">
-            View full photo
-          </span>
-        </button>
+        {/* Absolutely placed so the cards beside it, not the photos, set the row height. */}
+        <div className="relative h-72 md:h-auto md:min-h-64 md:flex-1">
+          <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 gap-1 p-1">
+            {favs.photos.map((ph, i) => (
+              <button
+                key={ph.src}
+                type="button"
+                onClick={() =>
+                  onOpen({ title: favs.label, subtitle: favs.caption, photos: favs.photos, start: i })
+                }
+                aria-label={`Open ${favs.label.toLowerCase()}, starting with ${ph.place}`}
+                className={`group relative block cursor-zoom-in overflow-hidden rounded-lg ${
+                  i === 0 ? 'col-span-2 row-span-2' : ''
+                }`}
+              >
+                <img
+                  src={ph.src}
+                  alt={ph.alt}
+                  width={ph.width}
+                  height={ph.height}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover object-[50%_60%] transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+              </button>
+            ))}
+          </div>
+        </div>
         <figcaption className="p-4">
-          <p className={cardLabel}>{photo.label}</p>
-          <p className="mt-1 text-sm text-text">{photo.place}</p>
+          <p className={cardLabel}>{favs.label}</p>
+          <p className="mt-1 text-sm text-text">{favs.caption}</p>
         </figcaption>
       </figure>
 

@@ -25,7 +25,7 @@ Every word on the site lives in `src/content.ts`. Components never hard-code tex
 | `site` | Name, tagline, email, LinkedIn, GitHub, resume path, headshot, site URL |
 | `hero` | The line above your name and the three buttons |
 | `nav` | Header links and the command palette's Navigate group |
-| `about` | Interests section: title, intro, hobbies, favorite photo and book, and languages |
+| `about` | Interests section: title, intro, hobbies, favorite photos and book, and languages |
 | `photos` | Photos shown on the travel map when a city is hovered or tapped. `place` must match a city in `travel` |
 | `travel` | Places on the travel map in Interests, with coordinates. Arcs fly out from `home` in list order, or from `from` for legs of a longer trip |
 | `caseStudies` | Selected work: Pega (2x2 prose sections) and Witness to History (problem, file listing, decision cards, screenshots) |

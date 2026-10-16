@@ -371,13 +371,33 @@ export const about = {
     title: 'The Boyfriend',
     author: 'Freida McFadden',
   },
-  favoritePhoto: {
-    label: 'Favorite photo',
-    src: '/photos/interlaken-2.webp',
-    place: 'Interlaken, Switzerland',
-    alt: 'Paragliders on a snowy slope above Alpine peaks and a valley of clouds',
-    width: 750,
-    height: 1000,
+  /** The first photo shows large; the rest stack beside it. */
+  favoritePhotos: {
+    label: 'Favorite photos',
+    caption: 'Interlaken, and Boston during my summer at Pega',
+    photos: [
+      {
+        src: '/photos/interlaken-2.webp',
+        place: 'Interlaken, Switzerland',
+        alt: 'Paragliders on a snowy slope above Alpine peaks and a valley of clouds',
+        width: 750,
+        height: 1000,
+      },
+      {
+        src: '/photos/boston-2.webp',
+        place: 'Boston, summer at Pega',
+        alt: 'Benches by the river with sailboats and the city skyline',
+        width: 750,
+        height: 1000,
+      },
+      {
+        src: '/photos/boston-1.webp',
+        place: 'Boston, summer at Pega',
+        alt: 'A ball field at golden hour with the city in the distance',
+        width: 750,
+        height: 1000,
+      },
+    ] as Photo[],
   },
   languages: {
     label: 'Languages',
