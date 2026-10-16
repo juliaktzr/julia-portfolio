@@ -22,7 +22,7 @@ Every word on the site lives in `src/content.ts`. Components never hard-code tex
 | Export | What it controls |
 |---|---|
 | `site` | Name, tagline, email, LinkedIn, GitHub, resume path, headshot, site URL |
-| `hero` | The line above your name, the seeking line, and the three buttons |
+| `hero` | The line above your name and the three buttons |
 | `nav` | Header links and the command palette's Navigate group |
 | `caseStudies` | Selected work: Pega (2x2 prose sections) and Witness to History (problem, file listing, decision cards, screenshots) |
 | `pegaFlow`, `witnessPipeline` | Steps for the Pega before/after diagram and the Witness content pipeline |

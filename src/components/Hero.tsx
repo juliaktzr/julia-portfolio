@@ -19,7 +19,6 @@ export function Hero() {
         {site.name}
       </h1>
       <p className="mt-6 max-w-2xl text-xl leading-relaxed text-text sm:text-2xl">{site.tagline}</p>
-      <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">{hero.seeking}</p>
       <div className="print-hidden mt-8 flex flex-wrap items-center gap-3">
         {hero.buttons.map((b) => (
           <ButtonLink

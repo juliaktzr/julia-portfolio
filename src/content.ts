@@ -10,7 +10,7 @@ export const site = {
   name: 'Julia Kantzer',
   firstName: 'Julia',
   role: 'AI Solutions, Strategy, and Technical Programs',
-  tagline: 'Making AI useful.',
+  tagline: 'Turning business problems into AI that works.',
   location: 'Nashville, TN',
   email: 'juliakantzer@gmail.com',
   linkedin: 'https://www.linkedin.com/in/julia-kantzer/',
@@ -27,8 +27,6 @@ export const site = {
 export const hero = {
   meta: 'CS and Applied Math at Vanderbilt, graduating May 2027',
   status: 'Currently at Pegasystems',
-  /** Shown between the tagline and the buttons. */
-  seeking: 'Seeking a role close to the customer and close to the code.',
   buttons: [
     { label: 'See my work', href: '#work', kind: 'primary' as const },
     { label: 'Resume', href: site.resumeUrl, kind: 'secondary' as const, download: true },
