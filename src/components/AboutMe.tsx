@@ -40,9 +40,9 @@ export function AboutMe() {
 
 const cardLabel = 'font-mono text-xs uppercase tracking-[0.18em] text-muted'
 
-/** Favorite photos on the left, with favorite book and languages stacked beside them. */
+/** Favorite photos on the left, with favorite author and languages stacked beside them. */
 function Favorites({ onOpen }: { onOpen: (gallery: Gallery) => void }) {
-  const { favoritePhotos: favs, favoriteBook: book, languages } = about
+  const { favoritePhotos: favs, favoriteAuthor: author, languages } = about
 
   return (
     <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -78,9 +78,8 @@ function Favorites({ onOpen }: { onOpen: (gallery: Gallery) => void }) {
       </figure>
 
       <div className="rounded-xl border border-line bg-surface/60 p-4">
-        <p className={cardLabel}>{book.label}</p>
-        <p className="mt-2 font-display text-lg font-semibold leading-tight">{book.title}</p>
-        <p className="mt-1 text-sm text-muted">{book.author}</p>
+        <p className={cardLabel}>{author.label}</p>
+        <p className="mt-2 font-display text-lg font-semibold leading-tight">{author.name}</p>
       </div>
 
       <div className="rounded-xl border border-line bg-surface/60 p-4">

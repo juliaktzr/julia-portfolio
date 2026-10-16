@@ -341,10 +341,9 @@ export const about = {
     'If you want to know me outside of work, I love reading, cooking, traveling, and photography. Here are some places I explored during my semester in Madrid.',
   hobbies: ['Reading', 'Cooking', 'Traveling', 'Photography'],
   /** Cards under the travel map. */
-  favoriteBook: {
-    label: 'Favorite book',
-    title: 'The Boyfriend',
-    author: 'Freida McFadden',
+  favoriteAuthor: {
+    label: 'Favorite author',
+    name: 'Freida McFadden',
   },
   /** The first photo shows large; the rest stack beside it. */
   favoritePhotos: {
@@ -564,7 +563,7 @@ export const contact = {
   id: 'contact',
   eyebrow: 'Contact',
   title: 'Let’s talk.',
-  body: 'I’m looking for new grad roles starting summer 2027 in AI solutions or forward-deployed engineering, technology consulting and strategy, or technical program management. I’m happy to relocate. Email is the best way to reach me.',
+  body: 'I’m looking for new grad roles starting summer 2027 in AI solutions or forward-deployed engineering, technology consulting and strategy, or technical program management. I’m open to relocate for the right role. Email is the best way to reach me.',
   links: [
     { label: 'Email', value: site.email, href: `mailto:${site.email}` },
     { label: 'LinkedIn', value: 'linkedin.com/in/julia-kantzer', href: site.linkedin },
