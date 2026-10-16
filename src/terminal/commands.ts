@@ -1,4 +1,15 @@
-import { caseStudies, contact, education, experience, hero, interests, nav, site, skills } from '../content'
+import {
+  about,
+  caseStudies,
+  contact,
+  education,
+  experience,
+  hero,
+  interests,
+  nav,
+  site,
+  skills,
+} from '../content'
 import type { Theme } from '../hooks/useTheme'
 import { startHangman, type GameState, type WordBank } from './games'
 import type { Line } from './types'
@@ -57,8 +68,9 @@ const wordBank: WordBank = dedupe([
     g.items
       .map((i) => i.replace(/\s*\(.*\)/, ''))
       .filter((w) => /^[A-Za-z]{4,}$/.test(w))
-      .map((w) => ({ word: w, hint: g.name === 'Languages' ? 'A language I speak' : `${g.name} skill` })),
+      .map((w) => ({ word: w, hint: `${g.name} skill` })),
   ),
+  ...about.languages.items.map((l) => ({ word: l.name, hint: 'A language I speak' })),
   { word: 'Vanderbilt', hint: 'Where I study' },
   { word: 'Nashville', hint: 'City I study in' },
   { word: 'Madrid', hint: 'Where I studied abroad' },

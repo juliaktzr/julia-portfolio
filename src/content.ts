@@ -573,7 +573,6 @@ export const skills = {
         'User Personas',
       ],
     },
-    { name: 'Languages', items: ['English (Native)', 'Spanish (Professional)', 'Polish (Conversational)'] },
   ],
 }
 
