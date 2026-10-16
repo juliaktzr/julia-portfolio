@@ -384,14 +384,14 @@ export const about = {
       },
       {
         src: '/photos/boston-2.webp',
-        place: 'Boston, summer at Pega',
+        place: 'Boston, Massachusetts',
         alt: 'Benches by the river with sailboats and the city skyline',
         width: 750,
         height: 1000,
       },
       {
         src: '/photos/boston-1.webp',
-        place: 'Boston, summer at Pega',
+        place: 'Boston, Massachusetts',
         alt: 'A ball field at golden hour with the city in the distance',
         width: 750,
         height: 1000,
