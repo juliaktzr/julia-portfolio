@@ -374,7 +374,6 @@ export const about = {
   /** The first photo shows large; the rest stack beside it. */
   favoritePhotos: {
     label: 'Favorite photos',
-    caption: 'Interlaken, and Boston during my summer at Pega',
     photos: [
       {
         src: '/photos/interlaken-2.webp',

@@ -54,9 +54,7 @@ function Favorites({ onOpen }: { onOpen: (gallery: Gallery) => void }) {
               <button
                 key={ph.src}
                 type="button"
-                onClick={() =>
-                  onOpen({ title: favs.label, subtitle: favs.caption, photos: favs.photos, start: i })
-                }
+                onClick={() => onOpen({ title: favs.label, photos: favs.photos, start: i })}
                 aria-label={`Open ${favs.label.toLowerCase()}, starting with ${ph.place}`}
                 className={`group relative block cursor-zoom-in overflow-hidden rounded-lg ${
                   i === 0 ? 'col-span-2 row-span-2' : ''
@@ -76,7 +74,6 @@ function Favorites({ onOpen }: { onOpen: (gallery: Gallery) => void }) {
         </div>
         <figcaption className="p-4">
           <p className={cardLabel}>{favs.label}</p>
-          <p className="mt-1 text-sm text-text">{favs.caption}</p>
         </figcaption>
       </figure>
 
