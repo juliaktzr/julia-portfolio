@@ -273,7 +273,7 @@ function SideProjects() {
                   <dd className="text-muted">{p.solution}</dd>
                 </div>
               </dl>
-              {p.image && <Decisions items={p.decisions} />}
+              {p.image && <Decisions items={p.decisions} className="mt-6" />}
               <ul className="mt-5 flex flex-wrap gap-2">
                 {p.stack.map((t) => (
                   <li key={t}>
@@ -289,10 +289,10 @@ function SideProjects() {
                 width={p.image.width}
                 height={p.image.height}
                 loading="lazy"
-                className="mx-auto w-full max-w-64 self-start rounded-xl border border-line shadow-lg"
+                className="mx-auto w-full max-w-64 self-center rounded-xl border border-line shadow-lg"
               />
             ) : (
-              <Decisions items={p.decisions} />
+              <Decisions items={p.decisions} className="mt-5 md:mt-0" />
             )}
           </article>
         ))}
@@ -301,9 +301,9 @@ function SideProjects() {
   )
 }
 
-function Decisions({ items }: { items: string[] }) {
+function Decisions({ items, className }: { items: string[]; className: string }) {
   return (
-    <div className="mt-5 md:mt-0">
+    <div className={className}>
       <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Product decisions</p>
       <ul className="space-y-2 text-sm leading-relaxed text-muted">
         {items.map((d) => (

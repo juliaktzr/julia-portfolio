@@ -128,6 +128,12 @@ export const sideProjects = {
         'No account and no server, so there’s nothing to sign up for and job data never leaves the browser',
       ],
       stack: ['JavaScript', 'Chrome Manifest V3', 'chrome.storage'],
+      image: {
+        src: '/work/applied-popup.webp',
+        alt: 'The Applied popup showing counts for applied, interviews, offers, and rejections above a list of tracked jobs, with job details blurred',
+        width: 782,
+        height: 1200,
+      },
     },
   ] as SideProject[],
 }
