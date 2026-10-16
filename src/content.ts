@@ -599,7 +599,7 @@ export const skills = {
 ------------------------------------------------------------------------- */
 export const interests = {
   eyebrow: 'What I want next',
-  body: 'I like figuring out what’s worth building as much as building it. AI is where that matters most right now, because a tool that works in a demo often falls apart once people rely on it every day. That gap is what I want to work on.',
+  body: 'My favorite part of any project is figuring out what’s actually worth building. At Pega, that meant building four versions of the same tool to see which one fit best. I want to keep doing that with AI: talking to the people who’ll use it, learning what they need, and making something that still works after the demo.',
 }
 
 /* -------------------------------------------------------------------------
