@@ -609,7 +609,7 @@ export const contact = {
   id: 'contact',
   eyebrow: 'Contact',
   title: 'Let’s talk.',
-  body: 'I’m looking for new grad roles starting summer 2027 in AI solutions or forward-deployed engineering, technology consulting and strategy, or technical program management. I’m open to relocate for the right role. Email is the best way to reach me.',
+  body: 'I’m looking for new grad roles starting summer 2027 where I can turn AI into real impact, in AI solutions and solutions engineering, technology consulting and strategy, or product and program management. I’m open to relocating for the right role. Email is the best way to reach me.',
   links: [
     { label: 'Email', value: site.email, href: `mailto:${site.email}` },
     { label: 'LinkedIn', value: 'linkedin.com/in/julia-kantzer', href: site.linkedin },
@@ -637,5 +637,5 @@ export const consoleGreeting = {
  | |_| | |_| | | | (_| | | . \\ (_| | | | | |_ / /  __/ |
   \\___/ \\__,_|_|_|\\__,_| |_|\\_\\__,_|_| |_|\\__/___\\___|_|
 `,
-  line: `Hi, I'm Julia. I'm looking for AI solutions, consulting, and TPM roles. Say hi: ${site.email}`,
+  line: `Hi, I'm Julia. I'm looking for AI solutions, consulting, and product roles. Say hi: ${site.email}`,
 }
