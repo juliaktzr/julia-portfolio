@@ -66,6 +66,8 @@ export type CaseStudy = {
   company: string
   role: string
   period?: string
+  /** Small badge in the header, e.g. "In progress". */
+  status?: string
   title: string
   summary: string
   links?: CaseStudyLink[]
@@ -76,6 +78,8 @@ export type CaseStudy = {
   builtIntro?: string
   /** Shown under "What I built" as "My part". */
   contribution?: string
+  /** Shown under "My part" as "Where it stands": what is done and what is next. */
+  progress?: { done: string; next: string }
   built?: CaseStudyFile[]
   decisionsIntro?: string
   decisions?: CaseStudyDecision[]
@@ -155,11 +159,12 @@ export const caseStudies: CaseStudy[] = [
     company: 'Witness to History',
     role: 'Lead engineer, six-person team (2\u00A0CS,\u00A04\u00A0Education) · CS 3892, Vanderbilt',
     period: 'August 2026 to December 2026',
+    status: 'In progress',
     title: 'A history game where students make the decisions',
     summary:
-      'A browser game for middle and high school history classes, built for a Vanderbilt course. Students talk with people living through a historical moment, make a decision with only the information those people had, and then learn what actually happened.',
+      'A browser game for middle and high school history classes that my team is building this semester for a Vanderbilt course. Students talk with people living through a historical moment, make a decision with only the information those people had, and then learn what actually happened. The core game is built and live, and we’re still adding to it.',
     links: [
-      { label: 'Live demo', href: 'https://witness-to-history.vercel.app/', kind: 'primary' },
+      { label: 'Try the current build', href: 'https://witness-to-history.vercel.app/', kind: 'primary' },
       { label: 'Source', href: 'https://github.com/juliaktzr/witness-to-history', kind: 'secondary' },
     ],
     problem:
@@ -168,6 +173,10 @@ export const caseStudies: CaseStudy[] = [
       'I led the engineering. The game runs in any browser with nothing to install and no login, so it works on a school Chromebook. A student picks a time period, talks with two or three people through branching dialogue, makes one decision, and then sees the outcome next to what really happened.',
     contribution:
       'I built the game engine, the pipeline that turns the team’s spreadsheet into game content, the dialogue and source panels, read-aloud, the town map, the title screen and character creator, and the deployment. The Education team researched, wrote, and sourced every scenario.',
+    progress: {
+      done: 'The game engine, content pipeline, dialogue and sources, read-aloud, town map, and character creator all work in the live build.',
+      next: 'More scenarios and polish before the course ends in December.',
+    },
     built: [
       {
         name: 'pipeline/',
@@ -178,7 +187,7 @@ export const caseStudies: CaseStudy[] = [
       { name: 'a11y/', desc: 'Read-aloud, full keyboard navigation, and alt text on every image' },
       { name: 'deploy/', desc: 'Static site on Vercel. No backend and no running costs' },
     ],
-    decisionsIntro: 'Five decisions that shaped the project before our October 7 pitch.',
+    decisionsIntro: 'Five decisions that have shaped the project so far.',
     decisions: [
       {
         chose: 'Get one decision working in one scenario first',
@@ -193,7 +202,7 @@ export const caseStudies: CaseStudy[] = [
       {
         chose: 'Everyone works on one scenario, each with a clear job',
         over: 'Each person writing a scenario of their own',
-        why: 'We wanted feedback on the format at the pitch before splitting up the work.',
+        why: 'We wanted feedback on the format before splitting up the work.',
       },
       {
         chose: 'Error checking built into the tool',

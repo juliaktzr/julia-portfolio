@@ -35,6 +35,12 @@ function CaseStudyArticle({ study }: { study: CaseStudyData }) {
             <span>{study.period}</span>
           </>
         )}
+        {study.status && (
+          <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-[11px] text-accent-ink">
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
+            {study.status}
+          </span>
+        )}
       </div>
       <h3 id={`${study.id}-title`} className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
         {study.title}
@@ -113,6 +119,23 @@ function CompactSections({ study }: { study: CaseStudyData }) {
                 My part
               </h5>
               <p className="leading-relaxed text-muted">{study.contribution}</p>
+            </>
+          )}
+          {study.progress && (
+            <>
+              <h5 className="mb-2 mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-accent-ink">
+                Where it stands
+              </h5>
+              <dl className="space-y-2 leading-relaxed text-muted">
+                <div>
+                  <dt className="inline font-medium text-text">Done: </dt>
+                  <dd className="inline">{study.progress.done}</dd>
+                </div>
+                <div>
+                  <dt className="inline font-medium text-text">Next: </dt>
+                  <dd className="inline">{study.progress.next}</dd>
+                </div>
+              </dl>
             </>
           )}
         </div>
