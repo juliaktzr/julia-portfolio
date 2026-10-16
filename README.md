@@ -13,6 +13,7 @@ npm run build      # production build in dist/
 npm run preview    # serve the production build locally
 npm run lint       # oxlint
 npm run og         # re-render public/og-image.png
+npm run map        # rebuild the travel map's Europe basemap
 ```
 
 ## Edit the content
@@ -24,6 +25,7 @@ Every word on the site lives in `src/content.ts`. Components never hard-code tex
 | `site` | Name, tagline, email, LinkedIn, GitHub, resume path, headshot, site URL |
 | `hero` | The line above your name and the three buttons |
 | `nav` | Header links and the command palette's Navigate group |
+| `travel` | Places on the travel map under Education, with coordinates. Arcs fly out from `home` in list order |
 | `caseStudies` | Selected work: Pega (2x2 prose sections) and Witness to History (problem, file listing, decision cards, screenshots) |
 | `pegaFlow`, `witnessPipeline` | Steps for the Pega before/after diagram and the Witness content pipeline |
 | `experience` | Timeline roles in resume order. Each `summary` always shows; `bullets` show when expanded |

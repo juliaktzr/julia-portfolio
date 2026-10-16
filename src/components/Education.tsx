@@ -1,5 +1,9 @@
+import { lazy, Suspense } from 'react'
 import { education } from '../content'
 import { Section } from './Section'
+
+// The basemap is about 60 KB of path data, so it loads in its own chunk.
+const TravelMap = lazy(() => import('./TravelMap').then((mod) => ({ default: mod.TravelMap })))
 
 export function Education() {
   return (
@@ -35,6 +39,13 @@ export function Education() {
           </article>
         ))}
       </div>
+      <Suspense
+        fallback={
+          <div className="print-hidden mt-6 aspect-[10/7] rounded-xl border border-line lg:aspect-[1.83/1]" />
+        }
+      >
+        <TravelMap />
+      </Suspense>
     </Section>
   )
 }

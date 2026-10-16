@@ -346,6 +346,37 @@ export const education = {
 }
 
 /* -------------------------------------------------------------------------
+   Travel map (shown under Education). Arcs fly out from `home` in list order.
+------------------------------------------------------------------------- */
+export type Place = { city: string; country: string; lat: number; lon: number }
+
+export const travel = {
+  label: 'Semester abroad',
+  title: 'Five months based in Madrid',
+  caption: '17 places in 10 countries.',
+  home: 'Madrid',
+  places: [
+    { city: 'Madrid', country: 'Spain', lat: 40.4168, lon: -3.7038 },
+    { city: 'Edinburgh', country: 'United Kingdom', lat: 55.9533, lon: -3.1883 },
+    { city: 'Paris', country: 'France', lat: 48.8566, lon: 2.3522 },
+    { city: 'Interlaken', country: 'Switzerland', lat: 46.6863, lon: 7.8632 },
+    { city: 'Barcelona', country: 'Spain', lat: 41.3874, lon: 2.1686 },
+    { city: 'Copenhagen', country: 'Denmark', lat: 55.6761, lon: 12.5683 },
+    { city: 'Dublin', country: 'Ireland', lat: 53.3498, lon: -6.2603 },
+    { city: 'Budapest', country: 'Hungary', lat: 47.4979, lon: 19.0402 },
+    { city: 'Rome', country: 'Italy', lat: 41.9028, lon: 12.4964 },
+    { city: 'Crete', country: 'Greece', lat: 35.3, lon: 24.9 },
+    { city: 'Positano', country: 'Italy', lat: 40.6281, lon: 14.485 },
+    { city: 'Capri', country: 'Italy', lat: 40.5532, lon: 14.2222 },
+    { city: 'Mallorca', country: 'Spain', lat: 39.5696, lon: 2.6502 },
+    { city: 'Venice', country: 'Italy', lat: 45.4408, lon: 12.3155 },
+    { city: 'Burano', country: 'Italy', lat: 45.4853, lon: 12.417 },
+    { city: 'Murano', country: 'Italy', lat: 45.458, lon: 12.353 },
+    { city: 'Vienna', country: 'Austria', lat: 48.2082, lon: 16.3738 },
+  ] as Place[],
+}
+
+/* -------------------------------------------------------------------------
    Research and AI evaluation
 ------------------------------------------------------------------------- */
 export const research = {
