@@ -1,5 +1,11 @@
 import type { CSSProperties } from 'react'
-import { caseStudies, work, type CaseStudy as CaseStudyData, type CaseStudyScreenshot } from '../content'
+import {
+  caseStudies,
+  sideProjects,
+  work,
+  type CaseStudy as CaseStudyData,
+  type CaseStudyScreenshot,
+} from '../content'
 import { ButtonLink } from './Button'
 import { FlowDiagram } from './FlowDiagram'
 import { Section, Tag } from './Section'
@@ -12,6 +18,7 @@ export function CaseStudy() {
           <CaseStudyArticle key={c.id} study={c} />
         ))}
       </div>
+      <SideProjects />
     </Section>
   )
 }
@@ -223,6 +230,55 @@ function Screenshots({ shots }: { shots: CaseStudyScreenshot[] }) {
           </figcaption>
         </figure>
       ))}
+    </div>
+  )
+}
+
+/** Compact cards for smaller projects, after the full case studies. A lone card spans the full width. */
+function SideProjects() {
+  const single = sideProjects.items.length === 1
+  return (
+    <div className="mt-20 border-t border-line pt-10">
+      <h3 className="mb-5 font-mono text-xs uppercase tracking-[0.18em] text-accent-ink">
+        <span aria-hidden="true">// </span>
+        {sideProjects.title}
+      </h3>
+      <div className={`grid gap-4 ${single ? '' : 'md:grid-cols-2'}`}>
+        {sideProjects.items.map((p) => (
+          <article
+            key={p.name}
+            className={`grid gap-x-10 gap-y-4 rounded-xl border border-line bg-surface/60 p-5 sm:p-6 ${
+              single ? 'md:grid-cols-2' : ''
+            }`}
+          >
+            <div>
+              <p className="font-mono text-xs text-muted">
+                {p.kind} · {p.period}
+              </p>
+              <h4 className="mt-2 font-display text-xl font-semibold">{p.name}</h4>
+              <p className="mt-2 leading-relaxed text-muted">{p.summary}</p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {p.stack.map((t) => (
+                  <li key={t}>
+                    <Tag>{t}</Tag>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <ul className="space-y-2 self-center text-sm leading-relaxed text-muted">
+              {p.points.map((pt) => (
+                <li key={pt} className="flex gap-3">
+                  <span
+                    aria-hidden="true"
+                    className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-2"
+                  />
+                  <span>{pt}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
     </div>
   )
 }

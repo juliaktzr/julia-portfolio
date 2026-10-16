@@ -94,6 +94,36 @@ export const work = {
   title: 'What I’ve been building.',
 }
 
+/** Smaller projects, shown as compact cards after the case studies. */
+export type SideProject = {
+  name: string
+  kind: string
+  period: string
+  summary: string
+  points: string[]
+  stack: string[]
+}
+
+export const sideProjects = {
+  title: 'Smaller projects',
+  items: [
+    {
+      name: 'Applied',
+      kind: 'Chrome extension',
+      period: 'October 2026',
+      summary:
+        'A Chrome extension that tracks my job applications on its own. It logs the postings I open, marks them as applied when a confirmation page shows up, and keeps a status tracker in the toolbar.',
+      points: [
+        'Picks up postings on Workday, LinkedIn, Handshake, Greenhouse, Lever, Ashby, and most company career pages',
+        'Switches a job to Applied when it sees a confirmation like “Thank you for applying”',
+        'Statuses for interviews, offers, and rejections, plus search and CSV export',
+        'No account and no server. Everything stays in the browser',
+      ],
+      stack: ['JavaScript', 'Chrome Manifest V3', 'chrome.storage'],
+    },
+  ] as SideProject[],
+}
+
 export const pegaFlow = {
   before: {
     label: 'Before',
