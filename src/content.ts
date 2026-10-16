@@ -370,9 +370,6 @@ export const about = {
     label: 'Favorite book',
     title: 'The Boyfriend',
     author: 'Freida McFadden',
-    cover: '/photos/book-the-boyfriend.webp',
-    width: 137,
-    height: 219,
   },
   favoritePhoto: {
     label: 'Favorite photo',
@@ -406,6 +403,8 @@ export const photos: Photo[] = [
   { src: '/photos/interlaken-3.webp', place: 'Interlaken', alt: 'A paraglider drifting under storm clouds over a snowy ridge', width: 750, height: 1000 },
   { src: '/photos/copenhagen-1.webp', place: 'Copenhagen', alt: 'Colorful canal houses and boats reflected in the water', width: 750, height: 1000 },
   { src: '/photos/copenhagen-2.webp', place: 'Copenhagen', alt: 'A yellow arched walkway with a hanging lantern', width: 750, height: 1000 },
+  { src: '/photos/dublin-1.webp', place: 'Dublin', alt: 'A Gothic stone cathedral with daffodils lining the path to its door', width: 750, height: 1000 },
+  { src: '/photos/edinburgh-1.webp', place: 'Edinburgh', alt: 'Colorful shopfronts along a curving cobblestone street', width: 750, height: 1000 },
   { src: '/photos/vienna-1.webp', place: 'Vienna', alt: 'A quiet Vienna street lined with ornate cream buildings', width: 750, height: 1000 },
   { src: '/photos/vienna-2.webp', place: 'Vienna', alt: 'An ornate stone building under a deep blue sky', width: 750, height: 1000 },
 ]
@@ -431,7 +430,7 @@ export const travel = {
     { city: 'Rome', country: 'Italy', lat: 41.9028, lon: 12.4964 },
     { city: 'Crete', country: 'Greece', lat: 35.3, lon: 24.9 },
     { city: 'Positano', country: 'Italy', lat: 40.6281, lon: 14.485 },
-    { city: 'Capri', country: 'Italy', lat: 40.5532, lon: 14.2222 },
+    { city: 'Capri', country: 'Italy', lat: 40.5532, lon: 14.2222, from: 'Positano' },
     { city: 'Mallorca', country: 'Spain', lat: 39.5696, lon: 2.6502 },
     { city: 'Venice', country: 'Italy', lat: 45.4408, lon: 12.3155 },
     { city: 'Burano', country: 'Italy', lat: 45.4853, lon: 12.417, from: 'Venice' },

@@ -218,3 +218,8 @@
   transform-origin: center;
   animation: travel-ping 2.2s var(--ease-out-soft) infinite;
 }
+
+/* Dim the page behind the full-size photo viewer. */
+.photo-viewer::backdrop {
+  background: rgb(0 0 0 / 0.82);
+}

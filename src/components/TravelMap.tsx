@@ -4,6 +4,8 @@ import { photos, travel } from '../content'
 import { MAP_HEIGHT, MAP_WIDTH, otherPath, project, visitedPath } from '../travel/europeMap'
 
 const STEP = 0.16
+/** Stops closer than this (in map units) to the previous stop on a trip share its pin. */
+const CLUSTER = 14
 const DRAW = 0.7
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -80,12 +82,25 @@ export function TravelMap({ active, onActive }: Props) {
   const home = travel.places.find((p) => p.city === travel.home)!
   const origin = project(home.lat, home.lon)
   const pins = travel.places.map((p) => ({ ...p, at: project(p.lat, p.lon) }))
+  const pinOf = (city: string) => pins.find((p) => p.city === city)!
+
+  // A stop too close to the previous one on its trip to show as its own dot
+  // (Burano next to Venice) shares that trip's first pin instead.
+  const leadOf = (city: string): string => {
+    const p = pinOf(city)
+    const prev = p.from ? pinOf(p.from) : undefined
+    if (!prev) return city
+    const dist = Math.hypot(p.at[0] - prev.at[0], p.at[1] - prev.at[1])
+    return dist < CLUSTER ? leadOf(prev.city) : city
+  }
+  const groupOf = (lead: string) => pins.filter((p) => leadOf(p.city) === lead)
+
   const trips = pins
-    .filter((p) => p.city !== home.city)
+    .filter((p) => p.city !== home.city && leadOf(p.city) === p.city)
     .map((p, i) => {
       // Legs of a longer trip start from the previous stop instead of home.
-      const start = (p.from && pins.find((q) => q.city === p.from)?.at) || origin
-      return { ...p, d: arc(start, p.at), delay: 0.3 + i * STEP }
+      const start = (p.from && pinOf(p.from).at) || origin
+      return { ...p, group: groupOf(p.city), d: arc(start, p.at), delay: 0.3 + i * STEP }
     })
 
   const countries = [...new Set(travel.places.map((p) => p.country))]
@@ -98,8 +113,10 @@ export function TravelMap({ active, onActive }: Props) {
   const scale = Math.max(box.w / MAP_WIDTH, box.h / MAP_HEIGHT)
   const ox = (box.w - MAP_WIDTH * scale) / 2
   const oy = (box.h - MAP_HEIGHT * scale) / 2
-  const current = pins.find((p) => p.city === active)
-  const shots = current ? photos.filter((ph) => ph.place === current.city) : []
+  const activeLead = active ? leadOf(active) : null
+  const current = activeLead ? pinOf(activeLead) : undefined
+  const group = activeLead ? groupOf(activeLead) : []
+  const shots = photos.filter((ph) => group.some((g) => g.city === ph.place))
   const tip = current && { x: ox + current.at[0] * scale, y: oy + current.at[1] * scale }
   const tipBelow = tip ? tip.y < (shots.length ? 210 : 70) : false
   // One photo shows large; two or three sit side by side.
@@ -128,13 +145,13 @@ export function TravelMap({ active, onActive }: Props) {
             preserveAspectRatio="xMidYMid slice"
             className="block h-auto w-full lg:absolute lg:inset-0 lg:h-full"
             role="img"
-            aria-label={`Map of Europe with routes from ${travel.home} to ${trips.map((t) => t.city).join(', ')}`}
+            aria-label={`Map of Europe with routes from ${travel.home} to ${trips.map((t) => t.group.map((g) => g.city).join(' and ')).join(', ')}`}
           >
             <path d={otherPath} className="fill-line stroke-bg" strokeWidth={0.6} />
             <path d={visitedPath} className="fill-accent/25 stroke-bg" strokeWidth={0.6} />
 
             {trips.map((t) => {
-              const on = active === t.city
+              const on = activeLead === t.city
               return (
                 <m.path
                   key={t.city}
@@ -153,15 +170,17 @@ export function TravelMap({ active, onActive }: Props) {
             })}
 
             {trips.map((t) => {
-              const on = active === t.city
+              const on = activeLead === t.city
+              const many = t.group.length > 1
               return (
                 <m.circle
                   key={t.city}
                   cx={t.at[0]}
                   cy={t.at[1]}
-                  r={on ? 6 : 3.6}
-                  className="fill-accent-ink stroke-bg"
-                  strokeWidth={1.5}
+                  r={(on ? 6 : 3.6) + (many ? 1.4 : 0)}
+                  className={many ? 'fill-accent-ink stroke-accent' : 'fill-accent-ink stroke-bg'}
+                  strokeWidth={many ? 3 : 1.5}
+                  strokeOpacity={many ? 0.45 : 1}
                   style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
                   initial={reduce ? false : { scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
@@ -189,11 +208,11 @@ export function TravelMap({ active, onActive }: Props) {
             )}
 
             {/* Invisible, larger hover targets so small pins are easy to hit. */}
-            {pins.map((p) => (
+            {[home, ...trips].map((p) => (
               <circle
                 key={p.city}
-                cx={p.at[0]}
-                cy={p.at[1]}
+                cx={pinOf(p.city).at[0]}
+                cy={pinOf(p.city).at[1]}
                 r={11}
                 fill="transparent"
                 className="cursor-pointer"
@@ -228,7 +247,9 @@ export function TravelMap({ active, onActive }: Props) {
                 </div>
               )}
               <p className="px-3 pt-1.5 pb-2 leading-tight">
-                <span className="block text-sm font-semibold text-text">{current.city}</span>
+                <span className="block text-sm font-semibold text-text">
+                  {group.map((g) => g.city).join(', ')}
+                </span>
                 <span className="font-mono text-[11px] text-muted">
                   {current.city === home.city ? 'Home base' : current.country}
                 </span>
@@ -259,7 +280,9 @@ export function TravelMap({ active, onActive }: Props) {
                       className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
                         active === p.city
                           ? 'border-accent bg-accent text-bg'
-                          : 'border-line bg-bg/70 text-text hover:border-accent'
+                          : activeLead && leadOf(p.city) === activeLead
+                            ? 'border-accent bg-accent/15 text-text'
+                            : 'border-line bg-bg/70 text-text hover:border-accent'
                       }`}
                     >
                       {p.city}
