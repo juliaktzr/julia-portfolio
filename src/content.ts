@@ -393,7 +393,15 @@ export type Photo = { src: string; place: string; alt: string; width: number; he
 
 /** Photos shown on the travel map when someone hovers or taps a city. `place` must match a city in `travel`. */
 export const photos: Photo[] = [
+  { src: '/photos/madrid-3.webp', place: 'Madrid', alt: 'The Royal Palace of Madrid across a wide plaza at sunset', width: 750, height: 1000 },
+  { src: '/photos/madrid-4.webp', place: 'Madrid', alt: 'The Royal Palace courtyard under a deep blue sky with white clouds', width: 750, height: 1000 },
+  { src: '/photos/madrid-2.webp', place: 'Madrid', alt: 'A narrow street of colorful apartment buildings with iron balconies', width: 750, height: 1000 },
+  { src: '/photos/madrid-5.webp', place: 'Madrid', alt: 'Pink blossom trees lining a quiet street', width: 750, height: 1000 },
   { src: '/photos/madrid-1.webp', place: 'Madrid', alt: 'Spanish flag above pine trees against a clear blue sky', width: 750, height: 1000 },
+  { src: '/photos/segovia-4.webp', place: 'Segovia', alt: 'The Roman aqueduct of Segovia, its stone arches running above the street', width: 750, height: 1000 },
+  { src: '/photos/segovia-1.webp', place: 'Segovia', alt: 'A gilded altarpiece beneath an ornate ribbed cathedral ceiling', width: 750, height: 1000 },
+  { src: '/photos/segovia-2.webp', place: 'Segovia', alt: 'Gothic cloister arches framing a sunlit courtyard', width: 750, height: 1000 },
+  { src: '/photos/segovia-3.webp', place: 'Segovia', alt: 'A narrow lane between old stone walls leading to an arched gate', width: 750, height: 1000 },
   { src: '/photos/capri-1.webp', place: 'Capri', alt: 'The Faraglioni rock stacks rising out of the sea off Capri', width: 750, height: 1000 },
   { src: '/photos/capri-2.webp', place: 'Capri', alt: 'A pebble cove with turquoise water below limestone cliffs', width: 750, height: 1000 },
   { src: '/photos/positano-1.webp', place: 'Positano', alt: 'A cliffside town stepping down to a blue bay under a clear sky', width: 562, height: 1000 },
@@ -421,7 +429,7 @@ export type Place = { city: string; country: string; lat: number; lon: number; f
 export const travel = {
   label: 'Semester abroad',
   title: 'Five months based in Madrid',
-  caption: '17 places in 10 countries.',
+  caption: '18 places in 10 countries.',
   hint: 'Hover a place to see where it is. Click one with a camera to open its photos.',
   home: 'Madrid',
   places: [
@@ -442,6 +450,7 @@ export const travel = {
     { city: 'Burano', country: 'Italy', lat: 45.4853, lon: 12.417, from: 'Venice' },
     { city: 'Murano', country: 'Italy', lat: 45.458, lon: 12.353, from: 'Burano' },
     { city: 'Vienna', country: 'Austria', lat: 48.2082, lon: 16.3738 },
+    { city: 'Segovia', country: 'Spain', lat: 40.9429, lon: -4.1088 },
   ] as Place[],
 }
 

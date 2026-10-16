@@ -7,6 +7,7 @@ import { MAP_HEIGHT, MAP_WIDTH, otherPath, project, visitedPath } from '../trave
 const STEP = 0.16
 /** Stops closer than this (in map units) to the previous stop on a trip share its pin. */
 const CLUSTER = 14
+const PREVIEW_MAX = 3
 const DRAW = 0.7
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -120,11 +121,14 @@ export function TravelMap({ active, onActive, onOpen }: Props) {
   const current = activeLead ? pinOf(activeLead) : undefined
   const group = activeLead ? groupOf(activeLead) : []
   const shots = photos.filter((ph) => group.some((g) => g.city === ph.place))
+  // The hover preview shows up to three; the rest are counted on the last one.
+  const preview = shots.slice(0, PREVIEW_MAX)
+  const extra = shots.length - preview.length
   const tip = current && { x: ox + current.at[0] * scale, y: oy + current.at[1] * scale }
   const tipBelow = tip ? tip.y < (shots.length ? 210 : 70) : false
   // One photo shows large; two or three sit side by side.
   const tipWidth = Math.min(
-    shots.length === 0 ? 140 : shots.length === 1 ? 200 : shots.length * 110 + 8,
+    preview.length === 0 ? 140 : preview.length === 1 ? 200 : preview.length * 110 + 8,
     box.w - 16,
   )
   const tipLeft = tip ? Math.min(Math.max(tip.x - tipWidth / 2, 8), box.w - tipWidth - 8) : 0
@@ -250,17 +254,23 @@ export function TravelMap({ active, onActive, onOpen }: Props) {
                 bottom: tipBelow ? undefined : box.h - tip.y + 14,
               }}
             >
-              {shots.length > 0 && (
+              {preview.length > 0 && (
                 <div className="flex gap-1 p-1">
-                  {shots.map((ph) => (
-                    <img
-                      key={ph.src}
-                      src={ph.src}
-                      alt=""
-                      width={ph.width}
-                      height={ph.height}
-                      className={`block min-w-0 flex-1 rounded-md object-cover ${shots.length === 1 ? 'h-36' : 'h-32'}`}
-                    />
+                  {preview.map((ph, i) => (
+                    <span key={ph.src} className="relative block min-w-0 flex-1">
+                      <img
+                        src={ph.src}
+                        alt=""
+                        width={ph.width}
+                        height={ph.height}
+                        className={`block w-full rounded-md object-cover ${preview.length === 1 ? 'h-36' : 'h-32'}`}
+                      />
+                      {extra > 0 && i === preview.length - 1 && (
+                        <span className="absolute inset-0 flex items-center justify-center rounded-md bg-black/50 font-mono text-sm font-semibold text-white">
+                          +{extra}
+                        </span>
+                      )}
+                    </span>
                   ))}
                 </div>
               )}
