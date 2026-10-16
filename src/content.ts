@@ -10,7 +10,7 @@ export const site = {
   name: 'Julia Kantzer',
   firstName: 'Julia',
   role: 'AI Solutions, Strategy, and Technical Programs',
-  tagline: 'Turning business problems into AI that works.',
+  tagline: 'Turning AI into impact.',
   location: 'Nashville, TN',
   email: 'juliakantzer@gmail.com',
   linkedin: 'https://www.linkedin.com/in/julia-kantzer/',
