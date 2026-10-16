@@ -25,9 +25,9 @@ Every word on the site lives in `src/content.ts`. Components never hard-code tex
 | `site` | Name, tagline, email, LinkedIn, GitHub, resume path, headshot, site URL |
 | `hero` | The line above your name and the three buttons |
 | `nav` | Header links and the command palette's Navigate group |
-| `about` | More about me: title, intro, and hobbies |
-| `photos` | Photo strip in More about me. A photo whose `place` matches a map city also appears on that pin |
-| `travel` | Places on the travel map in More about me, with coordinates. Arcs fly out from `home` in list order |
+| `about` | Interests section: title, intro, and hobbies |
+| `photos` | Photos shown on the travel map when a city is hovered or tapped. `place` must match a city in `travel` |
+| `travel` | Places on the travel map in Interests, with coordinates. Arcs fly out from `home` in list order |
 | `caseStudies` | Selected work: Pega (2x2 prose sections) and Witness to History (problem, file listing, decision cards, screenshots) |
 | `pegaFlow`, `witnessPipeline` | Steps for the Pega before/after diagram and the Witness content pipeline |
 | `experience` | Timeline roles in resume order. Each `summary` always shows; `bullets` show when expanded |

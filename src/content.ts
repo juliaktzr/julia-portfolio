@@ -41,7 +41,7 @@ export const nav = [
   { label: 'Research', href: '#research' },
   { label: 'Leadership', href: '#leadership' },
   { label: 'Skills', href: '#skills' },
-  { label: 'About', href: '#about' },
+  { label: 'Interests', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -347,20 +347,20 @@ export const education = {
 }
 
 /* -------------------------------------------------------------------------
-   More about me: hobbies, travel map, and photos. Sits near the end of the page.
+   Interests: hobbies and the travel map with photos. Sits near the end of the page.
 ------------------------------------------------------------------------- */
 export const about = {
   id: 'about',
-  eyebrow: 'More about me',
-  title: 'Outside of work.',
+  eyebrow: 'Interests',
+  title: 'Beyond the tech.',
   intro:
-    'I love reading, cooking, traveling, and photography. Here are some of the places I’ve been, from my semester in Madrid and a summer in Boston.',
+    'If you want to know me outside of work, I love reading, cooking, traveling, and photography. Here are some places I explored during my semester in Madrid.',
   hobbies: ['Reading', 'Cooking', 'Traveling', 'Photography'],
 }
 
 export type Photo = { src: string; place: string; alt: string; width: number; height: number }
 
-/** Photo strip under the map. A photo whose `place` matches a map city also shows on that pin. */
+/** Photos shown on the travel map when someone hovers or taps a city. `place` must match a city in `travel`. */
 export const photos: Photo[] = [
   { src: '/photos/madrid-1.webp', place: 'Madrid', alt: 'Spanish flag above pine trees against a clear blue sky', width: 750, height: 1000 },
   { src: '/photos/capri-1.webp', place: 'Capri', alt: 'The Faraglioni rock stacks rising out of the sea off Capri', width: 750, height: 1000 },
@@ -374,8 +374,6 @@ export const photos: Photo[] = [
   { src: '/photos/copenhagen-2.webp', place: 'Copenhagen', alt: 'A yellow arched walkway with a hanging lantern', width: 750, height: 1000 },
   { src: '/photos/vienna-1.webp', place: 'Vienna', alt: 'A quiet Vienna street lined with ornate cream buildings', width: 750, height: 1000 },
   { src: '/photos/vienna-2.webp', place: 'Vienna', alt: 'An ornate stone building under a deep blue sky', width: 750, height: 1000 },
-  { src: '/photos/boston-2.webp', place: 'Boston', alt: 'Benches by the river with sailboats and the city skyline', width: 750, height: 1000 },
-  { src: '/photos/boston-1.webp', place: 'Boston', alt: 'A ball field at golden hour with the city in the distance', width: 750, height: 1000 },
 ]
 
 /* Travel map. Arcs fly out from `home` in list order. */
@@ -385,6 +383,7 @@ export const travel = {
   label: 'Semester abroad',
   title: 'Five months based in Madrid',
   caption: '17 places in 10 countries.',
+  hint: 'Hover or tap a place to see where it is. Places with a camera have photos.',
   home: 'Madrid',
   places: [
     { city: 'Madrid', country: 'Spain', lat: 40.4168, lon: -3.7038 },

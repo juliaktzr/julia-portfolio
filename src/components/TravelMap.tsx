@@ -34,6 +34,24 @@ function useBoxSize() {
   return [ref, size] as const
 }
 
+const hasPhotos = new Set(photos.map((p) => p.place))
+
+function CameraIcon() {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      className="h-3 w-3 opacity-70"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+    >
+      <title>has photos</title>
+      <path d="M2 5.5h2.5L6 3.5h4l1.5 2H14v7H2z" strokeLinejoin="round" />
+      <circle cx="8" cy="9" r="2.2" />
+    </svg>
+  )
+}
+
 type Props = {
   active: string | null
   onActive: (city: string | null) => void
@@ -41,12 +59,23 @@ type Props = {
 
 /**
  * Europe map with arcs flying out from Madrid to every place visited, drawn in
- * list order when scrolled into view. Hovering a pin or a place in the list
- * lights up its arc and shows its name, plus a photo when there is one.
+ * list order when scrolled into view. Hovering or tapping a pin or a place in
+ * the list lights up its arc and shows its name and any photos from there.
  */
 export function TravelMap({ active, onActive }: Props) {
   const reduce = useReducedMotion() ?? false
   const [boxRef, box] = useBoxSize()
+  const figureRef = useRef<HTMLElement>(null)
+
+  // On touch screens there is no mouseleave, so a tap outside the map clears the selection.
+  useEffect(() => {
+    if (!active) return
+    const onDown = (e: PointerEvent) => {
+      if (!figureRef.current?.contains(e.target as Node)) onActive(null)
+    }
+    document.addEventListener('pointerdown', onDown)
+    return () => document.removeEventListener('pointerdown', onDown)
+  }, [active, onActive])
 
   const home = travel.places.find((p) => p.city === travel.home)!
   const origin = project(home.lat, home.lon)
@@ -66,20 +95,27 @@ export function TravelMap({ active, onActive }: Props) {
   const ox = (box.w - MAP_WIDTH * scale) / 2
   const oy = (box.h - MAP_HEIGHT * scale) / 2
   const current = pins.find((p) => p.city === active)
-  const photo = current && photos.find((ph) => ph.place === current.city)
+  const shots = current ? photos.filter((ph) => ph.place === current.city) : []
   const tip = current && { x: ox + current.at[0] * scale, y: oy + current.at[1] * scale }
-  const tipBelow = tip ? tip.y < (photo ? 190 : 70) : false
-  const tipWidth = photo ? 160 : 140
+  const tipBelow = tip ? tip.y < (shots.length ? 210 : 70) : false
+  // One photo shows large; two or three sit side by side.
+  const tipWidth = Math.min(
+    shots.length === 0 ? 140 : shots.length === 1 ? 200 : shots.length * 110 + 8,
+    box.w - 16,
+  )
   const tipLeft = tip ? Math.min(Math.max(tip.x - tipWidth / 2, 8), box.w - tipWidth - 8) : 0
 
   const pinEvents = (city: string) => ({
     onMouseEnter: () => onActive(city),
     onMouseLeave: () => onActive(null),
-    onClick: () => onActive(active === city ? null : city),
+    onClick: () => onActive(city),
   })
 
   return (
-    <figure className="print-hidden overflow-hidden rounded-xl border border-line bg-surface/60">
+    <figure
+      ref={figureRef}
+      className="print-hidden overflow-hidden rounded-xl border border-line bg-surface/60"
+    >
       <div className="grid lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <div ref={boxRef} className="relative border-b border-line bg-bg/60 lg:border-b-0 lg:border-r">
           {/* From lg up the map fills its column, cropping open sea at the sides. */}
@@ -173,16 +209,21 @@ export function TravelMap({ active, onActive }: Props) {
                 bottom: tipBelow ? undefined : box.h - tip.y + 14,
               }}
             >
-              {photo && (
-                <img
-                  src={photo.src}
-                  alt=""
-                  width={photo.width}
-                  height={photo.height}
-                  className="block h-28 w-full object-cover"
-                />
+              {shots.length > 0 && (
+                <div className="flex gap-1 p-1">
+                  {shots.map((ph) => (
+                    <img
+                      key={ph.src}
+                      src={ph.src}
+                      alt=""
+                      width={ph.width}
+                      height={ph.height}
+                      className={`block min-w-0 flex-1 rounded-md object-cover ${shots.length === 1 ? 'h-36' : 'h-32'}`}
+                    />
+                  ))}
+                </div>
               )}
-              <p className="px-3 py-2 leading-tight">
+              <p className="px-3 pt-1.5 pb-2 leading-tight">
                 <span className="block text-sm font-semibold text-text">{current.city}</span>
                 <span className="font-mono text-[11px] text-muted">
                   {current.city === home.city ? 'Home base' : current.country}
@@ -196,6 +237,7 @@ export function TravelMap({ active, onActive }: Props) {
           <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">{travel.label}</p>
           <p className="mt-2 font-display text-2xl font-semibold tracking-tight">{travel.title}</p>
           <p className="mt-1 text-sm text-muted">{travel.caption}</p>
+          <p className="mt-1 text-xs text-muted">{travel.hint}</p>
           <ul className="mt-5 space-y-2.5 text-sm" onMouseLeave={() => onActive(null)}>
             {byCountry.map(({ country, cities }) => (
               <li key={country} className="flex gap-3">
@@ -208,15 +250,16 @@ export function TravelMap({ active, onActive }: Props) {
                       onMouseEnter={() => onActive(p.city)}
                       onFocus={() => onActive(p.city)}
                       onBlur={() => onActive(null)}
-                      onClick={() => onActive(active === p.city ? null : p.city)}
+                      onClick={() => onActive(p.city)}
                       aria-pressed={active === p.city}
-                      className={`rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
+                      className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
                         active === p.city
                           ? 'border-accent bg-accent text-bg'
                           : 'border-line bg-bg/70 text-text hover:border-accent'
                       }`}
                     >
                       {p.city}
+                      {hasPhotos.has(p.city) && <CameraIcon />}
                     </button>
                   ))}
                 </span>
