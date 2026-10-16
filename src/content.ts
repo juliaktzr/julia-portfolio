@@ -365,6 +365,31 @@ export const about = {
   intro:
     'If you want to know me outside of work, I love reading, cooking, traveling, and photography. Here are some places I explored during my semester in Madrid.',
   hobbies: ['Reading', 'Cooking', 'Traveling', 'Photography'],
+  /** Cards under the travel map. */
+  favoriteBook: {
+    label: 'Favorite book',
+    title: 'The Boyfriend',
+    author: 'Freida McFadden',
+    cover: '/photos/book-the-boyfriend.webp',
+    width: 137,
+    height: 219,
+  },
+  favoritePhoto: {
+    label: 'Favorite photo',
+    src: '/photos/interlaken-2.webp',
+    place: 'Interlaken, Switzerland',
+    alt: 'Paragliders on a snowy slope above Alpine peaks and a valley of clouds',
+    width: 750,
+    height: 1000,
+  },
+  languages: {
+    label: 'Languages',
+    items: [
+      { hello: 'Hello', name: 'English', level: 'Native' },
+      { hello: 'Hola', name: 'Spanish', level: 'Professional' },
+      { hello: 'Cześć', name: 'Polish', level: 'Conversational' },
+    ],
+  },
 }
 
 export type Photo = { src: string; place: string; alt: string; width: number; height: number }
@@ -385,8 +410,8 @@ export const photos: Photo[] = [
   { src: '/photos/vienna-2.webp', place: 'Vienna', alt: 'An ornate stone building under a deep blue sky', width: 750, height: 1000 },
 ]
 
-/* Travel map. Arcs fly out from `home` in list order. */
-export type Place = { city: string; country: string; lat: number; lon: number }
+/* Travel map. Arcs fly out from `home` in list order, or from `from` when a place was part of a longer trip. */
+export type Place = { city: string; country: string; lat: number; lon: number; from?: string }
 
 export const travel = {
   label: 'Semester abroad',
@@ -409,8 +434,8 @@ export const travel = {
     { city: 'Capri', country: 'Italy', lat: 40.5532, lon: 14.2222 },
     { city: 'Mallorca', country: 'Spain', lat: 39.5696, lon: 2.6502 },
     { city: 'Venice', country: 'Italy', lat: 45.4408, lon: 12.3155 },
-    { city: 'Burano', country: 'Italy', lat: 45.4853, lon: 12.417 },
-    { city: 'Murano', country: 'Italy', lat: 45.458, lon: 12.353 },
+    { city: 'Burano', country: 'Italy', lat: 45.4853, lon: 12.417, from: 'Venice' },
+    { city: 'Murano', country: 'Italy', lat: 45.458, lon: 12.353, from: 'Burano' },
     { city: 'Vienna', country: 'Austria', lat: 48.2082, lon: 16.3738 },
   ] as Place[],
 }

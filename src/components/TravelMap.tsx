@@ -82,7 +82,11 @@ export function TravelMap({ active, onActive }: Props) {
   const pins = travel.places.map((p) => ({ ...p, at: project(p.lat, p.lon) }))
   const trips = pins
     .filter((p) => p.city !== home.city)
-    .map((p, i) => ({ ...p, d: arc(origin, p.at), delay: 0.3 + i * STEP }))
+    .map((p, i) => {
+      // Legs of a longer trip start from the previous stop instead of home.
+      const start = (p.from && pins.find((q) => q.city === p.from)?.at) || origin
+      return { ...p, d: arc(start, p.at), delay: 0.3 + i * STEP }
+    })
 
   const countries = [...new Set(travel.places.map((p) => p.country))]
   const byCountry = countries.map((c) => ({
