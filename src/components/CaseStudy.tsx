@@ -234,29 +234,46 @@ function Screenshots({ shots }: { shots: CaseStudyScreenshot[] }) {
   )
 }
 
-/** Compact cards for smaller projects, after the full case studies. A lone card spans the full width. */
+/**
+ * Compact cards for smaller projects, after the full case studies: problem,
+ * solution, and product decisions, with a screenshot when there is one.
+ */
 function SideProjects() {
-  const single = sideProjects.items.length === 1
   return (
     <div className="mt-20 border-t border-line pt-10">
       <h3 className="mb-5 font-mono text-xs uppercase tracking-[0.18em] text-accent-ink">
         <span aria-hidden="true">// </span>
         {sideProjects.title}
       </h3>
-      <div className={`grid gap-4 ${single ? '' : 'md:grid-cols-2'}`}>
+      <div className="grid gap-4">
         {sideProjects.items.map((p) => (
           <article
             key={p.name}
-            className={`grid gap-x-10 gap-y-4 rounded-xl border border-line bg-surface/60 p-5 sm:p-6 ${
-              single ? 'md:grid-cols-2' : ''
+            className={`grid gap-x-10 gap-y-6 rounded-xl border border-line bg-surface/60 p-5 sm:p-6 ${
+              p.image ? 'md:grid-cols-[minmax(0,1fr)_16rem]' : 'md:grid-cols-2'
             }`}
           >
             <div>
               <p className="font-mono text-xs text-muted">
                 {p.kind} · {p.period}
               </p>
-              <h4 className="mt-2 font-display text-xl font-semibold">{p.name}</h4>
-              <p className="mt-2 leading-relaxed text-muted">{p.summary}</p>
+              <h4 className="mt-2 font-display text-2xl font-semibold">{p.name}</h4>
+              <p className="mt-1 text-text">{p.tagline}</p>
+              <dl className="mt-5 space-y-4 leading-relaxed">
+                <div>
+                  <dt className="mb-1 font-mono text-[11px] uppercase tracking-[0.18em] text-accent-2">
+                    Problem
+                  </dt>
+                  <dd className="text-muted">{p.problem}</dd>
+                </div>
+                <div>
+                  <dt className="mb-1 font-mono text-[11px] uppercase tracking-[0.18em] text-accent-ink">
+                    Fix
+                  </dt>
+                  <dd className="text-muted">{p.solution}</dd>
+                </div>
+              </dl>
+              {p.image && <Decisions items={p.decisions} />}
               <ul className="mt-5 flex flex-wrap gap-2">
                 {p.stack.map((t) => (
                   <li key={t}>
@@ -265,20 +282,37 @@ function SideProjects() {
                 ))}
               </ul>
             </div>
-            <ul className="space-y-2 self-center text-sm leading-relaxed text-muted">
-              {p.points.map((pt) => (
-                <li key={pt} className="flex gap-3">
-                  <span
-                    aria-hidden="true"
-                    className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-2"
-                  />
-                  <span>{pt}</span>
-                </li>
-              ))}
-            </ul>
+            {p.image ? (
+              <img
+                src={p.image.src}
+                alt={p.image.alt}
+                width={p.image.width}
+                height={p.image.height}
+                loading="lazy"
+                className="mx-auto w-full max-w-64 self-start rounded-xl border border-line shadow-lg"
+              />
+            ) : (
+              <Decisions items={p.decisions} />
+            )}
           </article>
         ))}
       </div>
+    </div>
+  )
+}
+
+function Decisions({ items }: { items: string[] }) {
+  return (
+    <div className="mt-5 md:mt-0">
+      <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Product decisions</p>
+      <ul className="space-y-2 text-sm leading-relaxed text-muted">
+        {items.map((d) => (
+          <li key={d} className="flex gap-3">
+            <span aria-hidden="true" className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-2" />
+            <span>{d}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

@@ -99,9 +99,14 @@ export type SideProject = {
   name: string
   kind: string
   period: string
-  summary: string
-  points: string[]
+  /** One line under the name that says what it is for. */
+  tagline: string
+  problem: string
+  solution: string
+  /** Product decisions, shown as a short list. */
+  decisions: string[]
   stack: string[]
+  image?: { src: string; alt: string; width: number; height: number }
 }
 
 export const sideProjects = {
@@ -111,13 +116,16 @@ export const sideProjects = {
       name: 'Applied',
       kind: 'Chrome extension',
       period: 'October 2026',
-      summary:
-        'A Chrome extension that tracks my job applications on its own. It logs the postings I open, marks them as applied when a confirmation page shows up, and keeps a status tracker in the toolbar.',
-      points: [
-        'Picks up postings on Workday, LinkedIn, Handshake, Greenhouse, Lever, Ashby, and most company career pages',
-        'Switches a job to Applied when it sees a confirmation like “Thank you for applying”',
-        'Statuses for interviews, offers, and rejections, plus search and CSV export',
-        'No account and no server. Everything stays in the browser',
+      tagline: 'A job tracker that fills itself in.',
+      problem:
+        'Keeping a job tracker meant clicking away from every posting to a separate page and copying the title, company, and link over by hand. That extra step was easy to skip.',
+      solution:
+        'Applied removes the step. It notices job postings as I browse and marks them as applied when a confirmation page shows up, so the tracker updates itself. I only open it to change a status.',
+      decisions: [
+        'Automatic first: detects postings on Workday, LinkedIn, Handshake, Greenhouse, Lever, Ashby, and most company career pages',
+        'A one-click “Mark this page as applied” for anything detection misses',
+        'Counts for applied, interviews, offers, and rejections, so the whole pipeline is visible at a glance',
+        'No account and no server, so there’s nothing to sign up for and job data never leaves the browser',
       ],
       stack: ['JavaScript', 'Chrome Manifest V3', 'chrome.storage'],
     },
