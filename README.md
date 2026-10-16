@@ -28,8 +28,8 @@ Every word on the site lives in `src/content.ts`. Components never hard-code tex
 | `about` | Interests section: title, intro, hobbies, favorite photos and book, and languages |
 | `photos` | Photos shown on the travel map when a city is hovered or tapped. `place` must match a city in `travel` |
 | `travel` | Places on the travel map in Interests, with coordinates. Arcs fly out from `home` in list order, or from `from` for legs of a longer trip |
-| `caseStudies` | Selected work: Pega (2x2 prose sections) and Witness to History (problem, file listing, decision cards, screenshots) |
-| `pegaFlow`, `witnessPipeline` | Steps for the Pega before/after diagram and the Witness content pipeline |
+| `caseStudies` | Selected work: Pega (2x2 prose sections) and Witness to History (problem, file listing and progress note, decision cards, screenshots) |
+| `pegaFlow` | Steps for the Pega before/after diagram |
 | `experience` | Timeline roles in resume order. Each `summary` always shows; `bullets` show when expanded |
 | `education` | Schools, degrees, and logo paths |
 | `research`, `leadership`, `skills`, `interests`, `contact` | The remaining sections |

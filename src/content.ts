@@ -76,17 +76,16 @@ export type CaseStudy = {
   /** Compact layout: problem line, file listing, tradeoff cards. Used by Witness. */
   problem?: string
   builtIntro?: string
-  /** Shown under "What I built" as "My part". */
-  contribution?: string
-  /** Shown under "My part" as "Where it stands": what is done and what is next. */
+  /** Shown under the file listing as "Where it stands": what is done and what is next. */
   progress?: { done: string; next: string }
   built?: CaseStudyFile[]
   decisionsIntro?: string
   decisions?: CaseStudyDecision[]
-  /** Shown in a row between the decision cards and the diagram. */
+  /** Shown in a row after the decision cards. */
   screenshots?: CaseStudyScreenshot[]
   stack: string[]
-  diagram: 'flow' | 'pipeline'
+  /** Pega's before and after diagram. */
+  diagram?: 'flow'
 }
 
 export const work = {
@@ -111,17 +110,6 @@ export const pegaFlow = {
     steps: ['Answer questions in a guided chat', 'Python engine runs the model', 'Get results in one session'],
     time: 'Under 40 minutes, within 5% of legacy',
   },
-}
-
-/** Content pipeline for Witness to History. The validator is the point of the story. */
-export const witnessPipeline = {
-  steps: [
-    { label: 'Google Sheet', note: 'Teammates write dialogue, sources, and outcomes' },
-    { label: 'CSV', note: 'Exported from the sheet' },
-    { label: 'Validator', note: 'Checks every link and explains errors in plain English', highlight: true },
-    { label: 'JSON', note: 'One file per scenario' },
-    { label: 'Game', note: 'Runs in the browser, no install or login' },
-  ],
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -170,9 +158,7 @@ export const caseStudies: CaseStudy[] = [
     problem:
       'Students usually learn how history turned out before they learn what people were deciding, so every choice looks obvious. Our team of four Education students and two engineers wanted students to feel how uncertain those choices were at the time.',
     builtIntro:
-      'I led the engineering. The game runs in any browser with nothing to install and no login, so it works on a school Chromebook. A student picks a time period, talks with two or three people through branching dialogue, makes one decision, and then sees the outcome next to what really happened.',
-    contribution:
-      'I built the game engine, the pipeline that turns the team’s spreadsheet into game content, the dialogue and source panels, read-aloud, the town map, the title screen and character creator, and the deployment. The Education team researched, wrote, and sourced every scenario.',
+      'I led the engineering and built the game engine, the content pipeline, and the interface. The game runs in any browser with nothing to install and no login, so it works on a school Chromebook. A student picks a time period, talks with two or three people through branching dialogue, makes one decision, and then sees the outcome next to what really happened. The Education team researched, wrote, and sourced every scenario.',
     progress: {
       done: 'The game engine, content pipeline, dialogue and sources, read-aloud, town map, and character creator all work in the live build.',
       next: 'More scenarios and polish before the course ends in December.',
@@ -187,7 +173,7 @@ export const caseStudies: CaseStudy[] = [
       { name: 'a11y/', desc: 'Read-aloud, full keyboard navigation, and alt text on every image' },
       { name: 'deploy/', desc: 'Static site on Vercel. No backend and no running costs' },
     ],
-    decisionsIntro: 'Five decisions that have shaped the project so far.',
+    decisionsIntro: 'Three decisions that have shaped the project so far.',
     decisions: [
       {
         chose: 'Get one decision working in one scenario first',
@@ -198,16 +184,6 @@ export const caseStudies: CaseStudy[] = [
         chose: 'An engine that loads any scenario from a single file',
         over: 'Hardcoding the first scenario, which is faster once but slow to change',
         why: 'The Education team can add and edit scenarios without waiting on an engineer.',
-      },
-      {
-        chose: 'Everyone works on one scenario, each with a clear job',
-        over: 'Each person writing a scenario of their own',
-        why: 'We wanted feedback on the format before splitting up the work.',
-      },
-      {
-        chose: 'Error checking built into the tool',
-        over: 'A shared doc of formatting rules',
-        why: 'Someone who doesn’t code can’t track down a broken link between scenes on their own.',
       },
       {
         chose: 'Composite characters, with a source for every fact',
@@ -232,7 +208,6 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     stack: ['React', 'Vite', 'Web Speech API', 'Google Sheets', 'Vercel', 'No backend'],
-    diagram: 'pipeline',
   },
 ]
 

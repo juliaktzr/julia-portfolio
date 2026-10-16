@@ -2,7 +2,6 @@ import type { CSSProperties } from 'react'
 import { caseStudies, work, type CaseStudy as CaseStudyData, type CaseStudyScreenshot } from '../content'
 import { ButtonLink } from './Button'
 import { FlowDiagram } from './FlowDiagram'
-import { PipelineDiagram } from './PipelineDiagram'
 import { Section, Tag } from './Section'
 
 export function CaseStudy() {
@@ -60,7 +59,11 @@ function CaseStudyArticle({ study }: { study: CaseStudyData }) {
       {study.built && <CompactSections study={study} />}
       {study.screenshots && <Screenshots shots={study.screenshots} />}
 
-      <div className="mt-10">{study.diagram === 'flow' ? <FlowDiagram /> : <PipelineDiagram />}</div>
+      {study.diagram === 'flow' && (
+        <div className="mt-10">
+          <FlowDiagram />
+        </div>
+      )}
 
       <div className="mt-8">
         <h4 className="mb-3 font-display text-xl font-semibold">Stack</h4>
@@ -113,20 +116,38 @@ function CompactSections({ study }: { study: CaseStudyData }) {
           <p className="leading-relaxed text-muted">{study.problem}</p>
           <h4 className="mb-2 mt-8 font-display text-xl font-semibold">What I built</h4>
           <p className="leading-relaxed text-muted">{study.builtIntro}</p>
-          {study.contribution && (
-            <>
-              <h5 className="mb-2 mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-accent-ink">
-                My part
-              </h5>
-              <p className="leading-relaxed text-muted">{study.contribution}</p>
-            </>
-          )}
+        </div>
+
+        {/* File listing with the progress note under it, so the two columns end close together. */}
+        <div className="flex flex-col gap-4">
+          <div className="overflow-hidden rounded-xl border border-line bg-surface/70">
+            <div className="print-hidden flex items-center gap-2 border-b border-line px-4 py-2.5">
+              <span className="h-2.5 w-2.5 rounded-full bg-accent/80" aria-hidden="true" />
+              <span className="h-2.5 w-2.5 rounded-full bg-accent-2/70" aria-hidden="true" />
+              <span className="h-2.5 w-2.5 rounded-full bg-muted/50" aria-hidden="true" />
+              <span className="ml-2 font-mono text-[11px] text-muted">witness-to-history</span>
+            </div>
+            <div className="px-4 py-4 font-mono text-sm sm:px-5">
+              <p className="mb-3 text-muted" aria-hidden="true">
+                <span className="text-accent-ink">❯</span> ls src/
+              </p>
+              <dl className="space-y-2.5">
+                {study.built?.map((f) => (
+                  <div key={f.name} className="grid grid-cols-[6.5rem_1fr] gap-3 sm:grid-cols-[7rem_1fr]">
+                    <dt className="text-accent-ink">{f.name}</dt>
+                    <dd className="font-sans text-sm leading-snug text-text">{f.desc}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
           {study.progress && (
-            <>
-              <h5 className="mb-2 mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-accent-ink">
+            <div className="rounded-xl border border-line bg-surface/40 p-4 sm:p-5">
+              <h5 className="mb-3 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-accent-ink">
+                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
                 Where it stands
               </h5>
-              <dl className="space-y-2 leading-relaxed text-muted">
+              <dl className="space-y-2 text-sm leading-relaxed text-muted">
                 <div>
                   <dt className="inline font-medium text-text">Done: </dt>
                   <dd className="inline">{study.progress.done}</dd>
@@ -136,37 +157,15 @@ function CompactSections({ study }: { study: CaseStudyData }) {
                   <dd className="inline">{study.progress.next}</dd>
                 </div>
               </dl>
-            </>
+            </div>
           )}
-        </div>
-
-        <div className="self-start overflow-hidden rounded-xl border border-line bg-surface/70">
-          <div className="print-hidden flex items-center gap-2 border-b border-line px-4 py-2.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-accent/80" aria-hidden="true" />
-            <span className="h-2.5 w-2.5 rounded-full bg-accent-2/70" aria-hidden="true" />
-            <span className="h-2.5 w-2.5 rounded-full bg-muted/50" aria-hidden="true" />
-            <span className="ml-2 font-mono text-[11px] text-muted">witness-to-history</span>
-          </div>
-          <div className="px-4 py-4 font-mono text-sm sm:px-5">
-            <p className="mb-3 text-muted" aria-hidden="true">
-              <span className="text-accent-ink">❯</span> ls src/
-            </p>
-            <dl className="space-y-2.5">
-              {study.built?.map((f) => (
-                <div key={f.name} className="grid grid-cols-[6.5rem_1fr] gap-3 sm:grid-cols-[7rem_1fr]">
-                  <dt className="text-accent-ink">{f.name}</dt>
-                  <dd className="font-sans text-sm leading-snug text-text">{f.desc}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
         </div>
       </div>
 
       <div className="mt-10 print:mt-4">
         <h4 className="mb-2 font-display text-xl font-semibold">How I decided</h4>
         <p className="mb-5 max-w-2xl leading-relaxed text-muted">{study.decisionsIntro}</p>
-        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 print:grid-cols-3">
+        <ol className="grid gap-3 md:grid-cols-3 print:grid-cols-3">
           {study.decisions?.map((d, i) => (
             <li
               key={d.chose}
