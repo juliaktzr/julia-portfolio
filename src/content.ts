@@ -157,7 +157,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 'work-witness',
     company: 'Witness to History',
-    role: 'Lead engineer, six-person team (2\u00A0CS,\u00A04\u00A0Education) · CS 3892, Vanderbilt',
+    role: 'Lead engineer',
     period: 'August 2026 to December 2026',
     status: 'In progress',
     title: 'A history game where students make the decisions',
