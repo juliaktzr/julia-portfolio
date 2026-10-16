@@ -568,7 +568,7 @@ export const skills = {
   groups: [
     {
       name: 'Technical',
-      items: ['Python', 'Java', 'C++', 'C', 'HTML/CSS', 'ReactJS', 'Git', 'Linux', 'MATLAB', 'Kubernetes'],
+      items: ['Python', 'Java', 'C++', 'C', 'HTML/CSS', 'ReactJS', 'Git', 'Linux', 'MATLAB'],
     },
     {
       name: 'AI',

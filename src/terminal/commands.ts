@@ -62,6 +62,9 @@ export const COMMAND_NAMES = COMMANDS.map((c) => c.name)
 
 const sections = nav.map((n) => ({ id: n.href.slice(1), label: n.label }))
 
+/** Stack words left out of hangman. */
+const HANGMAN_SKIP = new Set(['Vite'])
+
 /** Words for hangman, all pulled from site content. Single words only, first hint wins on repeats. */
 const wordBank: WordBank = dedupe([
   ...skills.groups.flatMap((g) =>
@@ -71,15 +74,25 @@ const wordBank: WordBank = dedupe([
       .map((w) => ({ word: w, hint: `${g.name} skill` })),
   ),
   ...about.languages.items.map((l) => ({ word: l.name, hint: 'A language I speak' })),
+  ...about.hobbies.map((h) => ({ word: h, hint: 'A hobby of mine' })),
   { word: 'Vanderbilt', hint: 'Where I study' },
   { word: 'Nashville', hint: 'City I study in' },
   { word: 'Madrid', hint: 'Where I studied abroad' },
   { word: 'Pegasystems', hint: 'Where I am now' },
-  { word: 'espresso', hint: 'Half of this color palette' },
-  { word: 'Fraunces', hint: 'The font my name is set in' },
+  { word: 'Boston', hint: 'Where I spent my summer at Pega' },
+  { word: 'Consulting', hint: 'A kind of role I’m looking for' },
+  { word: 'Strategy', hint: 'A kind of role I’m looking for' },
+  { word: 'Applied', hint: 'The Chrome extension I built' },
+  { word: 'McFadden', hint: 'My favorite author' },
+  { word: 'Interlaken', hint: 'Where my favorite photo was taken' },
+  { word: 'Positano', hint: 'I took a boat from here to Capri' },
+  { word: 'Segovia', hint: 'A city near Madrid I visited' },
+  { word: 'Budapest', hint: 'A city I visited in Hungary' },
+  { word: 'Copenhagen', hint: 'A city I visited in Denmark' },
+  { word: 'Crete', hint: 'A Greek island I visited' },
   ...caseStudies.flatMap((c) =>
     c.stack
-      .filter((w) => /^[A-Za-z]{4,}$/.test(w))
+      .filter((w) => /^[A-Za-z]{4,}$/.test(w) && !HANGMAN_SKIP.has(w))
       .map((w) => ({ word: w, hint: `In the ${c.company} stack` })),
   ),
 ])
