@@ -41,6 +41,7 @@ export const nav = [
   { label: 'Research', href: '#research' },
   { label: 'Leadership', href: '#leadership' },
   { label: 'Skills', href: '#skills' },
+  { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -346,8 +347,38 @@ export const education = {
 }
 
 /* -------------------------------------------------------------------------
-   Travel map (shown under Education). Arcs fly out from `home` in list order.
+   More about me: hobbies, travel map, and photos. Sits near the end of the page.
 ------------------------------------------------------------------------- */
+export const about = {
+  id: 'about',
+  eyebrow: 'More about me',
+  title: 'Outside of work.',
+  intro:
+    'I love reading, cooking, traveling, and photography. Here are some of the places I’ve been, from my semester in Madrid and a summer in Boston.',
+  hobbies: ['Reading', 'Cooking', 'Traveling', 'Photography'],
+}
+
+export type Photo = { src: string; place: string; alt: string; width: number; height: number }
+
+/** Photo strip under the map. A photo whose `place` matches a map city also shows on that pin. */
+export const photos: Photo[] = [
+  { src: '/photos/madrid-1.webp', place: 'Madrid', alt: 'Spanish flag above pine trees against a clear blue sky', width: 750, height: 1000 },
+  { src: '/photos/capri-1.webp', place: 'Capri', alt: 'The Faraglioni rock stacks rising out of the sea off Capri', width: 750, height: 1000 },
+  { src: '/photos/capri-2.webp', place: 'Capri', alt: 'A pebble cove with turquoise water below limestone cliffs', width: 750, height: 1000 },
+  { src: '/photos/crete-1.webp', place: 'Crete', alt: 'Three friends waving from ATVs above a green mountain valley', width: 1000, height: 750 },
+  { src: '/photos/budapest-1.webp', place: 'Budapest', alt: 'The Hungarian Parliament lit up gold at night across the Danube', width: 563, height: 1000 },
+  { src: '/photos/interlaken-2.webp', place: 'Interlaken', alt: 'Paragliders on a snowy slope above Alpine peaks and a valley of clouds', width: 750, height: 1000 },
+  { src: '/photos/interlaken-1.webp', place: 'Interlaken', alt: 'Footprints across fresh snow with the sun low over the Alps', width: 750, height: 1000 },
+  { src: '/photos/interlaken-3.webp', place: 'Interlaken', alt: 'A paraglider drifting under storm clouds over a snowy ridge', width: 750, height: 1000 },
+  { src: '/photos/copenhagen-1.webp', place: 'Copenhagen', alt: 'Colorful canal houses and boats reflected in the water', width: 750, height: 1000 },
+  { src: '/photos/copenhagen-2.webp', place: 'Copenhagen', alt: 'A yellow arched walkway with a hanging lantern', width: 750, height: 1000 },
+  { src: '/photos/vienna-1.webp', place: 'Vienna', alt: 'A quiet Vienna street lined with ornate cream buildings', width: 750, height: 1000 },
+  { src: '/photos/vienna-2.webp', place: 'Vienna', alt: 'An ornate stone building under a deep blue sky', width: 750, height: 1000 },
+  { src: '/photos/boston-2.webp', place: 'Boston', alt: 'Benches by the river with sailboats and the city skyline', width: 750, height: 1000 },
+  { src: '/photos/boston-1.webp', place: 'Boston', alt: 'A ball field at golden hour with the city in the distance', width: 750, height: 1000 },
+]
+
+/* Travel map. Arcs fly out from `home` in list order. */
 export type Place = { city: string; country: string; lat: number; lon: number }
 
 export const travel = {

@@ -20,7 +20,7 @@ export function Nav({ theme, onToggleTheme, onOpenPalette }: Props) {
           {site.name}
           <span className="text-accent">.</span>
         </a>
-        <nav aria-label="Primary" className="hidden items-center gap-6 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex">
           {nav.map((item) => (
             <a
               key={item.href}

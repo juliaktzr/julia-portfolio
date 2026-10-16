@@ -1,5 +1,6 @@
 import { LazyMotion, domAnimation } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
+import { AboutMe } from './components/AboutMe'
 import { CaseStudy } from './components/CaseStudy'
 import { CommandPalette } from './components/CommandPalette'
 import { Contact, Footer } from './components/Contact'
@@ -60,6 +61,7 @@ export default function App() {
         <Research />
         <Leadership />
         <Skills />
+        <AboutMe />
         <Interests />
         <Contact />
       </main>

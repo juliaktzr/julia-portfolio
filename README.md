@@ -25,7 +25,9 @@ Every word on the site lives in `src/content.ts`. Components never hard-code tex
 | `site` | Name, tagline, email, LinkedIn, GitHub, resume path, headshot, site URL |
 | `hero` | The line above your name and the three buttons |
 | `nav` | Header links and the command palette's Navigate group |
-| `travel` | Places on the travel map under Education, with coordinates. Arcs fly out from `home` in list order |
+| `about` | More about me: title, intro, and hobbies |
+| `photos` | Photo strip in More about me. A photo whose `place` matches a map city also appears on that pin |
+| `travel` | Places on the travel map in More about me, with coordinates. Arcs fly out from `home` in list order |
 | `caseStudies` | Selected work: Pega (2x2 prose sections) and Witness to History (problem, file listing, decision cards, screenshots) |
 | `pegaFlow`, `witnessPipeline` | Steps for the Pega before/after diagram and the Witness content pipeline |
 | `experience` | Timeline roles in resume order. Each `summary` always shows; `bullets` show when expanded |
@@ -35,6 +37,8 @@ Every word on the site lives in `src/content.ts`. Components never hard-code tex
 **Resume:** replace `public/JuliaKantzerResume.pdf` (keep the name, since it is what visitors save it as). The download button and the terminal `resume` command point at it.
 
 **Headshot:** replace `public/headshot.jpg` with a square image, 800px or larger.
+
+**Photos:** `public/photos/`. WebP, about 1000px on the long edge, with location metadata stripped.
 
 **Screenshots:** `public/work/`. Case study images, referenced from `screenshots` in `caseStudies`. Give each its real `width` and `height` so the page does not shift while it loads.
 
