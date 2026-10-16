@@ -106,6 +106,7 @@ export type SideProject = {
   /** Product decisions, shown as a short list. */
   decisions: string[]
   stack: string[]
+  links?: CaseStudyLink[]
   image?: { src: string; alt: string; width: number; height: number }
 }
 
@@ -128,6 +129,7 @@ export const sideProjects = {
         'No account and no server, so there’s nothing to sign up for and job data never leaves the browser',
       ],
       stack: ['JavaScript', 'Chrome Manifest V3', 'chrome.storage'],
+      links: [{ label: 'Source', href: 'https://github.com/juliaktzr/applied-tracker', kind: 'secondary' }],
       image: {
         src: '/work/applied-popup.webp',
         alt: 'The Applied popup showing counts for applied, interviews, offers, and rejections above a list of tracked jobs, with job details blurred',

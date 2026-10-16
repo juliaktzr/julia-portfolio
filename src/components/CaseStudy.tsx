@@ -259,6 +259,15 @@ function SideProjects() {
               </p>
               <h4 className="mt-2 font-display text-2xl font-semibold">{p.name}</h4>
               <p className="mt-1 text-text">{p.tagline}</p>
+              {p.links && (
+                <div className="print-hidden mt-4 flex flex-wrap gap-3">
+                  {p.links.map((l) => (
+                    <ButtonLink key={l.href} href={l.href} kind={l.kind} external>
+                      {l.label}
+                    </ButtonLink>
+                  ))}
+                </div>
+              )}
               <dl className="mt-5 space-y-4 leading-relaxed">
                 <div>
                   <dt className="mb-1 font-mono text-[11px] uppercase tracking-[0.18em] text-accent-2">
