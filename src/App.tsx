@@ -61,8 +61,8 @@ export default function App() {
         <Research />
         <Leadership />
         <Skills />
-        <AboutMe />
         <Interests />
+        <AboutMe />
         <Contact />
       </main>
       <Footer />
