@@ -19,7 +19,7 @@ export const site = {
   resumeFilename: 'JuliaKantzerResume.pdf', // name the browser saves the download as
   headshot: '/headshot.jpg',
   headshotAlt: 'Julia Kantzer smiling, wearing a dark blazer',
-  siteUrl: 'https://juliakantzer.com',
+  siteUrl: 'https://www.juliakantzer.com',
   description:
     'Julia Kantzer studies CS and Applied Math at Vanderbilt and builds AI tools at Pegasystems, where her team now sizes infrastructure in under 40 minutes instead of 40 hours.',
 }
