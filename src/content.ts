@@ -396,7 +396,7 @@ export const photos: Photo[] = [
   { src: '/photos/madrid-1.webp', place: 'Madrid', alt: 'Spanish flag above pine trees against a clear blue sky', width: 750, height: 1000 },
   { src: '/photos/capri-1.webp', place: 'Capri', alt: 'The Faraglioni rock stacks rising out of the sea off Capri', width: 750, height: 1000 },
   { src: '/photos/capri-2.webp', place: 'Capri', alt: 'A pebble cove with turquoise water below limestone cliffs', width: 750, height: 1000 },
-  { src: '/photos/capri-3.webp', place: 'Capri', alt: 'A cliffside town stepping down to a blue bay under a clear sky', width: 562, height: 1000 },
+  { src: '/photos/positano-1.webp', place: 'Positano', alt: 'A cliffside town stepping down to a blue bay under a clear sky', width: 562, height: 1000 },
   { src: '/photos/venice-1.webp', place: 'Venice', alt: 'A quiet canal lined with boats and faded yellow and red buildings, with a brick bridge ahead', width: 562, height: 1000 },
   { src: '/photos/burano-1.webp', place: 'Burano', alt: 'Brightly painted houses reflected in a canal', width: 750, height: 1000 },
   { src: '/photos/burano-2.webp', place: 'Burano', alt: 'A row of colorful houses along a canal with small boats moored', width: 750, height: 1000 },
@@ -422,7 +422,7 @@ export const travel = {
   label: 'Semester abroad',
   title: 'Five months based in Madrid',
   caption: '17 places in 10 countries.',
-  hint: 'Hover or tap a place to see where it is. Places with a camera have photos.',
+  hint: 'Hover a place to see where it is. Click one with a camera to open its photos.',
   home: 'Madrid',
   places: [
     { city: 'Madrid', country: 'Spain', lat: 40.4168, lon: -3.7038 },

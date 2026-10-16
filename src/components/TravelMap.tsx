@@ -1,6 +1,7 @@
 import { m, useReducedMotion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { photos, travel } from '../content'
+import type { Gallery } from './PhotoViewer'
 import { MAP_HEIGHT, MAP_WIDTH, otherPath, project, visitedPath } from '../travel/europeMap'
 
 const STEP = 0.16
@@ -57,6 +58,8 @@ function CameraIcon() {
 type Props = {
   active: string | null
   onActive: (city: string | null) => void
+  /** Opens the photo viewer for a city's trip. Only called when there are photos. */
+  onOpen: (gallery: Gallery) => void
 }
 
 /**
@@ -64,7 +67,7 @@ type Props = {
  * list order when scrolled into view. Hovering or tapping a pin or a place in
  * the list lights up its arc and shows its name and any photos from there.
  */
-export function TravelMap({ active, onActive }: Props) {
+export function TravelMap({ active, onActive, onOpen }: Props) {
   const reduce = useReducedMotion() ?? false
   const [boxRef, box] = useBoxSize()
   const figureRef = useRef<HTMLElement>(null)
@@ -126,10 +129,25 @@ export function TravelMap({ active, onActive }: Props) {
   )
   const tipLeft = tip ? Math.min(Math.max(tip.x - tipWidth / 2, 8), box.w - tipWidth - 8) : 0
 
+  // Clicking a place selects it and, when its trip has photos, opens them full size.
+  const select = (city: string) => {
+    onActive(city)
+    const grp = groupOf(leadOf(city))
+    const shots = photos.filter((ph) => grp.some((g) => g.city === ph.place))
+    if (!shots.length) return
+    const first = shots.findIndex((ph) => ph.place === city)
+    onOpen({
+      title: grp.map((g) => g.city).join(', '),
+      subtitle: city === home.city ? 'Home base' : pinOf(city).country,
+      photos: shots,
+      start: Math.max(first, 0),
+    })
+  }
+
   const pinEvents = (city: string) => ({
     onMouseEnter: () => onActive(city),
     onMouseLeave: () => onActive(null),
-    onClick: () => onActive(city),
+    onClick: () => select(city),
   })
 
   return (
@@ -275,7 +293,7 @@ export function TravelMap({ active, onActive }: Props) {
                       onMouseEnter={() => onActive(p.city)}
                       onFocus={() => onActive(p.city)}
                       onBlur={() => onActive(null)}
-                      onClick={() => onActive(p.city)}
+                      onClick={() => select(p.city)}
                       aria-pressed={active === p.city}
                       className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
                         active === p.city

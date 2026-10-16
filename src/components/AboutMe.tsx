@@ -1,5 +1,6 @@
-import { lazy, Suspense, useRef, useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { about } from '../content'
+import { PhotoViewer, type Gallery } from './PhotoViewer'
 import { Section } from './Section'
 
 // The basemap is about 60 KB of path data, so it loads in its own chunk.
@@ -8,6 +9,7 @@ const TravelMap = lazy(() => import('./TravelMap').then((mod) => ({ default: mod
 /** Hobbies, the travel map, and favorites. Photos live on the map, shown per city. */
 export function AboutMe() {
   const [active, setActive] = useState<string | null>(null)
+  const [gallery, setGallery] = useState<Gallery | null>(null)
 
   return (
     <Section id={about.id} eyebrow={about.eyebrow} title={about.title} intro={about.intro}>
@@ -27,10 +29,11 @@ export function AboutMe() {
           <div className="print-hidden aspect-[10/7] rounded-xl border border-line lg:aspect-[1.83/1]" />
         }
       >
-        <TravelMap active={active} onActive={setActive} />
+        <TravelMap active={active} onActive={setActive} onOpen={setGallery} />
       </Suspense>
 
-      <Favorites />
+      <Favorites onOpen={setGallery} />
+      <PhotoViewer gallery={gallery} onClose={() => setGallery(null)} />
     </Section>
   )
 }
@@ -38,9 +41,8 @@ export function AboutMe() {
 const cardLabel = 'font-mono text-xs uppercase tracking-[0.18em] text-muted'
 
 /** Favorite photo on the left, with favorite book and languages stacked beside it. */
-function Favorites() {
+function Favorites({ onOpen }: { onOpen: (gallery: Gallery) => void }) {
   const { favoritePhoto: photo, favoriteBook: book, languages } = about
-  const dialog = useRef<HTMLDialogElement>(null)
 
   return (
     <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -48,7 +50,9 @@ function Favorites() {
         {/* Absolutely placed so the cards beside it, not the photo, set the row height. */}
         <button
           type="button"
-          onClick={() => dialog.current?.showModal()}
+          onClick={() =>
+            onOpen({ title: photo.label, subtitle: photo.place, photos: [{ ...photo, place: photo.place }] })
+          }
           className="group relative block h-64 w-full cursor-zoom-in md:h-auto md:min-h-56 md:flex-1"
         >
           <img
@@ -89,32 +93,6 @@ function Favorites() {
           ))}
         </ul>
       </div>
-
-      {/* Full photo at its own proportions. Esc, the close button, or a click outside closes it. */}
-      <dialog
-        ref={dialog}
-        aria-label={`${photo.label}: ${photo.place}`}
-        onClick={(e) => e.target === e.currentTarget && dialog.current?.close()}
-        className="photo-viewer m-auto max-h-none max-w-none bg-transparent p-0"
-      >
-        <img
-          src={photo.src}
-          alt={photo.alt}
-          width={photo.width}
-          height={photo.height}
-          className="block h-auto max-h-[85svh] w-auto max-w-[92vw] rounded-lg"
-        />
-        <div className="mt-2 flex items-center justify-between gap-4 text-sm text-white/85">
-          <span>{photo.place}</span>
-          <button
-            type="button"
-            onClick={() => dialog.current?.close()}
-            className="rounded-full border border-white/30 px-3 py-1 text-white hover:border-white"
-          >
-            Close
-          </button>
-        </div>
-      </dialog>
     </div>
   )
 }
