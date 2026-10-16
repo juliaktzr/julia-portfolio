@@ -402,6 +402,8 @@ export const photos: Photo[] = [
   { src: '/photos/segovia-1.webp', place: 'Segovia', alt: 'A gilded altarpiece beneath an ornate ribbed cathedral ceiling', width: 750, height: 1000 },
   { src: '/photos/segovia-2.webp', place: 'Segovia', alt: 'Gothic cloister arches framing a sunlit courtyard', width: 750, height: 1000 },
   { src: '/photos/segovia-3.webp', place: 'Segovia', alt: 'A narrow lane between old stone walls leading to an arched gate', width: 750, height: 1000 },
+  { src: '/photos/rome-1.webp', place: 'Rome', alt: 'Crowds gathered around the Trevi Fountain on a sunny day', width: 750, height: 1000 },
+  { src: '/photos/rome-2.webp', place: 'Rome', alt: 'A long table set for dinner in a vaulted cellar restaurant lit by a chandelier', width: 750, height: 1000 },
   { src: '/photos/capri-1.webp', place: 'Capri', alt: 'The Faraglioni rock stacks rising out of the sea off Capri', width: 750, height: 1000 },
   { src: '/photos/capri-2.webp', place: 'Capri', alt: 'A pebble cove with turquoise water below limestone cliffs', width: 750, height: 1000 },
   { src: '/photos/positano-1.webp', place: 'Positano', alt: 'A cliffside town stepping down to a blue bay under a clear sky', width: 562, height: 1000 },
