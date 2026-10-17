@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -13,5 +14,6 @@ console.log(`%c${consoleGreeting.line}`, 'color:#7A6358;font-size:12px')
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
+    <Analytics />
   </StrictMode>,
 )
