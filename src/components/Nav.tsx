@@ -16,9 +16,8 @@ export function Nav({ theme, onToggleTheme, onOpenPalette }: Props) {
         Skip to content
       </a>
       <div className="relative mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6">
-        <a href="#top" className="font-display text-lg font-semibold tracking-tight">
-          {site.name}
-          <span className="text-accent">.</span>
+        <a href="#top" aria-label={site.name} className="font-display text-xl font-semibold tracking-tight">
+          JK<span className="text-accent">.</span>
         </a>
         <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex">
           {nav.map((item) => (
@@ -42,6 +41,14 @@ export function Nav({ theme, onToggleTheme, onOpenPalette }: Props) {
             ⌘K
           </button>
           <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+          <a
+            href={site.resumeUrl}
+            download={site.resumeFilename}
+            className="inline-flex h-9 items-center gap-1 rounded-full border border-text/25 px-4 text-sm font-medium transition-colors hover:border-accent hover:text-accent-ink"
+          >
+            Resume <span aria-hidden="true">↓</span>
+            <span className="sr-only"> (PDF)</span>
+          </a>
           <MobileMenu />
         </div>
       </div>

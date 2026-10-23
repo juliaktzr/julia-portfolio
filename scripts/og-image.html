@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>OG image</title>
-    <!-- Source for public/og-image.png. Render it with `npm run og`. Fonts load from node_modules. -->
+    <!-- Source for public/og-image.png. Render it with `npm run og`. Fonts load from node_modules. Matches the hero. -->
     <style>
       @font-face {
         font-family: 'Fraunces';
@@ -11,15 +11,15 @@
         font-weight: 100 900;
       }
       @font-face {
+        font-family: 'Fraunces';
+        src: url('../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-italic.woff2') format('woff2');
+        font-weight: 100 900;
+        font-style: italic;
+      }
+      @font-face {
         font-family: 'Inter';
         src: url('../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2') format('woff2');
         font-weight: 100 900;
-      }
-      @font-face {
-        font-family: 'JetBrains Mono';
-        src: url('../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2')
-          format('woff2');
-        font-weight: 100 800;
       }
 
       :root {
@@ -29,8 +29,6 @@
         --muted: #7a6358;
         --accent: #b86b77;
         --accent-ink: #9a4c59;
-        --accent-2: #8a5a44;
-        --line: rgb(43 29 23 / 0.12);
       }
 
       * {
@@ -42,11 +40,7 @@
         width: 1200px;
         height: 630px;
         overflow: hidden;
-        background-color: var(--bg);
-        background-image:
-          linear-gradient(rgb(43 29 23 / 0.04) 1px, transparent 1px),
-          linear-gradient(90deg, rgb(43 29 23 / 0.04) 1px, transparent 1px);
-        background-size: 56px 56px;
+        background: var(--bg);
         color: var(--text);
         font-family: 'Inter', sans-serif;
         display: flex;
@@ -55,61 +49,73 @@
       }
 
       .card {
-        width: 1050px;
-        height: 480px;
-        border: 1px solid var(--line);
-        border-radius: 18px;
+        width: 1120px;
+        height: 550px;
+        border-radius: 40px;
         background: var(--surface);
-        box-shadow: 0 30px 70px -30px rgb(43 29 23 / 0.25);
-        display: flex;
-        flex-direction: column;
-      }
-
-      .chrome {
         display: flex;
         align-items: center;
-        gap: 10px;
-        height: 62px;
-        padding: 0 26px;
-        border-bottom: 1px solid var(--line);
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 17px;
-        color: var(--muted);
-      }
-      .dot {
-        width: 13px;
-        height: 13px;
-        border-radius: 50%;
-      }
-      .chrome span:last-child {
-        margin-left: 14px;
+        gap: 64px;
+        padding: 0 72px 0 64px;
       }
 
-      .body {
-        flex: 1;
+      .portrait {
+        position: relative;
+        flex-shrink: 0;
+        width: 380px;
+        height: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .portrait svg {
+        position: absolute;
+        inset: 0;
+      }
+      .portrait text {
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 4.4px;
+        fill: var(--muted);
+      }
+      .portrait .star {
+        fill: var(--accent-ink);
+      }
+      .halo {
+        position: absolute;
+        width: 269px;
+        height: 269px;
+        border-radius: 50%;
+        background: var(--bg);
+      }
+      .photo {
+        position: relative;
+        width: 253px;
+        height: 253px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: 50% 30%;
+        box-shadow: 0 18px 40px rgb(43 29 23 / 0.18);
+      }
+
+      .copy {
         display: flex;
         flex-direction: column;
-        padding: 40px 52px 32px;
       }
-
-      .cmd {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 21px;
+      .hi {
+        font-family: 'Fraunces', serif;
+        font-style: italic;
+        font-size: 34px;
         color: var(--muted);
       }
-      .cmd b {
-        color: var(--accent);
-        font-weight: 500;
-        margin-right: 12px;
-      }
-
       h1 {
-        margin-top: 10px;
+        margin-top: 4px;
         font-family: 'Fraunces', serif;
-        font-size: 92px;
-        font-weight: 700;
-        line-height: 1.05;
-        letter-spacing: -0.02em;
+        font-size: 112px;
+        font-weight: 600;
+        line-height: 0.92;
+        letter-spacing: -0.045em;
         font-variation-settings:
           'opsz' 144,
           'SOFT' 30,
@@ -118,67 +124,64 @@
       h1 span {
         color: var(--accent);
       }
-
-      .line {
-        margin-top: 14px;
-        font-size: 34px;
-        line-height: 1.3;
+      .tagline {
+        margin-top: 26px;
+        font-family: 'Fraunces', serif;
+        font-style: italic;
+        font-size: 42px;
+        color: var(--accent-ink);
       }
-
       .meta {
-        margin-top: 18px;
-        padding-bottom: 22px;
-        border-bottom: 1px solid var(--line);
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 19px;
+        margin-top: 30px;
+        padding-top: 24px;
+        border-top: 1px solid rgb(43 29 23 / 0.14);
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+        font-size: 21px;
         color: var(--muted);
       }
-
-      .foot {
-        margin-top: auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .pills {
-        display: flex;
-        gap: 12px;
-      }
-      .pill {
-        padding: 7px 17px;
-        border: 1px solid rgb(138 90 68 / 0.35);
-        border-radius: 999px;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 17px;
-        color: var(--accent-2);
-      }
-      .url {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 19px;
-        color: var(--accent-ink);
+      .meta b {
+        font-weight: 500;
+        color: var(--text);
       }
     </style>
   </head>
   <body>
     <div class="card">
-      <div class="chrome">
-        <i class="dot" style="background: #b86b77"></i>
-        <i class="dot" style="background: #8a5a44"></i>
-        <i class="dot" style="background: #a89286"></i>
-        <span>julia@vanderbilt ~ zsh</span>
+      <div class="portrait">
+        <svg viewBox="0 0 300 300" aria-hidden="true">
+          <circle
+            cx="150"
+            cy="150"
+            r="146"
+            fill="none"
+            stroke="#9a4c59"
+            stroke-width="1.5"
+            stroke-dasharray="1 9"
+            stroke-linecap="round"
+            opacity="0.55"
+          />
+        </svg>
+        <svg viewBox="0 0 300 300" aria-hidden="true" style="transform: rotate(-58deg)">
+          <defs><path id="ring" d="M150,150 m-124,0 a124,124 0 1,1 248,0 a124,124 0 1,1 -248,0" /></defs>
+          <text>
+            <textPath href="#ring" textLength="779" lengthAdjust="spacing">
+              CS + APPLIED MATH <tspan class="star">✦</tspan> VANDERBILT ’27 <tspan class="star">✦</tspan> AI SOLUTIONS
+              <tspan class="star">✦</tspan> TECH STRATEGY <tspan class="star">✦</tspan> PRODUCT
+              <tspan class="star">✦</tspan>
+            </textPath>
+          </text>
+        </svg>
+        <div class="halo"></div>
+        <img class="photo" src="../public/headshot.jpg" alt="" />
       </div>
-      <div class="body">
-        <p class="cmd"><b>❯</b>whoami</p>
-        <h1>Julia Kantzer<span>.</span></h1>
-        <p class="line">Turning AI into impact.</p>
-        <p class="meta"># CS + Applied Math at Vanderbilt, May 2027</p>
-        <div class="foot">
-          <div class="pills">
-            <span class="pill">AI</span>
-            <span class="pill">Strategy</span>
-          </div>
-          <span class="url">juliakantzer.com</span>
-        </div>
+
+      <div class="copy">
+        <p class="hi">Hi, I’m</p>
+        <h1>Julia<br />Kantzer<span>.</span></h1>
+        <p class="tagline">Turning AI into impact.</p>
+        <p class="meta"><span>CS + Applied Math, Vanderbilt ’27</span><b>juliakantzer.com</b></p>
       </div>
     </div>
   </body>

@@ -27,11 +27,19 @@ export const site = {
 export const hero = {
   meta: 'CS and Applied Math at Vanderbilt, graduating May 2027',
   status: 'Currently at Pegasystems',
+  greeting: 'Hi, I’m',
+  intro:
+    'Senior at Vanderbilt and AI builder at Pegasystems. I’m looking for new grad roles where I can help teams figure out what’s worth building, then build it.',
+  /** Words on the ring that circles the headshot. */
+  ring: ['CS + Applied Math', 'Vanderbilt ’27', 'AI Solutions', 'Tech Strategy', 'Product'],
   buttons: [
     { label: 'See my work', href: '#work', kind: 'primary' as const },
-    { label: 'Resume', href: site.resumeUrl, kind: 'secondary' as const, download: true },
-    { label: 'Contact', href: '#contact', kind: 'ghost' as const },
+    { label: 'Let’s talk', href: '#contact', kind: 'secondary' as const },
   ],
+  places: {
+    label: 'Where I’ve worked and studied',
+    items: ['Pegasystems', 'Vanderbilt', 'LEAR Lab', 'Handshake AI', 'UC3M Madrid'],
+  },
 }
 
 export const nav = [

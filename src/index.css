@@ -1,7 +1,11 @@
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/jetbrains-mono';
 @import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/fraunces/wght-italic.css';
 @import 'tailwindcss';
+
+/* dark: utilities follow the data-theme attribute, not the OS setting. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 /* ---------------------------------------------------------------------------
    Design tokens. Light is the default; dark overrides under [data-theme="dark"].
@@ -222,4 +226,27 @@
 /* Dim the page behind the full-size photo viewer. */
 .photo-viewer::backdrop {
   background: rgb(0 0 0 / 0.82);
+}
+
+/* The hero's ring of words turns slowly, the dotted ring the other way. Hover pauses both. */
+@keyframes hero-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.hero-ring {
+  animation: hero-spin 40s linear infinite;
+}
+.hero-dots {
+  animation: hero-spin 60s linear infinite reverse;
+}
+.hero-portrait:hover .hero-ring,
+.hero-portrait:hover .hero-dots {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-ring,
+  .hero-dots {
+    animation: none;
+  }
 }
