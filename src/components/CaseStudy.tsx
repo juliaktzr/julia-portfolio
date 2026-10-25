@@ -60,7 +60,26 @@ function CaseStudyArticle({ study }: { study: CaseStudyData }) {
           ))}
         </div>
       )}
-      <p className="mt-6 max-w-2xl text-lg leading-relaxed">{study.summary}</p>
+      {study.photo ? (
+        <div className="mt-6 grid items-start gap-6 md:grid-cols-[1fr_17rem] lg:grid-cols-[1fr_21rem] lg:gap-10">
+          <p className="max-w-2xl text-lg leading-relaxed">{study.summary}</p>
+          <figure className="print-hidden max-w-xs overflow-hidden rounded-xl border border-line bg-surface/60 md:max-w-none">
+            <img
+              src={study.photo.src}
+              alt={study.photo.alt}
+              width={study.photo.width}
+              height={study.photo.height}
+              loading="lazy"
+              className="block h-auto w-full md:aspect-[3/2] md:object-cover md:object-[50%_30%]"
+            />
+            <figcaption className="border-t border-line px-4 py-3 text-sm leading-snug text-muted">
+              {study.photo.caption}
+            </figcaption>
+          </figure>
+        </div>
+      ) : (
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed">{study.summary}</p>
+      )}
 
       {study.sections && <ProseSections study={study} />}
       {study.built && <CompactSections study={study} />}

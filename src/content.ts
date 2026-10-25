@@ -91,6 +91,8 @@ export type CaseStudy = {
   decisions?: CaseStudyDecision[]
   /** Shown in a row after the decision cards. */
   screenshots?: CaseStudyScreenshot[]
+  /** A photo shown beside the summary, e.g. with the team. */
+  photo?: CaseStudyScreenshot
   stack: string[]
   /** Pega's before and after diagram. */
   diagram?: 'flow'
@@ -193,6 +195,13 @@ export const caseStudies: CaseStudy[] = [
         body: 'Three people on my team use it today. Pega asked me to keep working on it remotely through the school year.',
       },
     ],
+    photo: {
+      src: '/work/pega-team.webp',
+      alt: 'Julia standing with seven members of Pega’s Government Americas consulting team in the office',
+      caption: 'With my Government Americas consulting team at Pega.',
+      width: 968,
+      height: 1000,
+    },
     stack: ['Python', 'React', 'Claude Code', 'MCP'],
     diagram: 'flow',
   },
