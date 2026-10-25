@@ -61,27 +61,20 @@ function CaseStudyArticle({ study }: { study: CaseStudyData }) {
         </div>
       )}
       {study.photo ? (
-        <div className="mt-6 grid items-start gap-6 md:grid-cols-[1fr_17rem] lg:grid-cols-[1fr_21rem] lg:gap-10">
-          <p className="max-w-2xl text-lg leading-relaxed">{study.summary}</p>
-          <figure className="print-hidden max-w-xs overflow-hidden rounded-xl border border-line bg-surface/60 md:max-w-none">
-            <img
-              src={study.photo.src}
-              alt={study.photo.alt}
-              width={study.photo.width}
-              height={study.photo.height}
-              loading="lazy"
-              className="block h-auto w-full md:aspect-[3/2] md:object-cover md:object-[50%_30%]"
-            />
-            <figcaption className="border-t border-line px-4 py-3 text-sm leading-snug text-muted">
-              {study.photo.caption}
-            </figcaption>
-          </figure>
+        // Photo as a sidebar from lg up, so it never leaves a gap beside the text.
+        <div className="lg:grid lg:grid-cols-[1fr_16rem] lg:gap-12">
+          <div>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed">{study.summary}</p>
+            {study.sections && <ProseSections study={study} />}
+          </div>
+          <Photo photo={study.photo} />
         </div>
       ) : (
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed">{study.summary}</p>
+        <>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed">{study.summary}</p>
+          {study.sections && <ProseSections study={study} />}
+        </>
       )}
-
-      {study.sections && <ProseSections study={study} />}
       {study.built && <CompactSections study={study} />}
       {study.screenshots && <Screenshots shots={study.screenshots} />}
 
@@ -102,6 +95,25 @@ function CaseStudyArticle({ study }: { study: CaseStudyData }) {
         </ul>
       </div>
     </article>
+  )
+}
+
+/** A photo with a caption. Full width on phones, smaller on tablets, a sticky sidebar on desktop. */
+function Photo({ photo }: { photo: CaseStudyScreenshot }) {
+  return (
+    <figure className="print-hidden mx-auto mt-10 max-w-sm self-start overflow-hidden rounded-xl border border-line bg-surface/60 lg:sticky lg:top-24 lg:mx-0 lg:mt-7 lg:max-w-none">
+      <img
+        src={photo.src}
+        alt={photo.alt}
+        width={photo.width}
+        height={photo.height}
+        loading="lazy"
+        className="block h-auto w-full"
+      />
+      <figcaption className="border-t border-line px-4 py-3 text-sm leading-snug text-muted">
+        {photo.caption}
+      </figcaption>
+    </figure>
   )
 }
 
