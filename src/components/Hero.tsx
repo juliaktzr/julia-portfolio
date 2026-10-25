@@ -1,12 +1,12 @@
 import { hero, site } from '../content'
+import { buttonStyles } from './buttonStyles'
 
 const RING = 300
 const RING_R = 124
 // The ring path starts on the left and runs clockwise, so text reads along the top first.
 const ringPath = `M${RING / 2},${RING / 2} m-${RING_R},0 a${RING_R},${RING_R} 0 1,1 ${RING_R * 2},0 a${RING_R},${RING_R} 0 1,1 -${RING_R * 2},0`
 
-const btn =
-  'inline-flex h-12 items-center rounded-full px-6 font-medium transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgb(43_29_23/0.16)]'
+const btn = 'inline-flex h-12 items-center rounded-full px-6 font-medium transition-colors'
 
 const socials = [
   { label: 'LinkedIn', href: site.linkedin, icon: <LinkedInIcon /> },
@@ -35,13 +35,7 @@ export function Hero() {
 
         <div className="print-hidden mt-1 flex flex-wrap items-center justify-center gap-3">
           {hero.buttons.map((b) => (
-            <a
-              key={b.label}
-              href={b.href}
-              className={`${btn} ${
-                b.kind === 'primary' ? 'bg-text text-bg' : 'border border-text/25 hover:text-accent-ink'
-              }`}
-            >
+            <a key={b.label} href={b.href} className={`${btn} ${buttonStyles[b.kind]}`}>
               {b.label}
             </a>
           ))}
@@ -57,7 +51,7 @@ export function Hero() {
                     title={s.label}
                     target={external ? '_blank' : undefined}
                     rel={external ? 'noreferrer' : undefined}
-                    className="flex h-12 w-12 items-center justify-center rounded-full border border-text/25 transition-colors hover:bg-text hover:text-bg"
+                    className={`flex h-12 w-12 items-center justify-center rounded-full transition-colors ${buttonStyles.secondary}`}
                   >
                     {s.icon}
                   </a>
@@ -88,11 +82,7 @@ export function Hero() {
 function Portrait() {
   return (
     <div className="hero-portrait group relative flex aspect-square w-full max-w-[300px] shrink-0 items-center justify-center overflow-hidden rounded-full print:hidden">
-      <svg
-        className="hero-dots absolute inset-0"
-        viewBox={`0 0 ${RING} ${RING}`}
-        aria-hidden="true"
-      >
+      <svg className="hero-dots absolute inset-0" viewBox={`0 0 ${RING} ${RING}`} aria-hidden="true">
         <circle
           cx={RING / 2}
           cy={RING / 2}
@@ -105,11 +95,7 @@ function Portrait() {
           opacity="0.55"
         />
       </svg>
-      <svg
-        className="hero-ring absolute inset-0"
-        viewBox={`0 0 ${RING} ${RING}`}
-        aria-hidden="true"
-      >
+      <svg className="hero-ring absolute inset-0" viewBox={`0 0 ${RING} ${RING}`} aria-hidden="true">
         <defs>
           <path id="hero-ring-path" d={ringPath} />
         </defs>

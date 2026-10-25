@@ -1,5 +1,6 @@
 import { nav, site } from '../content'
 import type { Theme } from '../hooks/useTheme'
+import { buttonStyles } from './buttonStyles'
 import { MobileMenu } from './MobileMenu'
 import { ThemeToggle } from './ThemeToggle'
 
@@ -44,7 +45,7 @@ export function Nav({ theme, onToggleTheme, onOpenPalette }: Props) {
           <a
             href={site.resumeUrl}
             download={site.resumeFilename}
-            className="inline-flex h-9 items-center gap-1 rounded-full border border-text/25 px-4 text-sm font-medium transition-colors hover:border-accent hover:text-accent-ink"
+            className={`inline-flex h-9 items-center gap-1 rounded-full px-4 text-sm font-medium transition-colors ${buttonStyles.secondary}`}
           >
             Resume <span aria-hidden="true">↓</span>
             <span className="sr-only"> (PDF)</span>
