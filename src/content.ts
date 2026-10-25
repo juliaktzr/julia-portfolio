@@ -91,8 +91,8 @@ export type CaseStudy = {
   decisions?: CaseStudyDecision[]
   /** Shown in a row after the decision cards. */
   screenshots?: CaseStudyScreenshot[]
-  /** A photo shown beside the summary, e.g. with the team. */
-  photo?: CaseStudyScreenshot
+  /** A row of photos under the sections. Each opens full size. */
+  photos?: { title: string; items: CaseStudyScreenshot[] }
   stack: string[]
   /** Pega's before and after diagram. */
   diagram?: 'flow'
@@ -195,12 +195,31 @@ export const caseStudies: CaseStudy[] = [
         body: 'Three people on my team use it today. Pega asked me to keep working on it remotely through the school year.',
       },
     ],
-    photo: {
-      src: '/work/pega-team.webp',
-      alt: 'Julia standing with seven members of Pega’s Government Americas consulting team in the office',
-      caption: 'With my Government Americas consulting team at Pega.',
-      width: 968,
-      height: 1000,
+    photos: {
+      title: 'Summer at Pega',
+      items: [
+        {
+          src: '/work/pega-presentation.webp',
+          alt: 'Julia smiling beside a Pega podium in front of a screen showing her slide, My Summer at Pega',
+          caption: 'Giving my final internship presentation in August 2026.',
+          width: 1200,
+          height: 1086,
+        },
+        {
+          src: '/work/pega-team.webp',
+          alt: 'Julia standing with seven members of Pega’s Government Americas consulting team in the office',
+          caption: 'With my Government Americas consulting team.',
+          width: 968,
+          height: 1000,
+        },
+        {
+          src: '/work/pega-product-team.webp',
+          alt: 'A large group photo of Pega’s Massachusetts-based product team outdoors by the water',
+          caption: 'With Pega’s Massachusetts-based product team.',
+          width: 1600,
+          height: 832,
+        },
+      ],
     },
     stack: ['Python', 'React', 'Claude Code', 'MCP'],
     diagram: 'flow',

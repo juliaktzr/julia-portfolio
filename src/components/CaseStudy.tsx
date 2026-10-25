@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import { useState, type CSSProperties } from 'react'
 import {
   caseStudies,
   sideProjects,
@@ -8,6 +8,7 @@ import {
 } from '../content'
 import { ButtonLink } from './Button'
 import { FlowDiagram } from './FlowDiagram'
+import { PhotoViewer, type Gallery } from './PhotoViewer'
 import { Section, Tag } from './Section'
 
 export function CaseStudy() {
@@ -60,21 +61,10 @@ function CaseStudyArticle({ study }: { study: CaseStudyData }) {
           ))}
         </div>
       )}
-      {study.photo ? (
-        // Photo as a sidebar from lg up, so it never leaves a gap beside the text.
-        <div className="lg:grid lg:grid-cols-[1fr_16rem] lg:gap-12">
-          <div>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed">{study.summary}</p>
-            {study.sections && <ProseSections study={study} />}
-          </div>
-          <Photo photo={study.photo} />
-        </div>
-      ) : (
-        <>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed">{study.summary}</p>
-          {study.sections && <ProseSections study={study} />}
-        </>
-      )}
+      <p className="mt-6 max-w-2xl text-lg leading-relaxed">{study.summary}</p>
+
+      {study.sections && <ProseSections study={study} />}
+      {study.photos && <PhotoRow title={study.photos.title} items={study.photos.items} />}
       {study.built && <CompactSections study={study} />}
       {study.screenshots && <Screenshots shots={study.screenshots} />}
 
@@ -98,22 +88,49 @@ function CaseStudyArticle({ study }: { study: CaseStudyData }) {
   )
 }
 
-/** A photo with a caption. Full width on phones, smaller on tablets, a sticky sidebar on desktop. */
-function Photo({ photo }: { photo: CaseStudyScreenshot }) {
+/**
+ * Photos in one row, each as wide as its shape needs so they share a height.
+ * Stacked on phones. A click opens the full-size viewer.
+ */
+function PhotoRow({ title, items }: { title: string; items: CaseStudyScreenshot[] }) {
+  const [gallery, setGallery] = useState<Gallery | null>(null)
+  const photos = items.map((p) => ({ ...p, place: p.caption }))
+  const cols = items.map((s) => `${(s.width / s.height).toFixed(3)}fr`).join(' ')
   return (
-    <figure className="print-hidden mx-auto mt-10 max-w-sm self-start overflow-hidden rounded-xl border border-line bg-surface/60 lg:sticky lg:top-24 lg:mx-0 lg:mt-7 lg:max-w-none">
-      <img
-        src={photo.src}
-        alt={photo.alt}
-        width={photo.width}
-        height={photo.height}
-        loading="lazy"
-        className="block h-auto w-full"
-      />
-      <figcaption className="border-t border-line px-4 py-3 text-sm leading-snug text-muted">
-        {photo.caption}
-      </figcaption>
-    </figure>
+    <div className="print-hidden mt-10">
+      <h4 className="mb-3 font-display text-xl font-semibold">{title}</h4>
+      <div
+        style={{ '--shot-cols': cols } as CSSProperties}
+        className="grid gap-4 md:[grid-template-columns:var(--shot-cols)]"
+      >
+        {items.map((p, i) => (
+          <figure
+            key={p.src}
+            className="flex flex-col overflow-hidden rounded-xl border border-line bg-surface/60"
+          >
+            <button
+              type="button"
+              onClick={() => setGallery({ title, photos, start: i })}
+              aria-label={`Open photo: ${p.caption}`}
+              className="group block cursor-zoom-in overflow-hidden"
+            >
+              <img
+                src={p.src}
+                alt={p.alt}
+                width={p.width}
+                height={p.height}
+                loading="lazy"
+                className="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+            </button>
+            <figcaption className="flex-1 border-t border-line px-4 py-3 text-sm leading-snug text-muted">
+              {p.caption}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <PhotoViewer gallery={gallery} onClose={() => setGallery(null)} />
+    </div>
   )
 }
 
