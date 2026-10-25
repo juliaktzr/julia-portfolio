@@ -46,7 +46,6 @@ export const nav = [
   { label: 'Work', href: '#work' },
   { label: 'Experience', href: '#experience' },
   { label: 'Education', href: '#education' },
-  { label: 'Research', href: '#research' },
   { label: 'Leadership', href: '#leadership' },
   { label: 'Skills', href: '#skills' },
   { label: 'Interests', href: '#about' },
@@ -532,31 +531,6 @@ export const travel = {
 }
 
 /* -------------------------------------------------------------------------
-   Research and AI evaluation
-------------------------------------------------------------------------- */
-export const research = {
-  id: 'research',
-  eyebrow: 'Research and AI evaluation',
-  title: 'Finding what AI gets wrong.',
-  intro:
-    'A lot of my work has been checking AI output closely. At LEAR Lab, I review AI-generated content in iTELL and help decide what to change in the product. At Handshake AI, I graded model outputs for a confidential training project. In both, the goal is to find the patterns behind the mistakes so they can be fixed at the source.',
-  items: [
-    {
-      org: 'Language and Education Analytics Research Lab',
-      role: 'Research Assistant, Strategy and Product Manager',
-      period: 'September 2024 to Present',
-      stat: { value: 25, suffix: '+', label: 'deployments' },
-    },
-    {
-      org: 'Handshake AI',
-      role: 'MOVE Fellow',
-      period: 'August 2025 to October 2025',
-      stat: null,
-    },
-  ],
-}
-
-/* -------------------------------------------------------------------------
    Leadership and impact
 ------------------------------------------------------------------------- */
 export type Counter = { value: number; prefix?: string; suffix?: string; label: string }
@@ -645,7 +619,7 @@ export const contact = {
   id: 'contact',
   eyebrow: 'Contact',
   title: 'Let’s talk.',
-  body: 'I’m looking for new grad roles starting summer 2027 where I can turn AI into real impact, in AI solutions and solutions engineering, technology consulting and strategy, or product and program management. I’m open to relocating for the right role. Email is the best way to reach me.',
+  body: 'I’m looking for new grad roles starting summer 2027 in AI solutions engineering, technology consulting and strategy, or product and program management. I’m open to relocating for the right role. Email is the best way to reach me.',
   links: [
     { label: 'Email', value: site.email, href: `mailto:${site.email}` },
     { label: 'LinkedIn', value: 'linkedin.com/in/julia-kantzer', href: site.linkedin },

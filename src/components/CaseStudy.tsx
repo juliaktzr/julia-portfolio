@@ -141,9 +141,9 @@ function ProseSections({ study }: { study: CaseStudyData }) {
       {study.sections?.map((s) => (
         <div key={s.heading}>
           <h4 className="mb-2 font-display text-xl font-semibold">{s.heading}</h4>
-          <p className="leading-relaxed text-muted">{s.body}</p>
+          <p className="leading-relaxed">{s.body}</p>
           {s.bullets && (
-            <ul className="mt-3 space-y-2.5 text-sm leading-relaxed text-muted">
+            <ul className="mt-3 space-y-2.5 text-sm leading-relaxed">
               {s.bullets.map((b) => (
                 <li key={b} className="flex gap-3">
                   <span
@@ -168,9 +168,9 @@ function CompactSections({ study }: { study: CaseStudyData }) {
       <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:gap-10 print:mt-4 print:grid-cols-2 print:gap-4">
         <div>
           <h4 className="mb-2 font-display text-xl font-semibold">The problem</h4>
-          <p className="leading-relaxed text-muted">{study.problem}</p>
+          <p className="leading-relaxed">{study.problem}</p>
           <h4 className="mb-2 mt-8 font-display text-xl font-semibold">What I built</h4>
-          <p className="leading-relaxed text-muted">{study.builtIntro}</p>
+          <p className="leading-relaxed">{study.builtIntro}</p>
         </div>
 
         {/* File listing with the progress note under it, so the two columns end close together. */}

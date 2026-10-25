@@ -291,11 +291,12 @@ export function TravelMap({ active, onActive, onOpen }: Props) {
           <p className="mt-2 font-display text-2xl font-semibold tracking-tight">{travel.title}</p>
           <p className="mt-1 text-sm text-muted">{travel.caption}</p>
           <p className="mt-1 text-xs text-muted">{travel.hint}</p>
-          <ul className="mt-5 space-y-2.5 text-sm" onMouseLeave={() => onActive(null)}>
+          {/* Country groups flow in one wrapping row instead of a line each. */}
+          <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2.5 text-sm" onMouseLeave={() => onActive(null)}>
             {byCountry.map(({ country, cities }) => (
-              <li key={country} className="flex gap-3">
-                <span className="w-28 shrink-0 font-mono text-xs leading-6 text-muted">{country}</span>
-                <span className="flex flex-wrap gap-1.5">
+              <li key={country} className="flex flex-wrap items-center gap-1.5">
+                <span className="mr-0.5 font-mono text-[11px] leading-6 text-muted">{country}</span>
+                <span className="contents">
                   {cities.map((p) => (
                     <button
                       key={p.city}

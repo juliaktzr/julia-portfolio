@@ -14,7 +14,7 @@ type Props = {
 /** Shared section frame: mono eyebrow, display title, optional intro. */
 export function Section({ id, eyebrow, title, intro, introClassName = '', children, className = '' }: Props) {
   return (
-    <section id={id} className={`scroll-mt-20 py-20 sm:py-28 ${className}`} aria-labelledby={`${id}-title`}>
+    <section id={id} className={`scroll-mt-20 py-14 sm:py-20 ${className}`} aria-labelledby={`${id}-title`}>
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <Reveal>
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-accent-ink">

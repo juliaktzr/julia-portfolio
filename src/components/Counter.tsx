@@ -5,8 +5,17 @@ import { usePrinting } from '../hooks/usePrinting'
 
 const fmt = new Intl.NumberFormat('en-US')
 
-/** Counts up from 0 when scrolled into view. Reduced motion shows the final value. */
-export function Counter({ value, prefix = '', suffix = '', label }: CounterData) {
+/**
+ * Counts up from 0 when scrolled into view. Reduced motion shows the final value.
+ * `compact` is a smaller size for several counters sharing a narrow card.
+ */
+export function Counter({
+  value,
+  prefix = '',
+  suffix = '',
+  label,
+  compact = false,
+}: CounterData & { compact?: boolean }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-10% 0px' })
   const reduce = useReducedMotion() ?? false
@@ -30,7 +39,9 @@ export function Counter({ value, prefix = '', suffix = '', label }: CounterData)
     <div className="flex flex-col">
       <span
         ref={ref}
-        className="font-display text-3xl font-semibold tabular-nums tracking-tight print:text-2xl sm:text-4xl"
+        className={`font-display font-semibold tabular-nums tracking-tight print:text-2xl ${
+          compact ? 'text-2xl sm:text-[1.75rem]' : 'text-3xl sm:text-4xl'
+        }`}
       >
         <span aria-hidden="true">
           {prefix}
@@ -39,7 +50,7 @@ export function Counter({ value, prefix = '', suffix = '', label }: CounterData)
         </span>
         <span className="sr-only">{finalText}</span>
       </span>
-      <span className="mt-1 text-sm text-muted">{label}</span>
+      <span className={`mt-1 text-muted ${compact ? 'text-xs leading-snug' : 'text-sm'}`}>{label}</span>
     </div>
   )
 }

@@ -11,7 +11,6 @@ import { Hero } from './components/Hero'
 import { Interests } from './components/Interests'
 import { Leadership } from './components/Leadership'
 import { Nav } from './components/Nav'
-import { Research } from './components/Research'
 import { Skills } from './components/Skills'
 import { Terminal } from './components/Terminal'
 import { useTheme } from './hooks/useTheme'
@@ -58,7 +57,6 @@ export default function App() {
         <CaseStudy />
         <Experience />
         <Education />
-        <Research />
         <Leadership />
         <Skills />
         <Interests />
