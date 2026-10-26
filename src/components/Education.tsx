@@ -28,6 +28,7 @@ export function Education() {
               <h3 className="font-semibold leading-snug">{s.name}</h3>
               <p className="mt-1 text-sm text-text">{s.degree}</p>
               <p className="mt-1 text-sm leading-relaxed text-muted">{s.detail}</p>
+              {'coursework' in s && <p className="mt-1 text-sm leading-relaxed text-muted">{s.coursework}</p>}
               <p className="mt-3 font-mono text-xs text-muted">
                 {s.period} · {s.location}
               </p>

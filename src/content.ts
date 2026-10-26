@@ -29,7 +29,7 @@ export const hero = {
   status: 'Currently at Pegasystems',
   greeting: 'Hi, I’m',
   intro:
-    'Senior at Vanderbilt and AI builder at Pegasystems. I’m looking for new grad roles where I can help teams figure out what’s worth building, then build it.',
+    'Senior at Vanderbilt and building AI tools at Pegasystems. I’m looking for new grad roles where I can help teams figure out what’s worth building, then build it.',
   /** Words on the ring that circles the headshot. */
   ring: ['CS + Applied Math', 'Vanderbilt ’27', 'AI Solutions', 'Tech Strategy', 'Product'],
   buttons: [
@@ -59,7 +59,14 @@ export const nav = [
 
 /** Pega title, shared by the case study and the experience timeline. Matches the resume. */
 const PEGA_TITLE = 'Technology Architect Consulting Intern'
-export type CaseStudySection = { heading: string; body: string; bullets?: string[] }
+/** `steps` render as a numbered list after `body`, followed by `outro`. */
+export type CaseStudySection = {
+  heading: string
+  body: string
+  bullets?: string[]
+  steps?: string[]
+  outro?: string
+}
 export type CaseStudyLink = { label: string; href: string; kind: 'primary' | 'secondary' }
 /** A line in the terminal-style feature listing. */
 export type CaseStudyFile = { name: string; desc: string }
@@ -187,7 +194,14 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: 'How I decided',
-        body: 'There were four reasonable ways to deliver it: a Claude conversational skill, Claude Code with MCP tools calling the engine, a Python and React web app, or a native Pega build. Rather than pick one on paper, I’m building each in turn and comparing product fit, user experience, and implementation effort. The MCP and skill versions came first, then the React app, and I’m building the Pega version now. Engineering leadership is using the comparison to shape the roadmap.',
+        body: 'There were four reasonable ways to deliver it:',
+        steps: [
+          'Claude conversational skill',
+          'Claude Code with MCP tools calling the engine',
+          'Python and React web app',
+          'Native Pega build (in progress)',
+        ],
+        outro: 'Engineering leadership is using the comparison to shape the roadmap.',
       },
       {
         heading: 'Result',
@@ -239,7 +253,7 @@ export const caseStudies: CaseStudy[] = [
     problem:
       'Students usually learn how history turned out before they learn what people were deciding, so every choice looks obvious. Our team of four Education students and two engineers wanted students to feel how uncertain those choices were at the time.',
     builtIntro:
-      'I led the engineering and built the game engine, the content pipeline, and the interface. The game runs in any browser with nothing to install and no login, so it works on a school Chromebook. A student picks a time period, talks with two or three people through branching dialogue, makes one decision, and then sees the outcome next to what really happened. The Education team researched, wrote, and sourced every scenario.',
+      'I led the engineering and built the game engine, content pipeline, and interface. It runs in any browser with no install or login, so it works on school Chromebooks.',
     progress: {
       done: 'The game engine, content pipeline, dialogue and sources, read-aloud, town map, and character creator all work in the live build.',
       next: 'More scenarios and polish before the course ends in December.',
@@ -393,6 +407,8 @@ export const education = {
       period: 'August 2023 to May 2027',
       degree: 'B.S. Computer Science, B.A. Applied Mathematics',
       detail: 'Minors in Human and Organizational Development and Scientific Computing.',
+      coursework:
+        'Relevant coursework: Principles of Software Engineering, Operating Systems, User Interface Design, Group Work Leadership.',
       logo: '/logos/vanderbilt.png',
       logoAlt: 'Vanderbilt University',
       logoStyle: 'mark' as const,
@@ -578,7 +594,7 @@ export const skills = {
   groups: [
     {
       name: 'Technical',
-      items: ['Python', 'Java', 'C++', 'C', 'HTML/CSS', 'ReactJS', 'Git', 'Linux', 'MATLAB'],
+      items: ['Python', 'JavaScript', 'Java', 'C++', 'C', 'HTML/CSS', 'ReactJS', 'Git', 'Linux', 'MATLAB'],
     },
     {
       name: 'AI',

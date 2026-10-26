@@ -90,7 +90,8 @@ function CaseStudyArticle({ study }: { study: CaseStudyData }) {
 
 /**
  * Photos in one row, each as wide as its shape needs so they share a height.
- * Stacked on phones. A click opens the full-size viewer.
+ * On phones they become a swipeable row that bleeds to the screen edges;
+ * from sm to md they stack. A click opens the full-size viewer.
  */
 function PhotoRow({ title, items }: { title: string; items: CaseStudyScreenshot[] }) {
   const [gallery, setGallery] = useState<Gallery | null>(null)
@@ -101,12 +102,12 @@ function PhotoRow({ title, items }: { title: string; items: CaseStudyScreenshot[
       <h4 className="mb-3 font-display text-xl font-semibold">{title}</h4>
       <div
         style={{ '--shot-cols': cols } as CSSProperties}
-        className="grid gap-4 md:[grid-template-columns:var(--shot-cols)]"
+        className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 md:[grid-template-columns:var(--shot-cols)]"
       >
         {items.map((p, i) => (
           <figure
             key={p.src}
-            className="flex flex-col overflow-hidden rounded-xl border border-line bg-surface/60"
+            className="flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-xl border border-line bg-surface/60 sm:w-auto"
           >
             <button
               type="button"
@@ -142,6 +143,22 @@ function ProseSections({ study }: { study: CaseStudyData }) {
         <div key={s.heading}>
           <h4 className="mb-2 font-display text-xl font-semibold">{s.heading}</h4>
           <p className="leading-relaxed">{s.body}</p>
+          {s.steps && (
+            <ol className="mt-3 space-y-2">
+              {s.steps.map((step, i) => (
+                <li key={step} className="flex gap-3 leading-relaxed">
+                  <span
+                    aria-hidden="true"
+                    className="w-5 shrink-0 font-mono text-sm leading-[1.625rem] text-accent-ink"
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+          )}
+          {s.outro && <p className="mt-3 leading-relaxed">{s.outro}</p>}
           {s.bullets && (
             <ul className="mt-3 space-y-2.5 text-sm leading-relaxed">
               {s.bullets.map((b) => (
