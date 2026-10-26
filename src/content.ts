@@ -59,13 +59,12 @@ export const nav = [
 
 /** Pega title, shared by the case study and the experience timeline. Matches the resume. */
 const PEGA_TITLE = 'Technology Architect Consulting Intern'
-/** `steps` render as a numbered list after `body`, followed by `outro`. */
+/** `steps` render as a numbered list after `body`. */
 export type CaseStudySection = {
   heading: string
   body: string
   bullets?: string[]
   steps?: string[]
-  outro?: string
 }
 export type CaseStudyLink = { label: string; href: string; kind: 'primary' | 'secondary' }
 /** A line in the terminal-style feature listing. */
@@ -201,7 +200,6 @@ export const caseStudies: CaseStudy[] = [
           'Python and React web app',
           'Native Pega build (in progress)',
         ],
-        outro: 'Engineering leadership is using the comparison to shape the roadmap.',
       },
       {
         heading: 'Result',

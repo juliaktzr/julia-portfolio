@@ -158,7 +158,6 @@ function ProseSections({ study }: { study: CaseStudyData }) {
               ))}
             </ol>
           )}
-          {s.outro && <p className="mt-3 leading-relaxed">{s.outro}</p>}
           {s.bullets && (
             <ul className="mt-3 space-y-2.5 text-sm leading-relaxed">
               {s.bullets.map((b) => (
