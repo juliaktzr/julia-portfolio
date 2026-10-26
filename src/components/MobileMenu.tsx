@@ -1,11 +1,15 @@
 import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useId, useRef, type Dispatch, type SetStateAction } from 'react'
 import { nav } from '../content'
 
-/** Section links for narrow screens. Rendered as a disclosure under the header. */
-export function MobileMenu() {
+type Props = { open: boolean; setOpen: Dispatch<SetStateAction<boolean>> }
+
+/**
+ * Section links for narrow screens. Rendered as a disclosure under the header.
+ * The header owns `open` so it can stay on screen while the menu is showing.
+ */
+export function MobileMenu({ open, setOpen }: Props) {
   const reduce = useReducedMotion() ?? false
-  const [open, setOpen] = useState(false)
   const id = useId()
   const firstLink = useRef<HTMLAnchorElement>(null)
 
@@ -17,7 +21,7 @@ export function MobileMenu() {
     window.addEventListener('keydown', onKey)
     firstLink.current?.focus()
     return () => window.removeEventListener('keydown', onKey)
-  }, [open])
+  }, [open, setOpen])
 
   return (
     <div className="lg:hidden">

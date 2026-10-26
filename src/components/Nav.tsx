@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState, type FocusEvent } from 'react'
 import { nav, site } from '../content'
 import type { Theme } from '../hooks/useTheme'
 import { buttonStyles } from './buttonStyles'
@@ -6,9 +7,45 @@ import { ThemeToggle } from './ThemeToggle'
 
 type Props = { theme: Theme; onToggleTheme: () => void; onOpenPalette: () => void }
 
+/** True once less than this share of the hero is on screen. */
+const HERO_VISIBLE = 0.3
+
+/**
+ * Fixed bar, hidden over the hero and slid in once most of it has scrolled
+ * away. It also shows while anything inside it has focus or the mobile menu is open.
+ */
 export function Nav({ theme, onToggleTheme, onOpenPalette }: Props) {
+  const [pastHero, setPastHero] = useState(false)
+  const [focused, setFocused] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const headerRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const hero = document.getElementById('top')
+    if (!hero) return
+    const io = new IntersectionObserver(([entry]) => setPastHero(entry.intersectionRatio < HERO_VISIBLE), {
+      threshold: HERO_VISIBLE,
+    })
+    io.observe(hero)
+    return () => io.disconnect()
+  }, [])
+
+  const onBlur = (e: FocusEvent) => {
+    if (!headerRef.current?.contains(e.relatedTarget as Node | null)) setFocused(false)
+  }
+
+  const shown = pastHero || focused || menuOpen
+
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-bg/80 backdrop-blur">
+    <header
+      ref={headerRef}
+      onFocus={() => setFocused(true)}
+      onBlur={onBlur}
+      aria-hidden={shown ? undefined : true}
+      className={`fixed inset-x-0 top-0 z-40 border-b border-line bg-bg/80 backdrop-blur transition-[transform,opacity] duration-300 ease-out motion-reduce:translate-y-0 ${
+        shown ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-full opacity-0'
+      }`}
+    >
       {/* relative wrapper so the mobile menu can hang below the bar */}
       <a
         href="#main"
@@ -50,7 +87,7 @@ export function Nav({ theme, onToggleTheme, onOpenPalette }: Props) {
             Resume <span aria-hidden="true">↓</span>
             <span className="sr-only"> (PDF)</span>
           </a>
-          <MobileMenu />
+          <MobileMenu open={menuOpen} setOpen={setMenuOpen} />
         </div>
       </div>
     </header>
