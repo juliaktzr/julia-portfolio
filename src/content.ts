@@ -68,7 +68,6 @@ export type CaseStudySection = {
 }
 export type CaseStudyLink = { label: string; href: string; kind: 'primary' | 'secondary' }
 /** A line in the terminal-style feature listing. */
-export type CaseStudyFile = { name: string; desc: string }
 /** One tradeoff: what was chosen, what it was chosen over, and why. */
 export type CaseStudyDecision = { chose: string; over: string; why: string }
 /** A product screenshot. Width and height are the image's real pixel size, to prevent layout shift. */
@@ -88,12 +87,11 @@ export type CaseStudy = {
   links?: CaseStudyLink[]
   /** Prose layout: a 2x2 grid of sections. Used by Pega. */
   sections?: CaseStudySection[]
-  /** Compact layout: problem line, file listing, tradeoff cards. Used by Witness. */
+  /** Compact layout: problem line, progress note, tradeoff cards. Used by Witness. */
   problem?: string
   builtIntro?: string
-  /** Shown under the file listing as "Where it stands": what is done and what is next. */
+  /** Shown beside the problem as "Where it stands": what is done and what is next. */
   progress?: { done: string; next: string }
-  built?: CaseStudyFile[]
   decisionsIntro?: string
   decisions?: CaseStudyDecision[]
   /** Shown in a row after the decision cards. */
@@ -272,16 +270,6 @@ export const caseStudies: CaseStudy[] = [
       done: 'The game engine, content pipeline, dialogue and sources, read-aloud, town map, and character creator all work in the live build.',
       next: 'More scenarios and polish before the course ends in December.',
     },
-    built: [
-      {
-        name: 'pipeline/',
-        desc: 'Turns the team’s Google Sheet into game files and flags mistakes in plain English, so writers never touch code',
-      },
-      { name: 'dialogue/', desc: 'Branching conversations, with a primary source behind every factual claim' },
-      { name: 'map/', desc: 'An illustrated town where the student’s character walks between people' },
-      { name: 'a11y/', desc: 'Read-aloud, full keyboard navigation, and alt text on every image' },
-      { name: 'deploy/', desc: 'Static site on Vercel. No backend and no running costs' },
-    ],
     decisionsIntro: 'Three decisions that have shaped the project so far.',
     decisions: [
       {
@@ -325,19 +313,23 @@ export const caseStudies: CaseStudy[] = [
 ------------------------------------------------------------------------- */
 export type Role = {
   org: string
+  /** Name on the timeline bar. */
+  short: string
   title: string
-  location: string
+  location?: string
   period: string
-  start: string // YYYY-MM, used for ordering only
-  tag: 'Engineering' | 'Research' | 'AI evaluation' | 'Teaching'
+  start: string // YYYY-MM
+  end?: string // YYYY-MM, omitted while the role is current
+  tag: 'Engineering' | 'Research' | 'AI evaluation' | 'Teaching' | 'Leadership'
   summary: string
   bullets: string[]
 }
 
-/** Same order as the resume: current roles first, then by end date. */
+/** Same order as the resume: current roles first, then by end date. The timeline sorts by start. */
 export const experience: Role[] = [
   {
     org: 'Pegasystems',
+    short: 'Pegasystems',
     title: PEGA_TITLE,
     location: 'Waltham, MA (now remote)',
     period: 'June 2026 to Present',
@@ -353,6 +345,7 @@ export const experience: Role[] = [
   },
   {
     org: 'Language and Education Analytics Research Lab',
+    short: 'LEAR Lab',
     title: 'Research Assistant, Strategy and Product Manager',
     location: 'Nashville, TN',
     period: 'September 2024 to Present',
@@ -367,10 +360,12 @@ export const experience: Role[] = [
   },
   {
     org: 'Vanderbilt School of Engineering',
+    short: 'CS1101 TA',
     title: 'Teaching Assistant, CS1101',
     location: 'Nashville, TN',
     period: 'January 2025 to December 2025',
     start: '2025-01',
+    end: '2025-12',
     tag: 'Teaching',
     summary: 'Helped 150+ intro CS students and flagged common sticking points to faculty.',
     bullets: [
@@ -380,10 +375,12 @@ export const experience: Role[] = [
   },
   {
     org: 'Handshake AI',
+    short: 'Handshake AI',
     title: 'MOVE Fellow',
     location: 'Remote',
     period: 'August 2025 to October 2025',
     start: '2025-08',
+    end: '2025-10',
     tag: 'AI evaluation',
     summary: 'Evaluated AI outputs for a confidential training project with a leading AI lab.',
     bullets: [
@@ -393,16 +390,31 @@ export const experience: Role[] = [
   },
   {
     org: 'Transmodal Corporation',
+    short: 'Transmodal',
     title: 'Software QA Intern',
     location: 'Ramsey, NJ',
     period: 'May 2025 to August 2025',
     start: '2025-05',
+    end: '2025-08',
     tag: 'Engineering',
     summary: 'Tested invoice-validation software used by global importers.',
     bullets: [
       'Wrote and ran test plans for commercial invoice-validation software used by global importers.',
       'Built test data and edge-case scenarios that caught validation failures.',
       'Sent weekly QA reports that helped engineers decide what to fix first and kept changing requirements clear.',
+    ],
+  },  {
+    org: 'Read for Those in Need',
+    short: 'Read for Those in Need',
+    title: 'Founder and CEO',
+    period: 'March 2019 to July 2023',
+    start: '2019-03',
+    end: '2023-07',
+    tag: 'Leadership',
+    summary: 'Started a nonprofit that got 3,000+ books to underserved K-8 students.',
+    bullets: [
+      'Started a nonprofit to get books to underserved K-8 students and ran outreach, fundraising, logistics, and partnerships.',
+      'Over four years, our 25 volunteers distributed more than 3,000 books across five public schools.',
     ],
   },
 ]
@@ -536,7 +548,6 @@ export const travel = {
   label: 'Semester abroad',
   title: 'Five months based in Madrid',
   caption: '18 places in 10 countries.',
-  hint: 'Hover a place to see where it is. Click one with a camera to open its photos.',
   home: 'Madrid',
   places: [
     { city: 'Madrid', country: 'Spain', lat: 40.4168, lon: -3.7038 },

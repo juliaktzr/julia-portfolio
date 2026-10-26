@@ -107,11 +107,9 @@ export function TravelMap({ active, onActive, onOpen }: Props) {
       return { ...p, group: groupOf(p.city), d: arc(start, p.at), delay: 0.3 + i * STEP }
     })
 
+  // Places from the same country sit next to each other in the list.
   const countries = [...new Set(travel.places.map((p) => p.country))]
-  const byCountry = countries.map((c) => ({
-    country: c,
-    cities: travel.places.filter((p) => p.country === c),
-  }))
+  const cities = countries.flatMap((c) => travel.places.filter((p) => p.country === c))
 
   // The svg uses "slice", so the map is scaled to cover the box and centered.
   const scale = Math.max(box.w / MAP_WIDTH, box.h / MAP_HEIGHT)
@@ -160,7 +158,7 @@ export function TravelMap({ active, onActive, onOpen }: Props) {
       className="print-hidden overflow-hidden rounded-xl border border-line bg-surface/60"
     >
       <div className="grid lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
-        <div ref={boxRef} className="relative border-b border-line bg-bg/60 lg:border-b-0 lg:border-r">
+        <div ref={boxRef} className="relative border-b border-line bg-bg/60 lg:min-h-[28rem] lg:border-b-0 lg:border-r">
           {/* From lg up the map fills its column, cropping open sea at the sides. */}
           <svg
             viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
@@ -290,35 +288,28 @@ export function TravelMap({ active, onActive, onOpen }: Props) {
           <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">{travel.label}</p>
           <p className="mt-2 font-display text-2xl font-semibold tracking-tight">{travel.title}</p>
           <p className="mt-1 text-sm text-muted">{travel.caption}</p>
-          <p className="mt-1 text-xs text-muted">{travel.hint}</p>
-          {/* Country groups flow in one wrapping row instead of a line each. */}
-          <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2.5 text-sm" onMouseLeave={() => onActive(null)}>
-            {byCountry.map(({ country, cities }) => (
-              <li key={country} className="flex flex-wrap items-center gap-1.5">
-                <span className="mr-0.5 font-mono text-[11px] leading-6 text-muted">{country}</span>
-                <span className="contents">
-                  {cities.map((p) => (
-                    <button
-                      key={p.city}
-                      type="button"
-                      onMouseEnter={() => onActive(p.city)}
-                      onFocus={() => onActive(p.city)}
-                      onBlur={() => onActive(null)}
-                      onClick={() => select(p.city)}
-                      aria-pressed={active === p.city}
-                      className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
-                        active === p.city
-                          ? 'border-accent bg-accent text-bg'
-                          : activeLead && leadOf(p.city) === activeLead
-                            ? 'border-accent bg-accent/15 text-text'
-                            : 'border-line bg-bg/70 text-text hover:border-accent'
-                      }`}
-                    >
-                      {p.city}
-                      {hasPhotos.has(p.city) && <CameraIcon />}
-                    </button>
-                  ))}
-                </span>
+          <ul className="mt-5 flex flex-wrap gap-1.5 text-sm" onMouseLeave={() => onActive(null)}>
+            {cities.map((p) => (
+              <li key={p.city}>
+                <button
+                  key={p.city}
+                  type="button"
+                  onMouseEnter={() => onActive(p.city)}
+                  onFocus={() => onActive(p.city)}
+                  onBlur={() => onActive(null)}
+                  onClick={() => select(p.city)}
+                  aria-pressed={active === p.city}
+                  className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
+                    active === p.city
+                      ? 'border-accent bg-accent text-bg'
+                      : activeLead && leadOf(p.city) === activeLead
+                        ? 'border-accent bg-accent/15 text-text'
+                        : 'border-line bg-bg/70 text-text hover:border-accent'
+                  }`}
+                >
+                  {p.city}
+                  {hasPhotos.has(p.city) && <CameraIcon />}
+                </button>
               </li>
             ))}
           </ul>
