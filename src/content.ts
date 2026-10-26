@@ -155,6 +155,8 @@ export const sideProjects = {
   ] as SideProject[],
 }
 
+export type ChatLine = { from: 'bot' | 'user' | 'status'; text: string }
+
 export const pegaFlow = {
   before: {
     label: 'Before',
@@ -166,9 +168,16 @@ export const pegaFlow = {
     ],
     time: '~40 hours',
   },
+  /** A made-up session in the guided chat. The real one is confidential, so the numbers are invented. */
   after: {
     label: 'After',
-    steps: ['Answer questions in a guided chat', 'Python engine runs the model', 'Get results in one session'],
+    tag: 'Illustrative example',
+    chat: [
+      { from: 'bot', text: 'How many users?' },
+      { from: 'user', text: 'About 5,000' },
+      { from: 'status', text: 'Running the model…' },
+      { from: 'bot', text: 'Estimate ready: 6 servers, 2 environments.' },
+    ] as ChatLine[],
     time: 'Under 40 minutes, within 5% of legacy',
   },
 }
