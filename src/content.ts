@@ -406,7 +406,7 @@ export const education = {
       degree: 'B.S. Computer Science, B.A. Applied Mathematics',
       detail: 'Minors in Human and Organizational Development and Scientific Computing.',
       coursework:
-        'Relevant coursework: Principles of Software Engineering, Operating Systems, User Interface Design, Group Work Leadership.',
+        'Relevant coursework: Algorithms, Intermediate Software Design, Operating Systems, User Interface Design, Group Work Leadership.',
       logo: '/logos/vanderbilt.png',
       logoAlt: 'Vanderbilt University',
       logoStyle: 'mark' as const,
