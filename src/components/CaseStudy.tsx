@@ -52,6 +52,7 @@ function CaseStudyArticle({ study }: { study: CaseStudyData }) {
       <h3 id={`${study.id}-title`} className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
         {study.title}
       </h3>
+      {study.stats && <Stats items={study.stats} className="mt-4" />}
       {study.links && (
         <div className="print-hidden mt-5 flex flex-wrap gap-3">
           {study.links.map((l) => (
@@ -323,6 +324,7 @@ function SideProjects() {
               </p>
               <h4 className="mt-2 font-display text-2xl font-semibold">{p.name}</h4>
               <p className="mt-1 text-text">{p.tagline}</p>
+              {p.stats && <Stats items={p.stats} className="mt-3" />}
               {p.links && (
                 <div className="print-hidden mt-4 flex flex-wrap gap-3">
                   {p.links.map((l) => (
@@ -371,6 +373,22 @@ function SideProjects() {
         ))}
       </div>
     </div>
+  )
+}
+
+/** Key numbers as small chips under a title. */
+function Stats({ items, className }: { items: string[]; className: string }) {
+  return (
+    <ul className={`flex flex-wrap gap-2 ${className}`} aria-label="Key numbers">
+      {items.map((s) => (
+        <li
+          key={s}
+          className="rounded-full border border-line bg-bg/70 px-3 py-1 font-mono text-xs text-text"
+        >
+          {s}
+        </li>
+      ))}
+    </ul>
   )
 }
 

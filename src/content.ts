@@ -82,6 +82,8 @@ export type CaseStudy = {
   /** Small badge in the header, e.g. "In progress". */
   status?: string
   title: string
+  /** Key numbers shown as chips under the title, for skimmers. Only true numbers. */
+  stats?: string[]
   summary: string
   links?: CaseStudyLink[]
   /** Prose layout: a 2x2 grid of sections. Used by Pega. */
@@ -116,6 +118,8 @@ export type SideProject = {
   period: string
   /** One line under the name that says what it is for. */
   tagline: string
+  /** Key numbers shown as chips under the tagline. */
+  stats?: string[]
   problem: string
   solution: string
   /** Product decisions, shown as a short list. */
@@ -133,6 +137,7 @@ export const sideProjects = {
       kind: 'Chrome extension',
       period: 'October 2026',
       tagline: 'A job tracker that fills itself in.',
+      stats: ['6 job boards detected', 'No account needed'],
       problem:
         'Keeping a job tracker meant clicking away from every posting to a separate page and copying the title, company, and link over by hand. That extra step was easy to skip.',
       solution:
@@ -189,6 +194,7 @@ export const caseStudies: CaseStudy[] = [
     role: PEGA_TITLE,
     period: 'June 2026 to Present',
     title: 'Cutting infrastructure sizing from 40 hours to under 40 minutes',
+    stats: ['40 hrs → <40 min', 'Within 5% of legacy', '12 test cases', '3 teammates using it'],
     summary:
       'Pega’s Government Consulting team sized infrastructure for each deployment in a set of legacy Excel workbooks. I rebuilt the calculations in Python and put an AI-guided interface on top, so my team can now produce the same estimate in under 40 minutes.',
     sections: [
@@ -251,6 +257,7 @@ export const caseStudies: CaseStudy[] = [
     period: 'August 2026 to December 2026',
     status: 'In progress',
     title: 'A history game where students make the decisions',
+    stats: ['6-person team', 'Runs on Chromebooks', 'No install or login'],
     summary:
       'A browser game for middle and high school history classes that my team is building this semester for a Vanderbilt course. Students talk with people living through a historical moment, make a decision with only the information those people had, and then learn what actually happened. The core game is built and live, and we’re still adding to it.',
     links: [
