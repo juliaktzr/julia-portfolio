@@ -182,35 +182,33 @@ function ProseSections({ study }: { study: CaseStudyData }) {
 function CompactSections({ study }: { study: CaseStudyData }) {
   return (
     <>
-      {/* Problem and intro side by side like Pega's sections, with the progress note across the bottom. */}
-      <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2 print:mt-4 print:grid-cols-2 print:gap-4">
+      {/* Problem and intro on the left, the progress note beside them, top-aligned. */}
+      <div className="mt-10 grid items-start gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-10 print:mt-4 print:grid-cols-2 print:gap-4">
         <div>
           <h4 className="mb-2 font-display text-xl font-semibold">The problem</h4>
           <p className="leading-relaxed">{study.problem}</p>
-        </div>
-        <div>
-          <h4 className="mb-2 font-display text-xl font-semibold">What I built</h4>
+          <h4 className="mb-2 mt-8 font-display text-xl font-semibold">What I built</h4>
           <p className="leading-relaxed">{study.builtIntro}</p>
         </div>
+        {study.progress && (
+          <div className="rounded-xl border border-line bg-surface/40 p-4 sm:p-5">
+            <h5 className="mb-3 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-accent-ink">
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
+              Where it stands
+            </h5>
+            <dl className="space-y-2 text-sm leading-relaxed text-muted">
+              <div>
+                <dt className="inline font-medium text-text">Done: </dt>
+                <dd className="inline">{study.progress.done}</dd>
+              </div>
+              <div>
+                <dt className="inline font-medium text-text">Next: </dt>
+                <dd className="inline">{study.progress.next}</dd>
+              </div>
+            </dl>
+          </div>
+        )}
       </div>
-      {study.progress && (
-        <div className="mt-8 rounded-xl border border-line bg-surface/40 p-4 print:mt-4 sm:p-5">
-          <h5 className="mb-3 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-accent-ink">
-            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
-            Where it stands
-          </h5>
-          <dl className="space-y-2 text-sm leading-relaxed text-muted">
-            <div>
-              <dt className="inline font-medium text-text">Done: </dt>
-              <dd className="inline">{study.progress.done}</dd>
-            </div>
-            <div>
-              <dt className="inline font-medium text-text">Next: </dt>
-              <dd className="inline">{study.progress.next}</dd>
-            </div>
-          </dl>
-        </div>
-      )}
 
       <div className="mt-10 print:mt-4">
         <h4 className="mb-2 font-display text-xl font-semibold">How I decided</h4>

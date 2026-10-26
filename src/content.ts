@@ -255,9 +255,9 @@ export const caseStudies: CaseStudy[] = [
     period: 'August 2026 to December 2026',
     status: 'In progress',
     title: 'A history game where students make the decisions',
-    stats: ['6-person team', 'Runs on Chromebooks', 'No install or login'],
+    stats: ['Lead engineer of 2', '4 non-coding content authors', 'Every fact sourced'],
     summary:
-      'A browser game for middle and high school history classes that my team is building this semester for a Vanderbilt course. Students talk with people living through a historical moment, make a decision with only the information those people had, and then learn what actually happened. The core game is built and live, and we’re still adding to it.',
+      'A browser game for middle and high school history classes, built this semester for a Vanderbilt course. Students talk with people living through a historical moment, make a decision with only what those people knew, then learn what actually happened.',
     links: [
       { label: 'Try the current build', href: 'https://witness-to-history.vercel.app/', kind: 'primary' },
       { label: 'Source', href: 'https://github.com/juliaktzr/witness-to-history', kind: 'secondary' },
@@ -265,7 +265,7 @@ export const caseStudies: CaseStudy[] = [
     problem:
       'Students usually learn how history turned out before they learn what people were deciding, so every choice looks obvious. Our team of four Education students and two engineers wanted students to feel how uncertain those choices were at the time.',
     builtIntro:
-      'I led the engineering and built the game engine, content pipeline, and interface. It runs in any browser with no install or login, so it works on school Chromebooks.',
+      'I led the engineering and built the game engine, the content pipeline, and the interface. Writers on the Education team fill in a Google Sheet, and my pipeline turns it into game content and flags mistakes in plain English, so they never touch code. The game runs in any browser with no install or login, and includes read-aloud and full keyboard navigation.',
     progress: {
       done: 'The game engine, content pipeline, dialogue and sources, read-aloud, town map, and character creator all work in the live build.',
       next: 'More scenarios and polish before the course ends in December.',
@@ -304,7 +304,7 @@ export const caseStudies: CaseStudy[] = [
         height: 856,
       },
     ],
-    stack: ['React', 'Vite', 'Web Speech API', 'Google Sheets', 'Vercel', 'No backend'],
+    stack: ['React', 'Vite', 'Web Speech API', 'Google Sheets', 'Vercel'],
   },
 ]
 
