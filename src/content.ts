@@ -94,14 +94,19 @@ export type CaseStudy = {
   progress?: { done: string; next: string }
   decisionsIntro?: string
   decisions?: CaseStudyDecision[]
-  /** Shown in a row after the decision cards. */
+  /** Witness: the first sits in the hero in a browser frame, the second beside the pipeline diagram. */
   screenshots?: CaseStudyScreenshot[]
   /** A row of photos under the sections. Each opens full size. */
   photos?: { title: string; items: CaseStudyScreenshot[] }
   stack: string[]
   /** Pega's before and after diagram. */
   diagram?: 'flow'
+  /** How content gets into the game, shown beside the second screenshot. Used by Witness. */
+  pipeline?: { title: string; steps: PipelineStep[] }
 }
+
+/** One step of a pipeline diagram. `highlight` marks the step the diagram is about. */
+export type PipelineStep = { name: string; desc: string; highlight?: boolean }
 
 export const work = {
   id: 'work',
@@ -304,6 +309,15 @@ export const caseStudies: CaseStudy[] = [
         height: 856,
       },
     ],
+    pipeline: {
+      title: 'How four non-coders add scenarios',
+      steps: [
+        { name: 'Google Sheet', desc: 'Writers fill in a scenario' },
+        { name: 'Validator', desc: 'Flags mistakes in plain English', highlight: true },
+        { name: 'Game content', desc: 'The pipeline turns the sheet into game files' },
+        { name: 'Live build', desc: 'Static site on Vercel' },
+      ],
+    },
     stack: ['React', 'Vite', 'Web Speech API', 'Google Sheets', 'Vercel'],
   },
 ]
